@@ -35,7 +35,7 @@
 
 
 #pragma mark -----自定义tabBarController方法-----
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
         for (UIView *child in self.tabBar.subviews) {
@@ -47,7 +47,7 @@
 }
 
 
-- (void)SetupMainTabBar{
+- (void)SetupMainTabBar {
     MainTabBar *mainTabBar = [[MainTabBar alloc] init];
     mainTabBar.frame = self.tabBar.bounds;
     mainTabBar.delegate = self;
@@ -55,10 +55,11 @@
     _mainTabBar = mainTabBar;
 }
 
-- (void)SetupAllControllers{
+- (void)SetupAllControllers {
+    
     NSArray *titles = @[@"首页", @"个人中心"];
-    NSArray *images = @[@"homepage-black", @"me-black"];
-    NSArray *selectedImages = @[@"homepage-red", @"me-red"];
+    NSArray *images = @[@"shouyehuise", @"person"];
+    NSArray *selectedImages = @[@"chicken", @"gerenzhongxinchengse"];
     
 
     HomePageViewController *homeVC = [[HomePageViewController alloc] init];
@@ -76,7 +77,7 @@
     }
 }
 
-- (void)SetupChildVc:(UIViewController *)childVc title:(NSString *)title image:(NSString *)imageName selectedImage:(NSString *)selectedImageName{
+- (void)SetupChildVc:(UIViewController *)childVc title:(NSString *)title image:(NSString *)imageName selectedImage:(NSString *)selectedImageName {
     MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:childVc];
     childVc.tabBarItem.image = [UIImage imageNamed:imageName];
     childVc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImageName];
@@ -88,11 +89,11 @@
 
 
 #pragma mark -----------------· ---mainTabBar delegate
-- (void)tabBar:(MainTabBar *)tabBar didSelectedButtonFrom:(long)fromBtnTag to:(long)toBtnTag{
+- (void)tabBar:(MainTabBar *)tabBar didSelectedButtonFrom:(long)fromBtnTag to:(long)toBtnTag {
     self.selectedIndex = toBtnTag;
 }
 
-//- (void)tabBarClickWriteButton:(MainTabBar *)tabBar{
+//- (void)tabBarClickWriteButton:(MainTabBar *)tabBar {
 ////    WriteViewController *writeVc = [[WriteViewController alloc] init];
 ////    MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:writeVc];
 ////    

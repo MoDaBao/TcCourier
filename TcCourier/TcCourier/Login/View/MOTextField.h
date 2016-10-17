@@ -13,6 +13,6 @@
 @property (nonatomic, strong) UITextField *textField;
 
 
-- (instancetype)initWithFrame:(CGRect)frame placeholder:(NSString *)placeholder lineColor:(UIColor *)lineColor tintColor:(UIColor *)tintColor font:(UIFont *)font icon:(UIImage *)icon;
+- (instancetype)initWithFrame:(CGRect)frame placeholder:(NSString *)placeholder lineColor:(UIColor *)lineColor tintColor:(UIColor *)tintColor font:(UIFont *)font icon:(UIImage *)icon secureTextEntry:(BOOL)secureTextEntry keyboardType:(UIKeyboardType)keyboardType returnKeyType:(UIReturnKeyType)returnKeyType;
 
 @end

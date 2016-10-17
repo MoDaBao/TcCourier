@@ -16,6 +16,8 @@
 
 #import "UIView+ChangeFrame.h"
 
+#import "UILabel+LabelHeightAndWidth.h"
+
 
 
 #endif /* PrefixHeader_pch */

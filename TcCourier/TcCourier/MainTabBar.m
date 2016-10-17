@@ -26,7 +26,7 @@
     return  _tabbarBtnArray;
 }
 
-- (instancetype)init{
+- (instancetype)init {
     if (self = [super init]) {
         self.backgroundColor = [UIColor whiteColor];
 //        [self SetupWriteButton];
@@ -45,14 +45,14 @@
 //    _writeButton = writeButton;
 //}
 
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
 //    self.writeButton.center = CGPointMake(self.frame.size.width*0.5, self.frame.size.height*0.5);
-    if (_line)
-    {
+    if (_line) {
         [_line removeFromSuperview];
     }
-    _line = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.frame.size.width, 1)];
+    float sortaPixel =1.0/[UIScreen mainScreen].scale;
+    _line = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.frame.size.width, sortaPixel)];
     _line.backgroundColor = [UIColor grayColor];
     [self addSubview:_line];
     
@@ -70,7 +70,7 @@
     
 }
 
-- (void)addTabBarButtonWithTabBarItem:(UITabBarItem *)tabBarItem{
+- (void)addTabBarButtonWithTabBarItem:(UITabBarItem *)tabBarItem {
     MainTabBarButton *tabBarBtn = [[MainTabBarButton alloc] init];
     tabBarBtn.tabBarItem = tabBarItem;
     [tabBarBtn addTarget:self action:@selector(ClickTabBarButton:) forControlEvents:UIControlEventTouchDown];
@@ -83,7 +83,7 @@
     }
 }
 
-- (void)ClickTabBarButton:(MainTabBarButton *)tabBarBtn{
+- (void)ClickTabBarButton:(MainTabBarButton *)tabBarBtn {
     
     if ([self.delegate respondsToSelector:@selector(tabBar:didSelectedButtonFrom:to:)]) {
         [self.delegate tabBar:self didSelectedButtonFrom:self.selectedButton.tag to:tabBarBtn.tag];
@@ -93,7 +93,7 @@
     self.selectedButton = tabBarBtn;
 }
 
-//- (void)ClickWriteButton{
+//- (void)ClickWriteButton {
 //    if ([self.delegate respondsToSelector:@selector(tabBarClickWriteButton:)]) {
 //        [self.delegate tabBarClickWriteButton:self];
 //    }

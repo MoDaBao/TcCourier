@@ -14,11 +14,20 @@
 
 @implementation PersonCenterViewController
 
+#pragma mark -----视图方法-----
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    self.tabBarController.tabBar.hidden = NO;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = kBGGary;
 }
 
 - (void)didReceiveMemoryWarning {

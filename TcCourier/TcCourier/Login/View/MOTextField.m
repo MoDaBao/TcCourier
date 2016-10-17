@@ -19,7 +19,7 @@
 }
 */
 
-- (instancetype)initWithFrame:(CGRect)frame placeholder:(NSString *)placeholder lineColor:(UIColor *)lineColor tintColor:(UIColor *)tintColor font:(UIFont *)font icon:(UIImage *)icon {
+- (instancetype)initWithFrame:(CGRect)frame placeholder:(NSString *)placeholder lineColor:(UIColor *)lineColor tintColor:(UIColor *)tintColor font:(UIFont *)font icon:(UIImage *)icon secureTextEntry:(BOOL)secureTextEntry keyboardType:(UIKeyboardType)keyboardType returnKeyType:(UIReturnKeyType)returnKeyType {
     if (self = [super initWithFrame:frame]) {
         
         // textfield与view的间距
@@ -28,7 +28,7 @@
         if (!icon) {
             self.textField = [[UITextField alloc] initWithFrame:CGRectMake(margin, 0, self.width - margin * 2, self.height)];
         } else {
-            UIImageView *iconV = [[UIImageView alloc] initWithFrame:CGRectMake(margin, 5, 15, 18)];
+            UIImageView *iconV = [[UIImageView alloc] initWithFrame:CGRectMake(margin, 5, 12, 16)];
             iconV.image = icon;
             [self addSubview:iconV];
             self.textField = [[UITextField alloc] initWithFrame:CGRectMake(iconV.x + iconV.width + margin, 0, self.width - margin * 3 - iconV.width, self.height)];
@@ -38,7 +38,10 @@
         self.textField.placeholder = placeholder;
         self.textField.tintColor = tintColor;// 修改光标颜色
         self.textField.font = font;
+        self.textField.secureTextEntry = secureTextEntry;
         self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.textField.keyboardType = keyboardType;
+        self.textField.returnKeyType = returnKeyType;
         [self addSubview:self.textField];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, self.height -  1, self.width, 1)];

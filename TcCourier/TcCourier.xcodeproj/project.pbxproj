@@ -23,6 +23,12 @@
 		E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856881DAF67080057D66F /* HomePageViewController.m */; };
 		E7E856981DAF67080057D66F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E8568E1DAF67080057D66F /* LoginViewController.m */; };
 		E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856941DAF67080057D66F /* PersonCenterViewController.m */; };
+		E7FAAA6D1DB47C1E00B20084 /* HomePageItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA6A1DB47C1E00B20084 /* HomePageItemView.m */; };
+		E7FAAA6E1DB47C1E00B20084 /* HomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA6C1DB47C1E00B20084 /* HomePageView.m */; };
+		E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */; };
+		E7FAAA741DB4B0FD00B20084 /* TodayCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA731DB4B0FD00B20084 /* TodayCountViewController.m */; };
+		E7FAAA791DB4B3FC00B20084 /* TodayInfoItemVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA761DB4B3FC00B20084 /* TodayInfoItemVIew.m */; };
+		E7FAAA7A1DB4B3FC00B20084 /* TodayInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA781DB4B3FC00B20084 /* TodayInfoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +83,18 @@
 		E7E8568E1DAF67080057D66F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E7E856931DAF67080057D66F /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
 		E7E856941DAF67080057D66F /* PersonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterViewController.m; sourceTree = "<group>"; };
+		E7FAAA691DB47C1E00B20084 /* HomePageItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageItemView.h; sourceTree = "<group>"; };
+		E7FAAA6A1DB47C1E00B20084 /* HomePageItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageItemView.m; sourceTree = "<group>"; };
+		E7FAAA6B1DB47C1E00B20084 /* HomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageView.h; sourceTree = "<group>"; };
+		E7FAAA6C1DB47C1E00B20084 /* HomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageView.m; sourceTree = "<group>"; };
+		E7FAAA6F1DB481F500B20084 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
+		E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
+		E7FAAA721DB4B0FD00B20084 /* TodayCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayCountViewController.h; path = ../../../../../Desktop/TodayCountViewController.h; sourceTree = "<group>"; };
+		E7FAAA731DB4B0FD00B20084 /* TodayCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayCountViewController.m; path = ../../../../../Desktop/TodayCountViewController.m; sourceTree = "<group>"; };
+		E7FAAA751DB4B3FC00B20084 /* TodayInfoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoItemView.h; sourceTree = "<group>"; };
+		E7FAAA761DB4B3FC00B20084 /* TodayInfoItemVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoItemVIew.m; sourceTree = "<group>"; };
+		E7FAAA771DB4B3FC00B20084 /* TodayInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoView.h; sourceTree = "<group>"; };
+		E7FAAA781DB4B3FC00B20084 /* TodayInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +201,8 @@
 				E70B06621DB06C7900E4B5A6 /* UIView+ChangeFrame.m */,
 				E7E856821DAF64DF0057D66F /* PrefixHeader.pch */,
 				E7E856841DAF655F0057D66F /* ContantHeader.h */,
+				E7FAAA6F1DB481F500B20084 /* UILabel+LabelHeightAndWidth.h */,
+				E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */,
 			);
 			path = tool;
 			sourceTree = "<group>";
@@ -202,6 +222,8 @@
 			children = (
 				E7E856871DAF67080057D66F /* HomePageViewController.h */,
 				E7E856881DAF67080057D66F /* HomePageViewController.m */,
+				E7FAAA721DB4B0FD00B20084 /* TodayCountViewController.h */,
+				E7FAAA731DB4B0FD00B20084 /* TodayCountViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -216,6 +238,14 @@
 		E7E8568A1DAF67080057D66F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E7FAAA691DB47C1E00B20084 /* HomePageItemView.h */,
+				E7FAAA6A1DB47C1E00B20084 /* HomePageItemView.m */,
+				E7FAAA6B1DB47C1E00B20084 /* HomePageView.h */,
+				E7FAAA6C1DB47C1E00B20084 /* HomePageView.m */,
+				E7FAAA751DB4B3FC00B20084 /* TodayInfoItemView.h */,
+				E7FAAA761DB4B3FC00B20084 /* TodayInfoItemVIew.m */,
+				E7FAAA771DB4B3FC00B20084 /* TodayInfoView.h */,
+				E7FAAA781DB4B3FC00B20084 /* TodayInfoView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -429,10 +459,16 @@
 				E7E8567E1DAF62B70057D66F /* MainTabBar.m in Sources */,
 				E7E856801DAF62B70057D66F /* MainTabBarController.m in Sources */,
 				E7E8567F1DAF62B70057D66F /* MainTabBarButton.m in Sources */,
+				E7FAAA791DB4B3FC00B20084 /* TodayInfoItemVIew.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
 				E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */,
 				E7E8567D1DAF62B70057D66F /* MainNavigationController.m in Sources */,
 				E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */,
+				E7FAAA7A1DB4B3FC00B20084 /* TodayInfoView.m in Sources */,
+				E7FAAA6D1DB47C1E00B20084 /* HomePageItemView.m in Sources */,
+				E7FAAA741DB4B0FD00B20084 /* TodayCountViewController.m in Sources */,
+				E7FAAA6E1DB47C1E00B20084 /* HomePageView.m in Sources */,
+				E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				E7E856381DAF56700057D66F /* main.m in Sources */,
 				E70B06601DB06C3C00E4B5A6 /* MOTextField.m in Sources */,
 			);

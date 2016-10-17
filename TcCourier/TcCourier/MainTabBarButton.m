@@ -46,7 +46,7 @@
     CGFloat imageW = contentRect.size.width;
     CGFloat imageH = contentRect.size.height * TabBarImageRatio;
     
-    return CGRectMake(0, 0, imageW, imageH);
+    return CGRectMake(0, 6, imageW, imageH);
 }
 
 // 修改self.titleLabel的frame
@@ -54,7 +54,7 @@
     CGFloat titleW = contentRect.size.width;
     CGFloat titleH = contentRect.size.height * TabBarTitleRation;
     
-    return CGRectMake(0, contentRect.size.height * TabBarImageRatio + 5, titleW, titleH);
+    return CGRectMake(0, contentRect.size.height * TabBarImageRatio + 6, titleW, titleH);
 }
 
 - (void)setTabBarItem:(UITabBarItem *)tabBarItem {

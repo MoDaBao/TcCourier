@@ -11,7 +11,7 @@
 @interface TodayInfoItemView : UIView
 
 
-@property (nonatomic, strong) UILabel *valueLabel;
+//@property (nonatomic, strong) UILabel *valueLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title value:(NSString *)value;
 

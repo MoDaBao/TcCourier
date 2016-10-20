@@ -33,12 +33,13 @@
         [self addSubview:titleLabel];
         
         
-        self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, centerY, frame.size.width, height)];
-        self.valueLabel.font = font;
+        UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, centerY, frame.size.width, height)];
+        valueLabel.font = font;
 //        self.valueLabel.backgroundColor = [UIColor redColor];
-        self.valueLabel.textAlignment = NSTextAlignmentCenter;
-        self.valueLabel.text = value;
-        [self addSubview:self.valueLabel];
+        valueLabel.textAlignment = NSTextAlignmentCenter;
+        valueLabel.text = value;
+        valueLabel.textColor = [UIColor colorWithRed:205 / 255.0 green:36 / 255.0 blue:29 / 255.0 alpha:1.0];
+        [self addSubview:valueLabel];
         
     }
     return self;

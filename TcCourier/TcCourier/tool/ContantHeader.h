@@ -22,4 +22,7 @@
 #define kScaleForWidth [UIScreen mainScreen].bounds.size.width / 375 //以iPhone6的尺寸为基准的宽比
 #define kScaleForHeight [UIScreen mainScreen].bounds.size.height / 667 //以iPhone6的储存为基准的高比
 
+#define kHeartWidth 24// 星星图片的宽度
+#define kHeartHeight 18// 星星图片的高度
+
 #endif /* ContantHeader_h */

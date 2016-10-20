@@ -10,9 +10,11 @@
 
 @interface MOTextField : UIView
 
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) UITextField *tf;
 
 
-- (instancetype)initWithFrame:(CGRect)frame placeholder:(NSString *)placeholder lineColor:(UIColor *)lineColor tintColor:(UIColor *)tintColor font:(UIFont *)font icon:(UIImage *)icon secureTextEntry:(BOOL)secureTextEntry keyboardType:(UIKeyboardType)keyboardType returnKeyType:(UIReturnKeyType)returnKeyType;
+- (instancetype)initWithFrame:(CGRect)frame bgColor:(UIColor *)bgColor placeholder:(NSString *)placeholder lineColor:(UIColor *)lineColor tintColor:(UIColor *)tintColor font:(UIFont *)font icon:(UIImage *)icon secureTextEntry:(BOOL)secureTextEntry keyboardType:(UIKeyboardType)keyboardType returnKeyType:(UIReturnKeyType)returnKeyType;
+
+- (void)changeBorderWidth:(CGFloat)width borderColor:(UIColor *)borderColor;
 
 @end

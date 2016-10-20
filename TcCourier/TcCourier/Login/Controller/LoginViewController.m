@@ -8,12 +8,13 @@
 
 #import "LoginViewController.h"
 #import "MOTextField.h"
+#import "TcLoginButton.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) MOTextField *phoneTF;
 @property (nonatomic, strong) MOTextField *passwordTF;
-@property (nonatomic, strong) UIButton *loginBtn;
+@property (nonatomic, strong) TcLoginButton *loginBtn;
 @property (nonatomic, assign) BOOL isWork;
 
 @end
@@ -21,14 +22,11 @@
 @implementation LoginViewController
 
 
-#pragma mark -----按钮方法-----
-
-- (void)login {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark -----视图方法-----
 
+/**
+ 创建视图
+ */
 - (void)createView {
     
     CGFloat margin = 30;
@@ -40,10 +38,11 @@
     contentV.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentV];
     
-    _phoneTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 80, contentV.width - margin * 2, 30) placeholder:@"请输入您的账号" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"account"] secureTextEntry:NO keyboardType:UIKeyboardTypeNumberPad returnKeyType:UIReturnKeyNext];
+    _phoneTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 80, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的账号" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"account"] secureTextEntry:NO keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyNext];
+    _phoneTF.tf.delegate = self;
     [contentV addSubview:_phoneTF];
     
-    _passwordTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 140, contentV.width - margin * 2, 30) placeholder:@"请输入您的密码" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"password"] secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyDone];
+    _passwordTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 140, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的密码" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"password"] secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyDone];
     [contentV addSubview:_passwordTF];
     
     CGFloat logoW = 80 * kScaleForWidth;
@@ -52,21 +51,9 @@
     logo.image = [UIImage imageNamed:@"avatar"];
     [self.view addSubview:logo];
     
-    _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _loginBtn.frame = CGRectMake(contentMargin, contentV.y + contentV.height + 60, contentV.width, 40);
-    [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-    [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_loginBtn setBackgroundColor:kOrangeColor];
-    _loginBtn.layer.cornerRadius = _loginBtn.height * .5;
-    _loginBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    _loginBtn.layer.shadowColor = [UIColor blackColor].CGColor;// 阴影颜色
-    _loginBtn.layer.shadowOffset = CGSizeMake(1, 1);// 阴影范围
-    _loginBtn.layer.shadowRadius = 4;// 阴影半径
-    _loginBtn.layer.shadowOpacity = .5;// 阴影透明度
+    _loginBtn = [[TcLoginButton alloc] initWithFrame:CGRectMake(contentMargin, contentV.y + contentV.height + 60, contentV.width, 40) title:@"登录" titleColor:[UIColor whiteColor] bgColor:kOrangeColor];
     [_loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:_loginBtn];
-    
     
 }
 
@@ -89,10 +76,28 @@
     
 }
 
-#pragma mark ----手势方法-----
+
+#pragma mark -----按钮方法-----
+
+- (void)login {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark ----键盘回收手势方法-----
 
 - (void)returnKeyBoard {
     [self.view endEditing:YES];
+}
+
+
+#pragma mark -----代理方法-----
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == _phoneTF.tf) {
+        [_passwordTF.tf becomeFirstResponder];
+    }
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

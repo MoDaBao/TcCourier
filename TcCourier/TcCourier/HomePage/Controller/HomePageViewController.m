@@ -75,6 +75,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = kBGGary;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     [self presentViewController:loginVC animated:YES completion:nil];
@@ -84,6 +85,21 @@
     
     
 }
+
+
+#pragma mark -----代理方法-----
+
+/**
+ 右滑返回手势代理方法
+ */
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (self.navigationController.viewControllers.count == 1) {// 关闭主界面的右滑返回
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 
 #pragma mark -----按钮方法-----
 

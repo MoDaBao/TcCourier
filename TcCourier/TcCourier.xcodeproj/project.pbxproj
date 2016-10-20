@@ -12,7 +12,6 @@
 		E70B06691DB0755500E4B5A6 /* 123.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E70B06681DB0755500E4B5A6 /* 123.jpg */; };
 		E7E856381DAF56700057D66F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856371DAF56700057D66F /* main.m */; };
 		E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E8563A1DAF56700057D66F /* AppDelegate.m */; };
-		E7E856431DAF56700057D66F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7E856421DAF56700057D66F /* Assets.xcassets */; };
 		E7E856461DAF56700057D66F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7E856441DAF56700057D66F /* LaunchScreen.storyboard */; };
 		E7E856511DAF56700057D66F /* TcCourierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856501DAF56700057D66F /* TcCourierTests.m */; };
 		E7E8565C1DAF56700057D66F /* TcCourierUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E8565B1DAF56700057D66F /* TcCourierUITests.m */; };
@@ -26,9 +25,15 @@
 		E7FAAA6D1DB47C1E00B20084 /* HomePageItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA6A1DB47C1E00B20084 /* HomePageItemView.m */; };
 		E7FAAA6E1DB47C1E00B20084 /* HomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA6C1DB47C1E00B20084 /* HomePageView.m */; };
 		E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */; };
-		E7FAAA741DB4B0FD00B20084 /* TodayCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA731DB4B0FD00B20084 /* TodayCountViewController.m */; };
 		E7FAAA791DB4B3FC00B20084 /* TodayInfoItemVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA761DB4B3FC00B20084 /* TodayInfoItemVIew.m */; };
 		E7FAAA7A1DB4B3FC00B20084 /* TodayInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA781DB4B3FC00B20084 /* TodayInfoView.m */; };
+		E7FB2BCA1DB5F44D0045E871 /* TcLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BC91DB5F44D0045E871 /* TcLoginButton.m */; };
+		E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BCF1DB5F9160045E871 /* TodayCountViewController.m */; };
+		E7FB2BE21DB751BF0045E871 /* StarttAppraiseRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BE11DB751BF0045E871 /* StarttAppraiseRateView.m */; };
+		E7FB2BE51DB755880045E871 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BE41DB755880045E871 /* SettingView.m */; };
+		E7FB2BE71DB7580B0045E871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7FB2BE61DB7580B0045E871 /* Assets.xcassets */; };
+		E7FB2BEA1DB7595D0045E871 /* SettingItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BE91DB7595D0045E871 /* SettingItemView.m */; };
+		E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BEC1DB774910045E871 /* ModifyPasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +63,6 @@
 		E7E856371DAF56700057D66F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E7E856391DAF56700057D66F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E7E8563A1DAF56700057D66F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E7E856421DAF56700057D66F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7E856451DAF56700057D66F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7E856471DAF56700057D66F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7E8564C1DAF56700057D66F /* TcCourierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TcCourierTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,12 +93,23 @@
 		E7FAAA6C1DB47C1E00B20084 /* HomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageView.m; sourceTree = "<group>"; };
 		E7FAAA6F1DB481F500B20084 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
-		E7FAAA721DB4B0FD00B20084 /* TodayCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TodayCountViewController.h; path = ../../../../../Desktop/TodayCountViewController.h; sourceTree = "<group>"; };
-		E7FAAA731DB4B0FD00B20084 /* TodayCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TodayCountViewController.m; path = ../../../../../Desktop/TodayCountViewController.m; sourceTree = "<group>"; };
 		E7FAAA751DB4B3FC00B20084 /* TodayInfoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoItemView.h; sourceTree = "<group>"; };
 		E7FAAA761DB4B3FC00B20084 /* TodayInfoItemVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoItemVIew.m; sourceTree = "<group>"; };
 		E7FAAA771DB4B3FC00B20084 /* TodayInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoView.h; sourceTree = "<group>"; };
 		E7FAAA781DB4B3FC00B20084 /* TodayInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoView.m; sourceTree = "<group>"; };
+		E7FB2BC81DB5F44D0045E871 /* TcLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TcLoginButton.h; sourceTree = "<group>"; };
+		E7FB2BC91DB5F44D0045E871 /* TcLoginButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TcLoginButton.m; sourceTree = "<group>"; };
+		E7FB2BCE1DB5F9160045E871 /* TodayCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayCountViewController.h; sourceTree = "<group>"; };
+		E7FB2BCF1DB5F9160045E871 /* TodayCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayCountViewController.m; sourceTree = "<group>"; };
+		E7FB2BE01DB751BF0045E871 /* StarttAppraiseRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarttAppraiseRateView.h; sourceTree = "<group>"; };
+		E7FB2BE11DB751BF0045E871 /* StarttAppraiseRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarttAppraiseRateView.m; sourceTree = "<group>"; };
+		E7FB2BE31DB755880045E871 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
+		E7FB2BE41DB755880045E871 /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
+		E7FB2BE61DB7580B0045E871 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7FB2BE81DB7595D0045E871 /* SettingItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingItemView.h; sourceTree = "<group>"; };
+		E7FB2BE91DB7595D0045E871 /* SettingItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingItemView.m; sourceTree = "<group>"; };
+		E7FB2BEB1DB774910045E871 /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
+		E7FB2BEC1DB774910045E871 /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,10 +174,10 @@
 				E7E8568B1DAF67080057D66F /* Login */,
 				E7E856911DAF67080057D66F /* PersonCenter */,
 				E7E856811DAF64C40057D66F /* tool */,
-				E7E856421DAF56700057D66F /* Assets.xcassets */,
 				E70B06681DB0755500E4B5A6 /* 123.jpg */,
 				E7E856441DAF56700057D66F /* LaunchScreen.storyboard */,
 				E7E856471DAF56700057D66F /* Info.plist */,
+				E7FB2BE61DB7580B0045E871 /* Assets.xcassets */,
 				E7E856361DAF56700057D66F /* Supporting Files */,
 			);
 			path = TcCourier;
@@ -222,8 +237,8 @@
 			children = (
 				E7E856871DAF67080057D66F /* HomePageViewController.h */,
 				E7E856881DAF67080057D66F /* HomePageViewController.m */,
-				E7FAAA721DB4B0FD00B20084 /* TodayCountViewController.h */,
-				E7FAAA731DB4B0FD00B20084 /* TodayCountViewController.m */,
+				E7FB2BCE1DB5F9160045E871 /* TodayCountViewController.h */,
+				E7FB2BCF1DB5F9160045E871 /* TodayCountViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -281,6 +296,8 @@
 			children = (
 				E70B065E1DB06C3C00E4B5A6 /* MOTextField.h */,
 				E70B065F1DB06C3C00E4B5A6 /* MOTextField.m */,
+				E7FB2BC81DB5F44D0045E871 /* TcLoginButton.h */,
+				E7FB2BC91DB5F44D0045E871 /* TcLoginButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +317,8 @@
 			children = (
 				E7E856931DAF67080057D66F /* PersonCenterViewController.h */,
 				E7E856941DAF67080057D66F /* PersonCenterViewController.m */,
+				E7FB2BEB1DB774910045E871 /* ModifyPasswordViewController.h */,
+				E7FB2BEC1DB774910045E871 /* ModifyPasswordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -314,6 +333,12 @@
 		E7E856961DAF67080057D66F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E7FB2BE01DB751BF0045E871 /* StarttAppraiseRateView.h */,
+				E7FB2BE11DB751BF0045E871 /* StarttAppraiseRateView.m */,
+				E7FB2BE31DB755880045E871 /* SettingView.h */,
+				E7FB2BE41DB755880045E871 /* SettingView.m */,
+				E7FB2BE81DB7595D0045E871 /* SettingItemView.h */,
+				E7FB2BE91DB7595D0045E871 /* SettingItemView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -428,8 +453,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E70B06691DB0755500E4B5A6 /* 123.jpg in Resources */,
+				E7FB2BE71DB7580B0045E871 /* Assets.xcassets in Resources */,
 				E7E856461DAF56700057D66F /* LaunchScreen.storyboard in Resources */,
-				E7E856431DAF56700057D66F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,22 +480,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				E70B06631DB06C7900E4B5A6 /* UIView+ChangeFrame.m in Sources */,
+				E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */,
 				E7E856981DAF67080057D66F /* LoginViewController.m in Sources */,
 				E7E8567E1DAF62B70057D66F /* MainTabBar.m in Sources */,
 				E7E856801DAF62B70057D66F /* MainTabBarController.m in Sources */,
 				E7E8567F1DAF62B70057D66F /* MainTabBarButton.m in Sources */,
 				E7FAAA791DB4B3FC00B20084 /* TodayInfoItemVIew.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
+				E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */,
 				E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */,
+				E7FB2BE51DB755880045E871 /* SettingView.m in Sources */,
 				E7E8567D1DAF62B70057D66F /* MainNavigationController.m in Sources */,
 				E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */,
 				E7FAAA7A1DB4B3FC00B20084 /* TodayInfoView.m in Sources */,
+				E7FB2BE21DB751BF0045E871 /* StarttAppraiseRateView.m in Sources */,
 				E7FAAA6D1DB47C1E00B20084 /* HomePageItemView.m in Sources */,
-				E7FAAA741DB4B0FD00B20084 /* TodayCountViewController.m in Sources */,
+				E7FB2BCA1DB5F44D0045E871 /* TcLoginButton.m in Sources */,
 				E7FAAA6E1DB47C1E00B20084 /* HomePageView.m in Sources */,
 				E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				E7E856381DAF56700057D66F /* main.m in Sources */,
 				E70B06601DB06C3C00E4B5A6 /* MOTextField.m in Sources */,
+				E7FB2BEA1DB7595D0045E871 /* SettingItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

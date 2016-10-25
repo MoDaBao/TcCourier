@@ -2,7 +2,7 @@
 //  MainTabBarController.m
 //  模仿简书自定义Tabbar（纯代码）
 //
-//  Created by 莫大宝 on 16/6/24.
+//  Created by 余钦 on 16/6/24.
 //  Copyright © 2016年 dabao. All rights reserved.
 //
 
@@ -22,12 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self SetupMainTabBar];
     [self SetupAllControllers];
-    
-    
-   
     
 }
 

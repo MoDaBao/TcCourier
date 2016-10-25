@@ -18,6 +18,6 @@
 
 #import "UILabel+LabelHeightAndWidth.h"
 
-
+#import "Masonry.h"
 
 #endif /* PrefixHeader_pch */

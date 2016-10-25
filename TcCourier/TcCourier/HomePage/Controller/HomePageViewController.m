@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "HomePageView.h"
 #import "TodayCountViewController.h"
+#import "WaitReceiveOrderViewController.h"
 
 @interface HomePageViewController ()
 
@@ -112,6 +113,8 @@
     HomePageItemView *daijiedan = [self.homePageView viewWithTag:1000];
     daijiedan.clickBlock = ^ () {
         NSLog(@"待接单");
+        WaitReceiveOrderViewController *waitVC = [[WaitReceiveOrderViewController alloc] init];
+        [self.navigationController pushViewController:waitVC animated:YES];
     };// 待接单
     HomePageItemView *peisongzhong = [self.homePageView viewWithTag:1001];
     peisongzhong.clickBlock = ^() {

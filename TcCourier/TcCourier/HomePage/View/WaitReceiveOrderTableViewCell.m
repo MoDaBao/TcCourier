@@ -30,7 +30,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         CGFloat margin = 10;
-        self.contentV = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, kScreenWidth - margin * 2, self.height - margin * 2)];
+        self.contentV = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, kScreenWidth - margin * 2, 100)];
         self.contentV.layer.borderWidth = 1;
         self.contentV.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.contentV.layer.cornerRadius = 5;
@@ -57,6 +57,11 @@
         
         _commissionL = [UILabel new];
         [_contentV addSubview:_commissionL];
+        
+        OvertimePaidView *test = [[OvertimePaidView alloc] initWithFrame:CGRectMake(0, 0, _contentV.width, 40)];
+        [_contentV addSubview:test];
+        
+        
         
     }
     return self;

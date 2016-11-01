@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ShopView.h"
+#import "OvertimePaidView.h"
 
 @interface WaitReceiveOrderTableViewCell : UITableViewCell
 

@@ -11,6 +11,8 @@
 #import "HomePageView.h"
 #import "TodayCountViewController.h"
 #import "WaitReceiveOrderViewController.h"
+#import "AlreadyDoneViewController.h"
+#import "ShopAddressViewController.h"
 
 @interface HomePageViewController ()
 
@@ -83,7 +85,11 @@
     
     [self createView];
     
-    
+    UIButton *testBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    testBtn.frame = CGRectMake(100, 100, 100, 40);
+    [testBtn setTitle:@"test" forState:UIControlStateNormal];
+    [testBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:testBtn];
     
 }
 
@@ -108,6 +114,12 @@
     
 }
 
+// 测试按钮的测试方法
+- (void)test {
+    ShopAddressViewController *shopVC = [[ShopAddressViewController alloc] init];
+    [self.navigationController pushViewController:shopVC animated:YES];
+}
+
 // 给homepageView中的每个item添加block实现
 - (void)addBlockAchive {
     HomePageItemView *daijiedan = [self.homePageView viewWithTag:1000];
@@ -123,7 +135,8 @@
         HomePageItemView *yiwancheng = [self.homePageView viewWithTag:1002];
     yiwancheng.clickBlock = ^() {
         NSLog(@"已完成");
-        
+        AlreadyDoneViewController *alreadyVC = [[AlreadyDoneViewController alloc] init];
+        [self.navigationController pushViewController:alreadyVC animated:YES];
     };// 已完成
     HomePageItemView *jinritongji = [self.homePageView viewWithTag:1003];
     jinritongji.clickBlock = ^() {

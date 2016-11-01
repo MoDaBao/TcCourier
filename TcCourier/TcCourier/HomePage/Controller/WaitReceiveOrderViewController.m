@@ -16,6 +16,20 @@
 
 @implementation WaitReceiveOrderViewController
 
+
+#pragma mark -----视图方法-----
+
+- (void)createView {
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backItem;
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight) style:UITableViewStylePlain];
+    [tableView registerClass:[WaitReceiveOrderTableViewCell class] forCellReuseIdentifier:@"reuse"];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
@@ -30,17 +44,15 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"待接单";
     
-//    ShopView *test = [[ShopView alloc] initWithFrame:CGRectMake(0, 100, kScreenWidth, 60) shopName:@"意得百货" address:@"意得百货"];
-//    [self.view addSubview:test];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight) style:UITableViewStylePlain];
-    [tableView registerClass:[WaitReceiveOrderTableViewCell class] forCellReuseIdentifier:@"reuse"];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [self.view addSubview:tableView];
+    [self createView];
     
     
     
+}
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -----tableView代理方法-----
@@ -54,7 +66,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 400;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

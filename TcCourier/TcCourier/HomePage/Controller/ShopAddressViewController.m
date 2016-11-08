@@ -18,11 +18,15 @@
 #pragma mark -----视图方法-----
 
 - (void)createView {
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backItem;
+    
     ShoppingInfoView *shopView = [ShoppingInfoView new];
     [self.view addSubview:shopView];
     [shopView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.equalTo(self.view);
-        make.height.equalTo(@150);
+        make.height.equalTo(@120);
     }];
 }
 
@@ -36,8 +40,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kBGGary;
+    self.navigationItem.title = @"商家地址";
     
     [self createView];
+}
+
+#pragma mark -----按钮方法-----
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

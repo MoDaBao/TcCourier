@@ -36,9 +36,10 @@
         UILabel *shopName = [UILabel new];
         [self addSubview:shopName];
         shopName.font = [UIFont systemFontOfSize:15];
+        shopName.textColor = [UIColor orangeColor];
         shopName.text = @"肯德基";
         [shopName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@20);
+            make.left.equalTo(@30);
             make.top.equalTo(@10);
             
         }];
@@ -64,12 +65,34 @@
         
         UILabel *addressL = [UILabel new];
         [self addSubview:addressL];
+        addressL.text = @"XXXX";
+        addressL.font = smallFont;
         [addressL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(shopName);
             make.top.equalTo(disL.mas_bottom).with.offset(10);
         }];
-        addressL.text = @"XXXX";
-        addressL.font = smallFont;
+        
+        UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self addSubview:phoneBtn];
+        [phoneBtn setBackgroundImage:[UIImage imageNamed:@"dianhua"] forState:UIControlStateNormal];
+        [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(phoneL);
+            make.right.equalTo(@-40);
+            make.width.and.height.equalTo(@35);
+        }];
+        
+        
+        UIButton *navigateBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self addSubview:navigateBtn];
+        [navigateBtn setBackgroundImage:[UIImage imageNamed:@"daohang"] forState:UIControlStateNormal];
+        CGFloat naW = 40;
+        [navigateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(phoneBtn);
+            make.width.equalTo(@(naW));
+            make.height.equalTo(@(naW / 78 * 29));
+            make.centerY.equalTo(addressL);
+        }];
+        
         
     }
     return self;

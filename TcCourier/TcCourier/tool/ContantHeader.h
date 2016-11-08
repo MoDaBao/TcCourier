@@ -25,4 +25,6 @@
 #define kHeartWidth 24// 星星图片的宽度
 #define kHeartHeight 18// 星星图片的高度
 
+#define REQUEST_URL @"http://waimai.tzouyi.com" //接口地址
+
 #endif /* ContantHeader_h */

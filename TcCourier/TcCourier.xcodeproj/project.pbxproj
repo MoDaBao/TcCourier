@@ -15,10 +15,13 @@
 		E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */; };
 		E732C8B41DBDE5BB00B18AA0 /* WaitReceiveOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B31DBDE5BB00B18AA0 /* WaitReceiveOrderTableViewCell.m */; };
 		E732C8B71DBF33F700B18AA0 /* OvertimePaidView.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B61DBF33F700B18AA0 /* OvertimePaidView.m */; };
+		E740D8D81DC9DC1F00484F53 /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */; };
 		E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */; };
 		E790342F1DC19578004C1C8E /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E790342E1DC19578004C1C8E /* ChooseView.m */; };
 		E79034321DC1EB5A004C1C8E /* ShoppingInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E79034311DC1EB59004C1C8E /* ShoppingInfoView.m */; };
 		E79034371DC71593004C1C8E /* ShopAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79034361DC71593004C1C8E /* ShopAddressViewController.m */; };
+		E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */; };
+		E7BA1E1C1DCC785B001B0081 /* AlredyDoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA1E1B1DCC785B001B0081 /* AlredyDoneTableViewCell.m */; };
 		E7E856381DAF56700057D66F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856371DAF56700057D66F /* main.m */; };
 		E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E8563A1DAF56700057D66F /* AppDelegate.m */; };
 		E7E856461DAF56700057D66F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7E856441DAF56700057D66F /* LaunchScreen.storyboard */; };
@@ -43,6 +46,15 @@
 		E7FB2BE71DB7580B0045E871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7FB2BE61DB7580B0045E871 /* Assets.xcassets */; };
 		E7FB2BEA1DB7595D0045E871 /* SettingItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BE91DB7595D0045E871 /* SettingItemView.m */; };
 		E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BEC1DB774910045E871 /* ModifyPasswordViewController.m */; };
+		E7FB7FA31DD19E640023148C /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7FB7F931DD19E640023148C /* MJRefresh.bundle */; };
+		E7FB7FA41DD19E640023148C /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7F961DD19E640023148C /* MJRefreshBaseView.m */; };
+		E7FB7FA51DD19E640023148C /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7F981DD19E640023148C /* MJRefreshConst.m */; };
+		E7FB7FA61DD19E640023148C /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7F9A1DD19E640023148C /* MJRefreshFooterView.m */; };
+		E7FB7FA71DD19E640023148C /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7F9C1DD19E640023148C /* MJRefreshHeaderView.m */; };
+		E7FB7FA81DD19E640023148C /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7F9E1DD19E640023148C /* UIScrollView+MJExtension.m */; };
+		E7FB7FA91DD19E640023148C /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7FA01DD19E640023148C /* UIScrollView+MJRefresh.m */; };
+		E7FB7FAA1DD19E640023148C /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7FA21DD19E640023148C /* UIView+MJExtension.m */; };
+		E7FB7FAD1DD19E7B0023148C /* MyMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7FAC1DD19E7B0023148C /* MyMD5.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +91,8 @@
 		E732C8B31DBDE5BB00B18AA0 /* WaitReceiveOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderTableViewCell.m; sourceTree = "<group>"; };
 		E732C8B51DBF33F700B18AA0 /* OvertimePaidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvertimePaidView.h; sourceTree = "<group>"; };
 		E732C8B61DBF33F700B18AA0 /* OvertimePaidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvertimePaidView.m; sourceTree = "<group>"; };
+		E740D8D61DC9DC1F00484F53 /* DeliveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
+		E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryViewController.m; sourceTree = "<group>"; };
 		E790342A1DC09335004C1C8E /* AlreadyDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyDoneViewController.h; sourceTree = "<group>"; };
 		E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyDoneViewController.m; sourceTree = "<group>"; };
 		E790342D1DC19578004C1C8E /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
@@ -87,6 +101,10 @@
 		E79034311DC1EB59004C1C8E /* ShoppingInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingInfoView.m; sourceTree = "<group>"; };
 		E79034351DC71592004C1C8E /* ShopAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopAddressViewController.h; sourceTree = "<group>"; };
 		E79034361DC71593004C1C8E /* ShopAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopAddressViewController.m; sourceTree = "<group>"; };
+		E7BA1E171DCC777D001B0081 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		E7BA1E1A1DCC785B001B0081 /* AlredyDoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlredyDoneTableViewCell.h; sourceTree = "<group>"; };
+		E7BA1E1B1DCC785B001B0081 /* AlredyDoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlredyDoneTableViewCell.m; sourceTree = "<group>"; };
 		E7E856331DAF56700057D66F /* TcCourier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TcCourier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7E856371DAF56700057D66F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E7E856391DAF56700057D66F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,6 +156,24 @@
 		E7FB2BE91DB7595D0045E871 /* SettingItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingItemView.m; sourceTree = "<group>"; };
 		E7FB2BEB1DB774910045E871 /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
 		E7FB2BEC1DB774910045E871 /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
+		E7FB7F931DD19E640023148C /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		E7FB7F941DD19E640023148C /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		E7FB7F951DD19E640023148C /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		E7FB7F961DD19E640023148C /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		E7FB7F971DD19E640023148C /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		E7FB7F981DD19E640023148C /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		E7FB7F991DD19E640023148C /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		E7FB7F9A1DD19E640023148C /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		E7FB7F9B1DD19E640023148C /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		E7FB7F9C1DD19E640023148C /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
+		E7FB7F9D1DD19E640023148C /* UIScrollView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJExtension.h"; sourceTree = "<group>"; };
+		E7FB7F9E1DD19E640023148C /* UIScrollView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJExtension.m"; sourceTree = "<group>"; };
+		E7FB7F9F1DD19E640023148C /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
+		E7FB7FA01DD19E640023148C /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
+		E7FB7FA11DD19E640023148C /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
+		E7FB7FA21DD19E640023148C /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		E7FB7FAB1DD19E7B0023148C /* MyMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMD5.h; sourceTree = "<group>"; };
+		E7FB7FAC1DD19E7B0023148C /* MyMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMD5.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,12 +287,15 @@
 		E7E856811DAF64C40057D66F /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				E7FB7F921DD19E640023148C /* MJRefresh */,
 				E70B06611DB06C7900E4B5A6 /* UIView+ChangeFrame.h */,
 				E70B06621DB06C7900E4B5A6 /* UIView+ChangeFrame.m */,
 				E7E856821DAF64DF0057D66F /* PrefixHeader.pch */,
 				E7E856841DAF655F0057D66F /* ContantHeader.h */,
 				E7FAAA6F1DB481F500B20084 /* UILabel+LabelHeightAndWidth.h */,
 				E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */,
+				E7FB7FAB1DD19E7B0023148C /* MyMD5.h */,
+				E7FB7FAC1DD19E7B0023148C /* MyMD5.m */,
 			);
 			path = tool;
 			sourceTree = "<group>";
@@ -284,6 +323,10 @@
 				E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */,
 				E79034351DC71592004C1C8E /* ShopAddressViewController.h */,
 				E79034361DC71593004C1C8E /* ShopAddressViewController.m */,
+				E740D8D61DC9DC1F00484F53 /* DeliveryViewController.h */,
+				E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */,
+				E7BA1E171DCC777D001B0081 /* OrderDetailViewController.h */,
+				E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -316,6 +359,8 @@
 				E790342E1DC19578004C1C8E /* ChooseView.m */,
 				E79034301DC1EB59004C1C8E /* ShoppingInfoView.h */,
 				E79034311DC1EB59004C1C8E /* ShoppingInfoView.m */,
+				E7BA1E1A1DCC785B001B0081 /* AlredyDoneTableViewCell.h */,
+				E7BA1E1B1DCC785B001B0081 /* AlredyDoneTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -396,6 +441,29 @@
 				E7FB2BE91DB7595D0045E871 /* SettingItemView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		E7FB7F921DD19E640023148C /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				E7FB7F931DD19E640023148C /* MJRefresh.bundle */,
+				E7FB7F941DD19E640023148C /* MJRefresh.h */,
+				E7FB7F951DD19E640023148C /* MJRefreshBaseView.h */,
+				E7FB7F961DD19E640023148C /* MJRefreshBaseView.m */,
+				E7FB7F971DD19E640023148C /* MJRefreshConst.h */,
+				E7FB7F981DD19E640023148C /* MJRefreshConst.m */,
+				E7FB7F991DD19E640023148C /* MJRefreshFooterView.h */,
+				E7FB7F9A1DD19E640023148C /* MJRefreshFooterView.m */,
+				E7FB7F9B1DD19E640023148C /* MJRefreshHeaderView.h */,
+				E7FB7F9C1DD19E640023148C /* MJRefreshHeaderView.m */,
+				E7FB7F9D1DD19E640023148C /* UIScrollView+MJExtension.h */,
+				E7FB7F9E1DD19E640023148C /* UIScrollView+MJExtension.m */,
+				E7FB7F9F1DD19E640023148C /* UIScrollView+MJRefresh.h */,
+				E7FB7FA01DD19E640023148C /* UIScrollView+MJRefresh.m */,
+				E7FB7FA11DD19E640023148C /* UIView+MJExtension.h */,
+				E7FB7FA21DD19E640023148C /* UIView+MJExtension.m */,
+			);
+			path = MJRefresh;
 			sourceTree = "<group>";
 		};
 		F2C4EC0E29519154CC7ED9C1 /* Pods */ = {
@@ -521,6 +589,7 @@
 			files = (
 				E70B06691DB0755500E4B5A6 /* 123.jpg in Resources */,
 				E7FB2BE71DB7580B0045E871 /* Assets.xcassets in Resources */,
+				E7FB7FA31DD19E640023148C /* MJRefresh.bundle in Resources */,
 				E7E856461DAF56700057D66F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,29 +665,40 @@
 			files = (
 				E70B06631DB06C7900E4B5A6 /* UIView+ChangeFrame.m in Sources */,
 				E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */,
+				E7BA1E1C1DCC785B001B0081 /* AlredyDoneTableViewCell.m in Sources */,
 				E7E856981DAF67080057D66F /* LoginViewController.m in Sources */,
 				E7E8567E1DAF62B70057D66F /* MainTabBar.m in Sources */,
+				E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */,
 				E732C8B41DBDE5BB00B18AA0 /* WaitReceiveOrderTableViewCell.m in Sources */,
 				E732C8AE1DBDA65500B18AA0 /* ShopView.m in Sources */,
+				E7FB7FA91DD19E640023148C /* UIScrollView+MJRefresh.m in Sources */,
+				E7FB7FA81DD19E640023148C /* UIScrollView+MJExtension.m in Sources */,
 				E7E856801DAF62B70057D66F /* MainTabBarController.m in Sources */,
 				E7E8567F1DAF62B70057D66F /* MainTabBarButton.m in Sources */,
 				E79034321DC1EB5A004C1C8E /* ShoppingInfoView.m in Sources */,
+				E7FB7FAD1DD19E7B0023148C /* MyMD5.m in Sources */,
 				E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */,
+				E7FB7FA61DD19E640023148C /* MJRefreshFooterView.m in Sources */,
 				E7FAAA791DB4B3FC00B20084 /* TodayInfoItemVIew.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
 				E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */,
 				E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */,
 				E7FB2BE51DB755880045E871 /* SettingView.m in Sources */,
 				E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */,
+				E7FB7FA71DD19E640023148C /* MJRefreshHeaderView.m in Sources */,
 				E7E8567D1DAF62B70057D66F /* MainNavigationController.m in Sources */,
 				E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */,
 				E7FAAA7A1DB4B3FC00B20084 /* TodayInfoView.m in Sources */,
 				E732C8B71DBF33F700B18AA0 /* OvertimePaidView.m in Sources */,
 				E790342F1DC19578004C1C8E /* ChooseView.m in Sources */,
 				E7FB2BE21DB751BF0045E871 /* StarttAppraiseRateView.m in Sources */,
+				E7FB7FA51DD19E640023148C /* MJRefreshConst.m in Sources */,
 				E7FAAA6D1DB47C1E00B20084 /* HomePageItemView.m in Sources */,
 				E7FB2BCA1DB5F44D0045E871 /* TcLoginButton.m in Sources */,
+				E7FB7FAA1DD19E640023148C /* UIView+MJExtension.m in Sources */,
 				E7FAAA6E1DB47C1E00B20084 /* HomePageView.m in Sources */,
+				E740D8D81DC9DC1F00484F53 /* DeliveryViewController.m in Sources */,
+				E7FB7FA41DD19E640023148C /* MJRefreshBaseView.m in Sources */,
 				E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				E7E856381DAF56700057D66F /* main.m in Sources */,
 				E70B06601DB06C3C00E4B5A6 /* MOTextField.m in Sources */,

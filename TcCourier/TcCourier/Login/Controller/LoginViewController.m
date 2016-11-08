@@ -74,13 +74,42 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnKeyBoard)];
     [self.view addGestureRecognizer:tap];
     
+//    NSLog(@"login");
+    
 }
 
 
 #pragma mark -----按钮方法-----
 
 - (void)login {
+    
+//    NSString *str = [NSString stringWithFormat:@"address=%@&api=%@&lati=%@&long=%@&start=%ld&word=%@",address,@"storesearch",latitude,longtitude,start,keyWords];
+//    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"storesearch",@"api",keyWords,@"word",longtitude,@"long",latitude,@"lati",[NSNumber numberWithInteger:start],@"start",address,@"address",nil];
+//    NSDictionary *ddd = [NSDictionary dictionaryWithObjectsAndKeys:dataDic,@"data",[[MyMD5 md5:str] uppercaseString],@"sign", nil];
+    
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@",@"pdalogin", @"pda", @"13333333333", @"123456"];
+    NSDictionary *dic = @{@"api":@"pdalogin", @"core": @"pda", @"phone":@"13333333333",  @"pwd":@"123456"};
+    
+    NSDictionary *parameterDic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFJSONRequestSerializer serializer];
+    session.responseSerializer = [AFJSONResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:parameterDic progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject is %@", responseObject);
+        NSLog(@"msg = %@", responseObject[@"msg"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@", error);
+    }];
+    
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
 }
 
 

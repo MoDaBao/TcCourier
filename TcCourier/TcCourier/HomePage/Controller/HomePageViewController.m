@@ -13,6 +13,7 @@
 #import "WaitReceiveOrderViewController.h"
 #import "AlreadyDoneViewController.h"
 #import "ShopAddressViewController.h"
+#import "DeliveryViewController.h"
 
 @interface HomePageViewController ()
 
@@ -85,6 +86,7 @@
     
     [self createView];
     
+    // 测试按钮
     UIButton *testBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     testBtn.frame = CGRectMake(100, 100, 100, 40);
     [testBtn setTitle:@"test" forState:UIControlStateNormal];
@@ -131,6 +133,8 @@
     HomePageItemView *peisongzhong = [self.homePageView viewWithTag:1001];
     peisongzhong.clickBlock = ^() {
         NSLog(@"配送中");
+        DeliveryViewController *deliveryVC = [[DeliveryViewController alloc] init];
+        [self.navigationController pushViewController:deliveryVC animated:YES];
     };// 配送中
         HomePageItemView *yiwancheng = [self.homePageView viewWithTag:1002];
     yiwancheng.clickBlock = ^() {

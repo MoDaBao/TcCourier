@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIButton *workBtn;
 @property (nonatomic, strong) UILabel *courierAddress;
 @property (nonatomic, strong) HomePageView *homePageView;
+@property (nonatomic, assign) BOOL isWork;
 
 @end
 
@@ -113,6 +114,13 @@
 #pragma mark -----按钮方法-----
 
 - (void)work {
+    
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFJSONRequestSerializer serializer];
+    session.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    
     
 }
 

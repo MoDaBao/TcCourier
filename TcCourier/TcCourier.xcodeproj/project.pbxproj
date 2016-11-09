@@ -46,6 +46,7 @@
 		E7FB2BE71DB7580B0045E871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7FB2BE61DB7580B0045E871 /* Assets.xcassets */; };
 		E7FB2BEA1DB7595D0045E871 /* SettingItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BE91DB7595D0045E871 /* SettingItemView.m */; };
 		E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BEC1DB774910045E871 /* ModifyPasswordViewController.m */; };
+		E7FB5AAB1DD2FF8E006DFADD /* TcCourierInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB5AAA1DD2FF8E006DFADD /* TcCourierInfoManager.m */; };
 		E7FB7FA31DD19E640023148C /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7FB7F931DD19E640023148C /* MJRefresh.bundle */; };
 		E7FB7FA41DD19E640023148C /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7F961DD19E640023148C /* MJRefreshBaseView.m */; };
 		E7FB7FA51DD19E640023148C /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB7F981DD19E640023148C /* MJRefreshConst.m */; };
@@ -156,6 +157,8 @@
 		E7FB2BE91DB7595D0045E871 /* SettingItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingItemView.m; sourceTree = "<group>"; };
 		E7FB2BEB1DB774910045E871 /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
 		E7FB2BEC1DB774910045E871 /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
+		E7FB5AA91DD2FF8E006DFADD /* TcCourierInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TcCourierInfoManager.h; sourceTree = "<group>"; };
+		E7FB5AAA1DD2FF8E006DFADD /* TcCourierInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TcCourierInfoManager.m; sourceTree = "<group>"; };
 		E7FB7F931DD19E640023148C /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		E7FB7F941DD19E640023148C /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		E7FB7F951DD19E640023148C /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 		E7E8568F1DAF67080057D66F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7FB5AA91DD2FF8E006DFADD /* TcCourierInfoManager.h */,
+				E7FB5AAA1DD2FF8E006DFADD /* TcCourierInfoManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -685,6 +690,7 @@
 				E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */,
 				E7FB2BE51DB755880045E871 /* SettingView.m in Sources */,
 				E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */,
+				E7FB5AAB1DD2FF8E006DFADD /* TcCourierInfoManager.m in Sources */,
 				E7FB7FA71DD19E640023148C /* MJRefreshHeaderView.m in Sources */,
 				E7E8567D1DAF62B70057D66F /* MainNavigationController.m in Sources */,
 				E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */,

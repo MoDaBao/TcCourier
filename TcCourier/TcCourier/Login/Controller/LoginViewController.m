@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "MOTextField.h"
 #import "TcLoginButton.h"
+#import "TipMessageView.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -87,27 +88,49 @@
 //    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"storesearch",@"api",keyWords,@"word",longtitude,@"long",latitude,@"lati",[NSNumber numberWithInteger:start],@"start",address,@"address",nil];
 //    NSDictionary *ddd = [NSDictionary dictionaryWithObjectsAndKeys:dataDic,@"data",[[MyMD5 md5:str] uppercaseString],@"sign", nil];
     
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@",@"pdalogin", @"pda", @"13333333333", @"123456"];
-    NSDictionary *dic = @{@"api":@"pdalogin", @"core": @"pda", @"phone":@"13333333333",  @"pwd":@"123456"};
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@",@"pdalogin", @"pda", _phoneTF.tf.text, _passwordTF.tf.text];
+    NSDictionary *dic = @{@"api":@"pdalogin", @"core": @"pda", @"phone":_phoneTF.tf.text,  @"pwd":_passwordTF.tf.text};
     
     NSDictionary *parameterDic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
-    
+
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFJSONRequestSerializer serializer];
-    session.responseSerializer = [AFJSONResponseSerializer serializer];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:parameterDic progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject is %@", responseObject);
-        NSLog(@"msg = %@", responseObject[@"msg"]);
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        if (0 == [dict[@"status"] floatValue]) {// 登录成功
+            
+            NSMutableDictionary *dataDic = dict[@"data"][@"pda"];
+            dataDic[@"phone"] = dict[@"data"][@"phone"];
+            
+            // 存储登录跑腿信息
+            [[TcCourierInfoManager shareInstance] setTcCourierInfoWithDic:dataDic];
+            
+            // 刷新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
+        } else {// 登录失败
+            // 提示框
+            CGFloat margin = 100;
+            CGFloat width = kScreenWidth - margin * 2;
+            CGFloat height = 100;
+            CGFloat tipY = (kScreenHeight - height) * .5;
+            TipMessageView *tipView = [[TipMessageView alloc] initWithFrame:CGRectMake(margin, tipY, width, height) tip:dict[@"msg"]];
+            [self.view addSubview:tipView];
+        }
+        
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error is %@", error);
+        NSLog(@"failed:%@", error);
     }];
     
     
-    [self dismissViewControllerAnimated:YES completion:nil];
     
     
 }

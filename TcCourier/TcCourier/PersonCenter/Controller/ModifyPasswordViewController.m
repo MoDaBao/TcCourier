@@ -44,6 +44,7 @@
     [self.view addSubview:_repeatTF];
     
     TcLoginButton *modifyBtn = [[TcLoginButton alloc] initWithFrame:CGRectMake(40, _repeatTF.y + tfHeight + 60, kScreenWidth - 40 * 2, 40) title:@"修改密码" titleColor:[UIColor whiteColor] bgColor:kOrangeColor];
+    [modifyBtn addTarget:self action:@selector(modifyPwd) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:modifyBtn];
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
@@ -61,6 +62,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.view.backgroundColor = kBGGary;
     self.navigationItem.title = @"修改密码";
     
@@ -69,6 +71,30 @@
     // 添加键盘回收手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnKeyboard)];
     [self.view addGestureRecognizer:tap];
+}
+
+
+#pragma mark -----按钮方法-----
+
+- (void)modifyPwd {
+    
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@&repwd=%@",@"pdarepwd", @"pda", @"13333333333", @"1234567", @"456789"];
+    NSDictionary *dic = @{@"api":@"pdarepwd", @"core":@"pda", @"phone":@"13333333333", @"pwd":@"1234567", @"repwd":@"456789"};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFJSONRequestSerializer serializer];
+    session.responseSerializer = [AFJSONResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject = %@",responseObject);
+        NSLog(@"msg = %@",responseObject[@"msg"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+    
 }
 
 

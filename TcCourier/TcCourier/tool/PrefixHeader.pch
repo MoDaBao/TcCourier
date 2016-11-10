@@ -25,6 +25,8 @@
 #import "MJRefresh/MJRefresh.h"
 #import "MyMD5.h"
 
+#import "TcCourierInfoManager.h"
+
 
 
 #endif /* PrefixHeader_pch */

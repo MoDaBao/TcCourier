@@ -37,7 +37,7 @@
     [scrollView addSubview:logoImageView];
     
     // 用户名
-    NSString *userName = @"配送员";
+    NSString *userName = [[TcCourierInfoManager shareInstance] getTcCourierUserName];
     UIFont *usernameFont = [UIFont systemFontOfSize:20];
     CGFloat usernameW = [UILabel getWidthWithTitle:userName
                                               font:usernameFont];
@@ -49,7 +49,7 @@
     [scrollView addSubview:usernameLabel];
     
     // 总好评率
-    CGFloat totalRate = 4.9 / 5.0;// 好评率
+    CGFloat totalRate = [[TcCourierInfoManager shareInstance] getScore].floatValue / 5.0;// 好评率
     NSString *totalRateStr = [NSString stringWithFormat:@"总好评率%%%02.0f",totalRate * 100];
     UIFont *totalRateFont = [UIFont systemFontOfSize:13];
     CGFloat totalRateW = [UILabel getWidthWithTitle:totalRateStr font:totalRateFont];
@@ -68,14 +68,12 @@
     [scrollView addSubview:settingView];
     settingView.passwordItem.clickBlock = ^(void) {// 修改密码的block实现
         NSLog(@"^修改密码");
-        printf("修改密码");
         ModifyPasswordViewController *modifyVC = [[ModifyPasswordViewController alloc] init];
         [self.navigationController pushViewController:modifyVC animated:YES];
         
     };
     settingView.contactItem.clickBlock = ^(void) {// 联系客服的block实现
         NSLog(@"^联系客服");
-        printf("联系客服");
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"商服电话:81691580\n工作时间：9:00-19:00" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
         alertView.tag = 2333;
         [alertView show];
@@ -97,6 +95,11 @@
     self.navigationController.navigationBar.hidden = YES;
     self.tabBarController.tabBar.hidden = NO;
     
+    for (UIView *view in self.view.subviews) {
+        [view removeFromSuperview];
+    }
+    [self createView];
+    
 }
 
 - (void)viewDidLoad {
@@ -105,8 +108,6 @@
     self.view.backgroundColor = kBGGary;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    
-    [self createView];
     
 }
 

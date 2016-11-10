@@ -73,6 +73,14 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     self.tabBarController.tabBar.hidden = NO;
+    
+    _isWork = [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] boolValue];
+    if (_isWork) {// 如果为1 在线
+        [_workBtn setBackgroundImage:[UIImage imageNamed:@"work"] forState:UIControlStateNormal];
+    } else {
+        [_workBtn setBackgroundImage:[UIImage imageNamed:@"workout"] forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)viewDidLoad {
@@ -93,6 +101,8 @@
     [testBtn setTitle:@"test" forState:UIControlStateNormal];
     [testBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:testBtn];
+    
+    [[TcCourierInfoManager shareInstance] saveTcCourierOnlineStatus:@"1"];
     
 }
 
@@ -115,10 +125,23 @@
 
 - (void)work {
     
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@&status=%@",@"pdastatus", @"pda", @"12633", @"0"];
+    NSDictionary *dic = @{@"api":@"pdastatus", @"core":@"pda", @"pid":@"12633", @"status":@"0"};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFJSONRequestSerializer serializer];
-    session.responseSerializer = [AFJSONResponseSerializer serializer];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        NSLog(@"%@",responseObject[@"msg"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+    
     
     
     

@@ -19,6 +19,27 @@
 @implementation AlreadyDoneViewController
 
 
+#pragma mark -----网络请求-----
+
+- (void)requestData {
+    
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@&day=%@",@"pdacomplete", @"pda", [[TcCourierInfoManager shareInstance] getTcCourierUserId], @"0"];
+    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":@"0"};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+
 #pragma mark -----视图方法-----
 
 - (void)createView {
@@ -95,13 +116,13 @@
     }
     
     if (btn.tag == 1000) {// 今日
-        printf("今日");
+//        printf("今日");
     } else if (btn.tag == 1001) {// 一周内
-        printf("一周内");
+//        printf("一周内");
     } else if (btn.tag == 1002) {// 一个月内
-        printf("一个月内");
+//        printf("一个月内");
     } else if (btn.tag == 1003) {// 全部
-        printf("全部");
+//        printf("全部");
     }
 }
 

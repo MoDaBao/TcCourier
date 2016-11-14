@@ -11,6 +11,7 @@
 #import "SettingView.h"
 #import "TcLoginButton.h"
 #import "ModifyPasswordViewController.h"
+#import "LoginViewController.h"
 
 @interface PersonCenterViewController ()<UIAlertViewDelegate>
 
@@ -67,13 +68,11 @@
     SettingView *settingView = [[SettingView alloc] initWithFrame:CGRectMake(0, startRateView.y + startRateView.height + 30, kScreenWidth, 100)];
     [scrollView addSubview:settingView];
     settingView.passwordItem.clickBlock = ^(void) {// 修改密码的block实现
-        NSLog(@"^修改密码");
         ModifyPasswordViewController *modifyVC = [[ModifyPasswordViewController alloc] init];
         [self.navigationController pushViewController:modifyVC animated:YES];
         
     };
     settingView.contactItem.clickBlock = ^(void) {// 联系客服的block实现
-        NSLog(@"^联系客服");
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"商服电话:81691580\n工作时间：9:00-19:00" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
         alertView.tag = 2333;
         [alertView show];
@@ -123,6 +122,15 @@
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",@"81691580"]];
             [[UIApplication sharedApplication] openURL:url];
         }
+    } else if (alertView.tag == 2334) { // 退出登录的弹窗
+        if (0 == buttonIndex) {// 点击确定
+            // 删除用户的登录信息
+            [[TcCourierInfoManager shareInstance] removeAllTcCourierInfo];
+            
+            // 弹出登录页面
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            [self presentViewController:loginVC animated:YES completion:nil];
+        }
     }
 }
 
@@ -141,7 +149,16 @@
 
 #pragma mark -----按钮方法-----
 
+
+/**
+ 退出登录
+ */
 - (void)logout {
+    
+    UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要退出登录吗" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    alertV.tag = 2334;
+    [alertV show];
+    
     
 }
 

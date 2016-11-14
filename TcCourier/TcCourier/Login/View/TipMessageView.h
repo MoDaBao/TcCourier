@@ -10,6 +10,6 @@
 
 @interface TipMessageView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame tip:(NSString *)tip;
+- (instancetype)initWithTip:(NSString *)tip;
 
 @end

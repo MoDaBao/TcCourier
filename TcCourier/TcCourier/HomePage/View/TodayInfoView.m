@@ -61,7 +61,8 @@
             //计算行号
             NSInteger row = i / totalColumn;
             NSInteger col = i % totalColumn;
-            TodayInfoItemView *view = [[TodayInfoItemView alloc] initWithFrame:CGRectMake(horizontalMargin + col * width, row * height, width, height) title:self.dataArray[i] value:@"0.00"];
+            TodayInfoItemView *view = [[TodayInfoItemView alloc] initWithFrame:CGRectMake(horizontalMargin + col * width, row * height, width, height) title:[self.dataArray[i] allKeys].firstObject value:[self.dataArray[i] allValues].firstObject];
+            NSLog(@"%ld",i);
             [self addSubview:view];
         }
         

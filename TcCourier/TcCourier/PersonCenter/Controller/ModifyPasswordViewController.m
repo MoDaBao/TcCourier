@@ -9,6 +9,7 @@
 #import "ModifyPasswordViewController.h"
 #import "MOTextField.h"
 #import "TcLoginButton.h"
+#import "TipMessageView.h"
 
 @interface ModifyPasswordViewController ()<UITextFieldDelegate>
 
@@ -78,22 +79,73 @@
 
 - (void)modifyPwd {
     
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@&repwd=%@",@"pdarepwd", @"pda", @"13333333333", @"1234567", @"456789"];
-    NSDictionary *dic = @{@"api":@"pdarepwd", @"core":@"pda", @"phone":@"13333333333", @"pwd":@"1234567", @"repwd":@"456789"};
-    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    if (self.originalTF.tf.text.length > 0) {// 原始密码不为空
+        if ([self.newlyTF.tf.text isEqualToString:self.repeatTF.tf.text]) {// 输入新密码与重复输入新密码一致
+            
+            if (self.newlyTF.tf.text.length > 0) {// 输入的新密码不为空
+                NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@&repwd=%@",@"pdarepwd", @"pda", [[TcCourierInfoManager shareInstance] getCourierPhone], self.originalTF.tf.text, self.repeatTF.tf.text];
+                NSDictionary *dic = @{@"api":@"pdarepwd", @"core":@"pda", @"phone":[[TcCourierInfoManager shareInstance] getCourierPhone], @"pwd":self.originalTF.tf.text, @"repwd":self.repeatTF.tf.text};
+                NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+                
+                AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+                session.requestSerializer = [AFHTTPRequestSerializer serializer];
+                session.responseSerializer = [AFHTTPResponseSerializer serializer];
+                [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+                [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    if (0 == [dict[@"status"] floatValue]) {// 修改密码成功
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.navigationController popViewControllerAnimated:YES];
+                        });
+                    } else {
+                        // 提示框
+                        TipMessageView *tipView = [[TipMessageView alloc] initWithTip:dict[@"msg"]];
+                        [self.view addSubview:tipView];
+                        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+                            make.center.equalTo(self.view);
+                            make.height.equalTo(@100);
+                            make.width.equalTo(@200);
+                        }];
+                    }
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    NSLog(@"error is %@",error);
+                }];
+            } else {// 输入的新密码为空
+                // 提示框
+                TipMessageView *tipView = [[TipMessageView alloc] initWithTip:@"请先输入新密码"];
+                [self.view addSubview:tipView];
+                [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.center.equalTo(self.view);
+                    make.height.equalTo(@100);
+                    make.width.equalTo(@200);
+                }];
+            }
+            
+            
+        } else {
+            // 提示框
+            TipMessageView *tipView = [[TipMessageView alloc] initWithTip:@"新密码两次输入不一致"];
+            [self.view addSubview:tipView];
+            [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.view);
+                make.height.equalTo(@100);
+                make.width.equalTo(@200);
+            }];
+        }
+    } else {// 原始密码为空
+        // 提示框
+        TipMessageView *tipView = [[TipMessageView alloc] initWithTip:@"请先输入密码"];
+        [self.view addSubview:tipView];
+        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+            make.height.equalTo(@100);
+            make.width.equalTo(@200);
+        }];
+    }
     
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFJSONRequestSerializer serializer];
-    session.responseSerializer = [AFJSONResponseSerializer serializer];
-    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:pdic progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject = %@",responseObject);
-        NSLog(@"msg = %@",responseObject[@"msg"]);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error is %@",error);
-    }];
+    
+    
+    
     
 }
 

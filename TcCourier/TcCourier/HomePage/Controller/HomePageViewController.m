@@ -29,6 +29,16 @@
 
 #pragma mark -----视图方法-----
 
+/** 修改上下班按钮图片 **/
+- (void)changeWorkBtnImg {
+    _isWork = [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] boolValue];
+    if (_isWork) {// 如果为1 在线
+        [_workBtn setBackgroundImage:[UIImage imageNamed:@"work"] forState:UIControlStateNormal];
+    } else {
+        [_workBtn setBackgroundImage:[UIImage imageNamed:@"workout"] forState:UIControlStateNormal];
+    }
+}
+
 // 创建UI视图
 - (void)createView {
     // 上下班按钮
@@ -39,7 +49,7 @@
     CGFloat workY = 30;
     self.workBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.workBtn.frame = CGRectMake(workX, workY, workW, workH);
-    [self.workBtn setBackgroundImage:[UIImage imageNamed:@"work"] forState:UIControlStateNormal];
+    [self.workBtn setBackgroundImage:[UIImage imageNamed:@"workout"] forState:UIControlStateNormal];
     [self.workBtn addTarget:self action:@selector(work) forControlEvents:UIControlEventTouchUpInside];
     self.workBtn.adjustsImageWhenHighlighted = NO;// 关闭按钮的高亮效果
     [self.view addSubview:self.workBtn];
@@ -74,13 +84,12 @@
     self.navigationController.navigationBar.hidden = YES;
     self.tabBarController.tabBar.hidden = NO;
     
-    _isWork = [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] boolValue];
-    if (_isWork) {// 如果为1 在线
-        [_workBtn setBackgroundImage:[UIImage imageNamed:@"work"] forState:UIControlStateNormal];
-    } else {
-        [_workBtn setBackgroundImage:[UIImage imageNamed:@"workout"] forState:UIControlStateNormal];
+    if ([[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "]) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self presentViewController:loginVC animated:YES completion:nil];
     }
     
+    [self changeWorkBtnImg];
 }
 
 - (void)viewDidLoad {
@@ -89,9 +98,6 @@
     
     self.view.backgroundColor = kBGGary;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [self presentViewController:loginVC animated:YES completion:nil];
     
     [self createView];
     
@@ -125,19 +131,28 @@
 
 - (void)work {
     
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@&status=%@",@"pdastatus", @"pda", @"12633", @"0"];
-    NSDictionary *dic = @{@"api":@"pdastatus", @"core":@"pda", @"pid":@"12633", @"status":@"0"};
+    _isWork = !_isWork;
+    
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@&status=%@",@"pdastatus", @"pda", [[TcCourierInfoManager shareInstance] getTcCourierUserId], [NSString stringWithFormat:@"%d",_isWork]];
+    NSDictionary *dic = @{@"api":@"pdastatus", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"status":[NSString stringWithFormat:@"%d",_isWork]};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.requestSerializer = [AFHTTPRequestSerializer serializer];
     session.responseSerializer = [AFHTTPResponseSerializer serializer];
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:pdic progress:^(NSProgress * _Nonnull uploadProgress) {
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"dict = %@",dict);
+        if (0 == [dict[@"status"] floatValue]) {// 请求成功
+            // 更新本地存储的在线状态
+            [[TcCourierInfoManager shareInstance] saveTcCourierOnlineStatus:[NSString stringWithFormat:@"%d", _isWork]];
+            [self changeWorkBtnImg];
+            
+        } else {
+            _isWork = !_isWork;
+        }
         
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-        NSLog(@"%@",responseObject[@"msg"]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error is %@",error);
     }];
@@ -157,25 +172,21 @@
 - (void)addBlockAchive {
     HomePageItemView *daijiedan = [self.homePageView viewWithTag:1000];
     daijiedan.clickBlock = ^ () {
-        NSLog(@"待接单");
         WaitReceiveOrderViewController *waitVC = [[WaitReceiveOrderViewController alloc] init];
         [self.navigationController pushViewController:waitVC animated:YES];
     };// 待接单
     HomePageItemView *peisongzhong = [self.homePageView viewWithTag:1001];
     peisongzhong.clickBlock = ^() {
-        NSLog(@"配送中");
         DeliveryViewController *deliveryVC = [[DeliveryViewController alloc] init];
         [self.navigationController pushViewController:deliveryVC animated:YES];
     };// 配送中
         HomePageItemView *yiwancheng = [self.homePageView viewWithTag:1002];
     yiwancheng.clickBlock = ^() {
-        NSLog(@"已完成");
         AlreadyDoneViewController *alreadyVC = [[AlreadyDoneViewController alloc] init];
         [self.navigationController pushViewController:alreadyVC animated:YES];
     };// 已完成
     HomePageItemView *jinritongji = [self.homePageView viewWithTag:1003];
     jinritongji.clickBlock = ^() {
-        NSLog(@"今日统计");
         TodayCountViewController *todayVC = [[TodayCountViewController alloc] init];
         [self.navigationController pushViewController:todayVC animated:YES];
     };// 今日统计

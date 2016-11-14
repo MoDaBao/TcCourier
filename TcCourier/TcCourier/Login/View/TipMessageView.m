@@ -25,23 +25,26 @@
 }
 */
 
-- (instancetype)initWithFrame:(CGRect)frame tip:(NSString *)tip {
-    if (self = [super initWithFrame:frame]) {
+- (instancetype)initWithTip:(NSString *)tip {
+    if (self = [super init]) {
         self.alpha = .0;
         self.layer.cornerRadius = 10;
         self.layer.backgroundColor = [UIColor blackColor].CGColor;
         
-        UILabel *tipLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        UILabel *tipLabel = [[UILabel alloc] init];
+        [self addSubview:tipLabel];
+        [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.top.and.right.and.bottom.equalTo(self);
+        }];
         tipLabel.text = tip;
         tipLabel.textColor = [UIColor whiteColor];
         tipLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:tipLabel];
+        
         
         
         [UIView animateWithDuration:.4 animations:^{
             self.alpha = .4;
         } completion:^(BOOL finished) {
-//            self.timer = [NSTimer scheduledTimerWithTimeInterval:.4 target:self selector:@selector(hide) userInfo:nil repeats:NO];
             [self hide];
         }];
         
@@ -50,12 +53,10 @@
 }
 
 - (void)hide {
-    [UIView animateWithDuration:.4 animations:^{
+    [UIView animateWithDuration:.5 animations:^{
         self.alpha = .0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
-//        [self.timer invalidate];
-//        self.timer = nil;
     }];
 }
 

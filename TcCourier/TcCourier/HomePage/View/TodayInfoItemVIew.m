@@ -37,7 +37,11 @@
         valueLabel.font = font;
 //        self.valueLabel.backgroundColor = [UIColor redColor];
         valueLabel.textAlignment = NSTextAlignmentCenter;
-        valueLabel.text = value;
+        if ([title isEqualToString:@"今日有效单"]) {
+            valueLabel.text = [NSString stringWithFormat:@"%@单",value];
+        } else {
+            valueLabel.text = [NSString stringWithFormat:@"￥%@元",value];
+        }
         valueLabel.textColor = [UIColor colorWithRed:205 / 255.0 green:36 / 255.0 blue:29 / 255.0 alpha:1.0];
         [self addSubview:valueLabel];
         

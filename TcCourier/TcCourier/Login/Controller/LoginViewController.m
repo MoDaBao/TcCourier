@@ -39,7 +39,7 @@
     contentV.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentV];
     
-    _phoneTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 80, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的账号" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"account"] secureTextEntry:NO keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyNext];
+    _phoneTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 80, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的账号" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"account"] secureTextEntry:NO keyboardType:UIKeyboardTypeNumberPad returnKeyType:UIReturnKeyNext];
     _phoneTF.tf.delegate = self;
     [contentV addSubview:_phoneTF];
     
@@ -75,7 +75,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(returnKeyBoard)];
     [self.view addGestureRecognizer:tap];
     
-//    NSLog(@"login");
+
     
 }
 
@@ -84,51 +84,71 @@
 
 - (void)login {
     
-//    NSString *str = [NSString stringWithFormat:@"address=%@&api=%@&lati=%@&long=%@&start=%ld&word=%@",address,@"storesearch",latitude,longtitude,start,keyWords];
-//    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"storesearch",@"api",keyWords,@"word",longtitude,@"long",latitude,@"lati",[NSNumber numberWithInteger:start],@"start",address,@"address",nil];
-//    NSDictionary *ddd = [NSDictionary dictionaryWithObjectsAndKeys:dataDic,@"data",[[MyMD5 md5:str] uppercaseString],@"sign", nil];
     
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@",@"pdalogin", @"pda", _phoneTF.tf.text, _passwordTF.tf.text];
-    NSDictionary *dic = @{@"api":@"pdalogin", @"core": @"pda", @"phone":_phoneTF.tf.text,  @"pwd":_passwordTF.tf.text};
-    
-    NSDictionary *parameterDic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
-    
-
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFHTTPRequestSerializer serializer];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:parameterDic progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        if (0 == [dict[@"status"] floatValue]) {// 登录成功
+    if (self.phoneTF.tf.text.length > 0) {// 账号不为空
+        if (self.passwordTF.tf.text.length > 0) {// 密码不为空
+            NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&phone=%@&pwd=%@",@"pdalogin", @"pda", _phoneTF.tf.text, _passwordTF.tf.text];
+            NSDictionary *dic = @{@"api":@"pdalogin", @"core": @"pda", @"phone":_phoneTF.tf.text,  @"pwd":_passwordTF.tf.text};
             
-            NSMutableDictionary *dataDic = dict[@"data"][@"pda"];
-            dataDic[@"phone"] = dict[@"data"][@"phone"];
+            NSDictionary *parameterDic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
             
-            // 存储登录跑腿信息
-            [[TcCourierInfoManager shareInstance] setTcCourierInfoWithDic:dataDic];
             
-            // 刷新UI
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self dismissViewControllerAnimated:YES completion:nil];
-            });
-        } else {// 登录失败
+            AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+            session.requestSerializer = [AFHTTPRequestSerializer serializer];
+            session.responseSerializer = [AFHTTPResponseSerializer serializer];
+            [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+            [session POST:REQUEST_URL parameters:parameterDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                if (0 == [dict[@"status"] floatValue]) {// 登录成功
+                    
+                    NSMutableDictionary *dataDic = dict[@"data"][@"pda"];
+                    dataDic[@"phone"] = dict[@"data"][@"phone"];
+                    
+                    // 存储登录跑腿信息
+                    [[TcCourierInfoManager shareInstance] setTcCourierInfoWithDic:dataDic];
+                    
+                    // 刷新UI
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    });
+                } else {// 登录失败
+                    // 提示框
+                    TipMessageView *tipView = [[TipMessageView alloc] initWithTip:dict[@"msg"]];
+                    [self.view addSubview:tipView];
+                    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.center.equalTo(self.view);
+                        make.height.equalTo(@100);
+                        make.width.equalTo(@200);
+                    }];
+                }
+                
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"failed:%@", error);
+            }];
+        } else {
             // 提示框
-            CGFloat margin = 100;
-            CGFloat width = kScreenWidth - margin * 2;
-            CGFloat height = 100;
-            CGFloat tipY = (kScreenHeight - height) * .5;
-            TipMessageView *tipView = [[TipMessageView alloc] initWithFrame:CGRectMake(margin, tipY, width, height) tip:dict[@"msg"]];
+            TipMessageView *tipView = [[TipMessageView alloc] initWithTip:@"密码不能为空"];
             [self.view addSubview:tipView];
+            [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.view);
+                make.height.equalTo(@100);
+                make.width.equalTo(@200);
+            }];
         }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"failed:%@", error);
-    }];
+    } else {
+        // 提示框
+        TipMessageView *tipView = [[TipMessageView alloc] initWithTip:@"账号不能为空"];
+        [self.view addSubview:tipView];
+        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+            make.height.equalTo(@100);
+            make.width.equalTo(@200);
+        }];
+    }
+    
+    
     
     
     
@@ -145,10 +165,20 @@
 
 #pragma mark -----代理方法-----
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == _phoneTF.tf) {
-        [_passwordTF.tf becomeFirstResponder];
+// 限制输入位数11位
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *str = [NSString stringWithFormat:@"%@%@",textField.text, string];
+    if (str.length > 11) {
+        return NO;
     }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    if (textField == _phoneTF.tf) {
+//        [_passwordTF.tf becomeFirstResponder];
+//    }
+    [self login];
     return YES;
 }
 

@@ -18,17 +18,45 @@
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
         self.dataArray = [NSMutableArray array];
-        [_dataArray addObject:@"今日有效单"];
-        [_dataArray addObject:@"今日提成"];
-        [_dataArray addObject:@"跑腿费(在线支付)"];
-        [_dataArray addObject:@"跑腿费(货到付款)"];
-        [_dataArray addObject:@"餐品费(在线支付)"];
-        [_dataArray addObject:@"餐品费(货到付款)"];
-        [_dataArray addObject:@"代购费(在线支付)"];
-        [_dataArray addObject:@"代购费(货到付款)"];
-
     }
     return _dataArray;
+}
+
+
+#pragma mark -----网络请求-----
+
+- (void)requestData {
+    
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@",@"pdastatistical", @"pda", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdastatistical", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        if (0 == [dict[@"status"] floatValue]) {// 请求成功
+            
+            [self.dataArray addObject:@{@"今日有效单":dict[@"data"][@"count"]}];
+            [self.dataArray addObject:@{@"今日提成":dict[@"data"][@"ti"]}];
+            [self.dataArray addObject:@{@"跑腿费(在线支付)":dict[@"data"][@"ponline"]}];
+            [self.dataArray addObject:@{@"跑腿费(货到付款)":dict[@"data"][@"punline"]}];
+            [self.dataArray addObject:@{@"餐品费(在线支付)":dict[@"data"][@"fonline"]}];
+            [self.dataArray addObject:@{@"餐品费(货到付款)":dict[@"data"][@"funonline"]}];
+            [self.dataArray addObject:@{@"代购费(在线支付)":dict[@"data"][@"donline"]}];
+            [self.dataArray addObject:@{@"代购费(货到付款)":dict[@"data"][@"dunonline"]}];
+            
+            // 更新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self createView];
+            });
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
 }
 
 
@@ -56,9 +84,9 @@
     self.view.backgroundColor = kBGGary;
     self.navigationItem.title = @"今日统计";
     
+    [self requestData];
     
     
-    [self createView];
 }
 
 - (void)back {

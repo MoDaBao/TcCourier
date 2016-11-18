@@ -67,9 +67,7 @@
     TodayInfoView *infoView = [[TodayInfoView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight + 50, kScreenWidth, 330 * kScaleForWidth) dataArray:self.dataArray];
     infoView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:infoView];
-    
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = backItem;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +81,9 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kBGGary;
     self.navigationItem.title = @"今日统计";
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backItem;
     
     [self requestData];
     

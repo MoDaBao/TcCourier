@@ -20,8 +20,6 @@
 #pragma mark -----视图方法-----
 
 - (void)createView {
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = backItem;
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight) style:UITableViewStylePlain];
     [tableView registerClass:[WaitReceiveOrderTableViewCell class] forCellReuseIdentifier:@"reuse"];
@@ -43,6 +41,9 @@
     self.view.backgroundColor = kBGGary;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"待接单";
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backItem;
     
     
     [self createView];

@@ -18,8 +18,7 @@
 
 
 - (void)createView {
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = backItem;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -33,6 +32,8 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kBGGary;
     self.navigationItem.title = @"订单详情";
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backItem;
     
 }
 

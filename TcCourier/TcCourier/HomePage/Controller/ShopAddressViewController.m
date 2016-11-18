@@ -19,9 +19,6 @@
 
 - (void)createView {
     
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = backItem;
-    
     ShoppingInfoView *shopView = [ShoppingInfoView new];
     [self.view addSubview:shopView];
     [shopView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,6 +38,8 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kBGGary;
     self.navigationItem.title = @"商家地址";
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backItem;
     
     [self createView];
 }

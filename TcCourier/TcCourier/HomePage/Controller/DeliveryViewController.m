@@ -33,8 +33,7 @@
 #pragma mark -----视图方法-----
 
 - (void)createView {
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = backItem;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,6 +47,8 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"配送中";
     self.view.backgroundColor = kBGGary;
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backItem;
     
     [self createView];
     

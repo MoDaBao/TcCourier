@@ -29,17 +29,17 @@
     CGFloat tfHeight = 50;
     CGFloat verticalMargin = 30;
     
-    _originalTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 100, kScreenWidth - margin * 2, tfHeight) bgColor:[UIColor whiteColor] placeholder:@"请输入原密码" lineColor:[UIColor whiteColor] tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:nil secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyNext];
+    _originalTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 100, kScreenWidth - margin * 2, tfHeight) bgColor:[UIColor whiteColor] placeholder:@"请输入原密码" lineColor:[UIColor whiteColor] tintColor:kOrangeColor font:kFont14 icon:nil secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyNext];
     [_originalTF changeBorderWidth:2 borderColor:kOrangeColor];
     _originalTF.tf.delegate = self;
     [self.view addSubview:_originalTF];
     
-    _newlyTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, _originalTF.y + tfHeight + verticalMargin, kScreenWidth - margin * 2, tfHeight) bgColor:[UIColor whiteColor] placeholder:@"请输入新密码" lineColor:[UIColor whiteColor] tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:nil secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyNext];
+    _newlyTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, _originalTF.y + tfHeight + verticalMargin, kScreenWidth - margin * 2, tfHeight) bgColor:[UIColor whiteColor] placeholder:@"请输入新密码" lineColor:[UIColor whiteColor] tintColor:kOrangeColor font:kFont14 icon:nil secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyNext];
     [_newlyTF changeBorderWidth:2 borderColor:kOrangeColor];
     _newlyTF.tf.delegate = self;
     [self.view addSubview:_newlyTF];
     
-    _repeatTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, _newlyTF.y + tfHeight + verticalMargin, kScreenWidth - margin * 2, tfHeight) bgColor:[UIColor whiteColor] placeholder:@"请确认新密码" lineColor:[UIColor whiteColor] tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:nil secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyDone];
+    _repeatTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, _newlyTF.y + tfHeight + verticalMargin, kScreenWidth - margin * 2, tfHeight) bgColor:[UIColor whiteColor] placeholder:@"请确认新密码" lineColor:[UIColor whiteColor] tintColor:kOrangeColor font:kFont14 icon:nil secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyDone];
     [_repeatTF changeBorderWidth:2 borderColor:kOrangeColor];
     _repeatTF.tf.delegate = self;
     [self.view addSubview:_repeatTF];

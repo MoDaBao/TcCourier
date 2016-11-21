@@ -36,4 +36,11 @@
     }
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.foodArray = [NSMutableArray array];
+    }
+    return self;
+}
+
 @end

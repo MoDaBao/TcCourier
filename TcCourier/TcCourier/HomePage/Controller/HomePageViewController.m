@@ -12,8 +12,9 @@
 #import "TodayCountViewController.h"
 #import "WaitReceiveOrderViewController.h"
 #import "AlreadyDoneViewController.h"
-#import "ShopAddressViewController.h"
+//#import "ShopAddressViewController.h"
 #import "DeliveryViewController.h"
+#import "OrderDetailViewController.h"
 
 @interface HomePageViewController ()
 
@@ -164,8 +165,11 @@
 
 // 测试按钮的测试方法
 - (void)test {
-    ShopAddressViewController *shopVC = [[ShopAddressViewController alloc] init];
-    [self.navigationController pushViewController:shopVC animated:YES];
+//    ShopAddressViewController *shopVC = [[ShopAddressViewController alloc] init];
+//    [self.navigationController pushViewController:shopVC animated:YES];
+    OrderDetailViewController *orderVC = [[OrderDetailViewController alloc] init];
+    [self.navigationController pushViewController:orderVC animated:YES];
+    
 }
 
 // 给homepageView中的每个item添加block实现

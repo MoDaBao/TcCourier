@@ -70,7 +70,7 @@
         
     }
     _height = _height + (array.count - 1) * 5;
-    NSLog(@"height = %f, width = %f",_height, width);
+//    NSLog(@"height = %f, width = %f",_height, width);
     [self mas_updateConstraints:^(MASConstraintMaker *make) {// 更新高度的约束
         make.height.equalTo(@(_height));
     }];

@@ -24,7 +24,7 @@
 - (void)createView {
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - KTabBarHeight)];
-    //    scrollView.contentSize = CGSizeMake(kScreenWidth, kScreenHeight);
+    scrollView.contentSize = CGSizeMake(scrollView.width, scrollView.height);
     scrollView.contentOffset = CGPointMake(0, 0);
     scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:scrollView];
@@ -82,7 +82,8 @@
     
     // 退出按钮
     CGFloat margin = 40;
-    TcLoginButton *logout = [[TcLoginButton alloc] initWithFrame:CGRectMake(margin, settingView.y + settingView.height + 150 * kScaleForWidth, kScreenWidth - margin * 2, 40) title:@"退出登录" titleColor:[UIColor whiteColor] bgColor:[UIColor colorWithRed:83 / 255.0 green:83 / 255.0 blue:83 / 255.0 alpha:1.0]];
+    CGFloat btnH = 40;
+    TcLoginButton *logout = [[TcLoginButton alloc] initWithFrame:CGRectMake(margin, kScreenHeight - KTabBarHeight - 40 - btnH, kScreenWidth - margin * 2, btnH) title:@"退出登录" titleColor:[UIColor whiteColor] bgColor:[UIColor colorWithRed:83 / 255.0 green:83 / 255.0 blue:83 / 255.0 alpha:1.0]];
     [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:logout];
     

@@ -18,9 +18,10 @@
 
 #define kOrangeColor [UIColor colorWithRed:252 / 255.0 green:135 / 255.0 blue:3 / 255.0 alpha:1.0] // 整体橙色
 #define kBGGary [UIColor colorWithRed:238 / 255.0 green:238 / 255.0 blue:238 / 255.0 alpha:1.0] // 灰色背景
+#define kFont14 [UIFont systemFontOfSize:14] //大小为14的字体对象
 
-#define kScaleForWidth [UIScreen mainScreen].bounds.size.width / 375 //以iPhone6的尺寸为基准的宽比
-#define kScaleForHeight [UIScreen mainScreen].bounds.size.height / 667 //以iPhone6的储存为基准的高比
+#define kScaleForWidth [UIScreen mainScreen].bounds.size.width / 375.0 //以iPhone6的尺寸为基准的宽比
+#define kScaleForHeight [UIScreen mainScreen].bounds.size.height / 667.0 //以iPhone6的尺寸为基准的高比
 
 #define kHeartWidth 24// 星星图片的宽度
 #define kHeartHeight 18// 星星图片的高度

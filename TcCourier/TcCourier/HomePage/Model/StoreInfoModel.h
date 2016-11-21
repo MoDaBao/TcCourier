@@ -23,5 +23,7 @@
 @property (nonatomic, copy) NSString *orderStatus;
 @property (nonatomic, copy) NSString *order_id;
 
+@property (nonatomic, strong) NSMutableArray *foodArray;
+
 
 @end

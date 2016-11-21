@@ -26,7 +26,7 @@
         //只需要设置一次的放置在这里
         self.imageView.contentMode = UIViewContentModeCenter;
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        self.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.titleLabel.font = kFont14;
         [self setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
 
         [self setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];

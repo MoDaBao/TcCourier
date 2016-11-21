@@ -39,11 +39,11 @@
     contentV.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentV];
     
-    _phoneTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 80, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的账号" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"account"] secureTextEntry:NO keyboardType:UIKeyboardTypeNumberPad returnKeyType:UIReturnKeyNext];
+    _phoneTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 80, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的账号" lineColor:kOrangeColor tintColor:kOrangeColor font:kFont14 icon:[UIImage imageNamed:@"account"] secureTextEntry:NO keyboardType:UIKeyboardTypeNumberPad returnKeyType:UIReturnKeyNext];
     _phoneTF.tf.delegate = self;
     [contentV addSubview:_phoneTF];
     
-    _passwordTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 140, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的密码" lineColor:kOrangeColor tintColor:kOrangeColor font:[UIFont systemFontOfSize:14] icon:[UIImage imageNamed:@"password"] secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyDone];
+    _passwordTF = [[MOTextField alloc] initWithFrame:CGRectMake(margin, 140, contentV.width - margin * 2, 30) bgColor:[UIColor whiteColor] placeholder:@"请输入您的密码" lineColor:kOrangeColor tintColor:kOrangeColor font:kFont14 icon:[UIImage imageNamed:@"password"] secureTextEntry:YES keyboardType:UIKeyboardTypeDefault returnKeyType:UIReturnKeyDone];
     [contentV addSubview:_passwordTF];
     
     CGFloat logoW = 80 * kScaleForWidth;

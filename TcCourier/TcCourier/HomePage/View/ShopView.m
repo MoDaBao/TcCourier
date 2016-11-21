@@ -32,7 +32,7 @@
         [self addSubview:icon];
         
         // 商家名称标签
-        UIFont *shopNameFont = [UIFont systemFontOfSize:14];
+        UIFont *shopNameFont = kFont14;
         CGFloat shopW = [UILabel getWidthWithTitle:shopName font:shopNameFont];
         CGFloat showH = [UILabel getHeightWithTitle:shopName font:shopNameFont];
         UILabel *shopNameL = [[UILabel alloc] initWithFrame:CGRectMake(icon.x + icon.width + margin * 3 * .5, icon.y + icon.height * .5 - showH * .5, shopW, showH)];

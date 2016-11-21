@@ -31,7 +31,7 @@
             make.left.equalTo(@(margin));
         }];
         titleL.text = title;
-        titleL.font = [UIFont systemFontOfSize:14];
+        titleL.font = kFont14;
         
         UILabel *timeL = [UILabel new];
         [self addSubview:timeL];
@@ -39,7 +39,7 @@
             make.centerY.equalTo(self);
             make.right.equalTo(@-20);
         }];
-        timeL.font = [UIFont systemFontOfSize:14];
+        timeL.font = kFont14;
         timeL.text = @"剩余时间：";
         
     }
@@ -59,7 +59,7 @@
             make.left.equalTo(@(margin));
         }];
         titleL.text = title;
-        titleL.font = [UIFont systemFontOfSize:14];
+        titleL.font = kFont14;
         
         UILabel *timeL = [UILabel new];
         [self addSubview:timeL];
@@ -67,7 +67,7 @@
             make.centerY.equalTo(self);
             make.right.equalTo(@-20);
         }];
-        timeL.font = [UIFont systemFontOfSize:14];
+        timeL.font = kFont14;
         timeL.text = @"剩余时间：";
         
     }

@@ -51,7 +51,7 @@
         NSArray *dataArray = dict[@"data"][@"order"];
         if (0 == [dict[@"status"] floatValue]) {
             
-            NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//            NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
             
             [self.dataArray removeAllObjects];
             
@@ -191,35 +191,35 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIFont *font = [UIFont systemFontOfSize:14];
+    
     OrderInfoModel *model = self.dataArray[indexPath.row];
     
     
-    CGFloat listViewWidth = tableView.width - (5) * 2 - ((5) * 3 + (18) + [UILabel getWidthWithTitle:@"店家地址:" font:[UIFont systemFontOfSize:14]]);// 计算地址列表视图的宽度
-    CGFloat orderInfoLwidth = listViewWidth + [UILabel getWidthWithTitle:@"店家地址:" font:font];
-    CGFloat baseH = [UILabel getHeightWithTitle:@"的" font:font];// 一行文字的高度
+    CGFloat listViewWidth = tableView.width - (5) * 2 - ((5) * 3 + (18) + [UILabel getWidthWithTitle:@"店家地址:" font:kFont14]);// 计算地址列表视图的宽度
+    CGFloat orderInfoLwidth = listViewWidth + [UILabel getWidthWithTitle:@"店家地址:" font:kFont14];
+    CGFloat baseH = [UILabel getHeightWithTitle:@"的" font:kFont14];// 一行文字的高度
     
     // 计算支付方式——距离——订单状态 标签高度
     CGFloat orderInfoLHeight = 0;
     if ([model.is_timeout isEqualToString:@"1"]) {
-        orderInfoLHeight = [UILabel getHeightByWidth:orderInfoLwidth title:[NSString stringWithFormat:@"%@ - 距%@km - 超时赔付 - %@",model.payment, model.distance, @"已完成"] font:font];
+        orderInfoLHeight = [UILabel getHeightByWidth:orderInfoLwidth title:[NSString stringWithFormat:@"%@ - 距%@km - 超时赔付 - %@",model.payment, model.distance, @"已完成"] font:kFont14];
     } else {// 无超时赔付
-        orderInfoLHeight = [UILabel getHeightByWidth:orderInfoLwidth title:[NSString stringWithFormat:@"%@ - 距%@km - %@",model.payment, model.distance, @"已完成"] font:font];
+        orderInfoLHeight = [UILabel getHeightByWidth:orderInfoLwidth title:[NSString stringWithFormat:@"%@ - 距%@km - %@",model.payment, model.distance, @"已完成"] font:kFont14];
     }
     
     // 计算店铺地址的高度
     CGFloat storeHeight = 0;
     for (StoreInfoModel *store in model.storeInfoArray) {
-        storeHeight = storeHeight + [UILabel getHeightByWidth:listViewWidth title:store.address font:font] + 5;
+        storeHeight = storeHeight + [UILabel getHeightByWidth:listViewWidth title:store.address font:kFont14] + 5;
     }
     storeHeight -= 5;
     
     // 计算收货地址的高度
     CGFloat receiverHeight = 0;
     AddressInfoModel *address = model.addressInfo;
-    receiverHeight = [UILabel getHeightByWidth:listViewWidth title:address.detail_addr font:font];
+    receiverHeight = [UILabel getHeightByWidth:listViewWidth title:address.detail_addr font:kFont14];
     
-    return 132 + (orderInfoLHeight - baseH) + (storeHeight - baseH) + (receiverHeight - baseH);
+    return 130 + (orderInfoLHeight - baseH) + (storeHeight - baseH) + (receiverHeight - baseH);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

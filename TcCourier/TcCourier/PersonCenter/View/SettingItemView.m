@@ -27,7 +27,7 @@
         [self addSubview:iconView];
         
         CGFloat margin = 10;
-        UIFont *tipFont = [UIFont systemFontOfSize:14];
+        UIFont *tipFont = kFont14;
         CGFloat tipHeight = [UILabel getHeightWithTitle:itemArray[1] font:tipFont];
         CGFloat tipWidth = [UILabel getWidthWithTitle:itemArray[1] font:tipFont];
         UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(iconView.x + iconView.width + margin, (self.height - tipHeight) * .5, tipWidth, tipHeight)];

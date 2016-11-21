@@ -31,7 +31,7 @@
             [self addSubview:btn];
             [btn setTitle:array[i] forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            btn.titleLabel.font = kFont14;
             [btn setBackgroundImage:[UIImage imageNamed:@"white"] forState:UIControlStateSelected];
 //            [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {

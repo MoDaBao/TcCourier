@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderInfoModel.h"
 
 @interface OrderDetailViewController : UIViewController
+
+@property (nonatomic, copy) NSString *orderNumber;
 
 @end

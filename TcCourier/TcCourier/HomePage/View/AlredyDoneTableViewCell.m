@@ -32,7 +32,6 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         _margin = 5;
-        UIFont *font = [UIFont systemFontOfSize:14];
         
         // 内容视图
         self.contentV = [[UIView alloc] init];
@@ -63,7 +62,7 @@
         // 支付方式——距离——订单状态
         _orderInfoL = [UILabel new];
         [self.contentV addSubview:_orderInfoL];
-        _orderInfoL.font = font;
+        _orderInfoL.font = kFont14;
         _orderInfoL.numberOfLines = 0;
         [_orderInfoL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.numberL);
@@ -75,11 +74,11 @@
         UILabel *dianjiadizhi = [UILabel new];
         dianjiadizhi.text = @"店家地址:";
         [self.contentV addSubview:dianjiadizhi];
-        dianjiadizhi.font = font;
+        dianjiadizhi.font = kFont14;
         [dianjiadizhi mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_orderInfoL);
             make.top.equalTo(_orderInfoL.mas_bottom).offset(_margin);
-            make.width.equalTo(@([UILabel getWidthWithTitle:dianjiadizhi.text font:font]));
+            make.width.equalTo(@([UILabel getWidthWithTitle:dianjiadizhi.text font:kFont14]));
         }];
         
         // 店家地址列表
@@ -96,11 +95,11 @@
         UILabel *shouhuodizhi = [UILabel new];
         shouhuodizhi.text = @"收货地址:";
         [self.contentV addSubview:shouhuodizhi];
-        shouhuodizhi.font = font;
+        shouhuodizhi.font = kFont14;
         [shouhuodizhi mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(dianjiadizhi);
             make.top.equalTo(_storeAddressListV.mas_bottom).offset(_margin);
-            make.width.equalTo(@([UILabel getWidthWithTitle:shouhuodizhi.text font:font]));
+            make.width.equalTo(@([UILabel getWidthWithTitle:shouhuodizhi.text font:kFont14]));
         }];
         
         // 收货地址列表标签
@@ -128,7 +127,7 @@
         // 订单编号
         _orderNumberL = [UILabel new];
         [self.contentV addSubview:_orderNumberL];
-        _orderNumberL.font = font;
+        _orderNumberL.font = kFont14;
         [_orderNumberL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(shouhuodizhi);
             make.top.equalTo(line.mas_bottom).offset(_margin);
@@ -137,7 +136,7 @@
         // 下单时间
         _orderTimeL = [UILabel new];
         [self.contentV addSubview:_orderTimeL];
-        _orderTimeL.font = font;
+        _orderTimeL.font = kFont14;
         [_orderTimeL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(shouhuodizhi);
             make.top.equalTo(_orderNumberL.mas_bottom).offset(_margin);
@@ -153,12 +152,13 @@
     // 计算地址列表视图的宽度
     CGFloat listViewWidth = tableWidth - _margin * 2 - (_margin * 3 + _numberLWidth + [UILabel getWidthWithTitle:@"店家地址:" font:_orderInfoL.font]);
     
-    _numberL.text = [NSString stringWithFormat:@"%ld",index + 1];// 加载编号
+    _numberL.text = [NSString stringWithFormat:@"%ld",(long)index + 1];// 加载编号
     
-    if ([orderModel.is_timeout isEqualToString:@"1"]) {
-         _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - 超时赔付 - %@",orderModel.payment, orderModel.distance, @"已完成"];// 加载 支付方式——距离——订单状态
+    // 加载 支付方式——距离——订单状态
+    if ([orderModel.is_timeout isEqualToString:@"1"]) {// 有超时赔付
+         _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - 超时赔付 - %@",orderModel.payment, orderModel.distance, @"已完成"];
     } else {// 无超时赔付
-        _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - %@",orderModel.payment, orderModel.distance, @"已完成"];// 加载 支付方式——距离——订单状态
+        _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - %@",orderModel.payment, orderModel.distance, @"已完成"];
     }
     
     [_storeAddressListV loadLabelWithArray:orderModel.storeInfoArray font:_orderInfoL.font width:listViewWidth];// 加载店铺地址

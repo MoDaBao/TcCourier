@@ -54,7 +54,7 @@
         }];
         self.numberL.clipsToBounds = YES;
         self.numberL.layer.cornerRadius = _numberLWidth * .5;
-        self.numberL.backgroundColor = [UIColor redColor];
+        self.numberL.backgroundColor = [UIColor colorWithRed:0.92 green:0.33 blue:0.30 alpha:1.00];
         self.numberL.textColor = [UIColor whiteColor];
         self.numberL.textAlignment = NSTextAlignmentCenter;
         self.numberL.font = [UIFont systemFontOfSize:13];

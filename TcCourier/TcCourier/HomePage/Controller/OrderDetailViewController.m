@@ -80,6 +80,7 @@
 
 
 - (void)createView {
+    // 加载tableView
     self.tableView = [UITableView new];
     self.tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
@@ -135,7 +136,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 300;
+    return 400;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -143,6 +144,7 @@
     OrderDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
         cell = [[OrderDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [cell setDataWithModel:self.dataSourceModel index:indexPath.row];
     return cell;

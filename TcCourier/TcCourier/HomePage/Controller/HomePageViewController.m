@@ -111,6 +111,8 @@
     
     [[TcCourierInfoManager shareInstance] saveTcCourierOnlineStatus:@"1"];
     
+    
+
 }
 
 
@@ -165,10 +167,37 @@
 
 // 测试按钮的测试方法
 - (void)test {
-//    ShopAddressViewController *shopVC = [[ShopAddressViewController alloc] init];
-//    [self.navigationController pushViewController:shopVC animated:YES];
     OrderDetailViewController *orderVC = [[OrderDetailViewController alloc] init];
     [self.navigationController pushViewController:orderVC animated:YES];
+    
+//    NSString *foodId = @"22053";
+//    NSString *foodStr = [NSString stringWithFormat:@"%d_%@",2,@"169"];
+////    NSDictionary *d1 = [NSDictionary dictionaryWithObjectsAndKeys:foodStr,foodId, nil];
+//    NSString *storeId = @"404";
+//    
+////    NSDictionary *d2 = [NSDictionary dictionaryWithObjectsAndKeys:d1,storeId, nil];
+//    NSDictionary *d2 = @{storeId:@{foodId:foodStr}};
+//    
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:d2 options:NSJSONWritingPrettyPrinted error:nil];
+//    
+//    NSString *foodJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];//
+//    
+//    NSString *pstr = [NSString stringWithFormat:@"address=%@&api=%@&bonus_id=%@&food=%@&is_cart=%@&is_run=%@&is_select=%@&remark=%@&server_time=%@",@"27658", @"addcart", @"", [foodJson stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"", @"", @"", @"", @""];
+//    NSDictionary *dicc = @{@"address":@"27658", @"api":@"addcart", @"bonus_id":@"", @"food":[foodJson stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"is_cart":@"", @"is_run":@"", @"is_select":@"", @"remark":@"", @"server_time":@""};
+//    NSDictionary *pdic = @{@"data":dicc, @"sign":[[MyMD5 md5:pstr] uppercaseString]};
+//    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+//    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+//    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSLog(@"responseObject = %@",responseObject);
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"msg = %@",dict[@"msg"]);
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"error is %@",error);
+//    }];
+    
     
 }
 

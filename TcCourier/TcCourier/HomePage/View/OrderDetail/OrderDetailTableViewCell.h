@@ -20,4 +20,14 @@
  */
 - (void)setDataWithModel:(OrderInfoModel *)orderModel index:(NSInteger)index;
 
+
+/**
+ 设置价格富文本
+ 
+ @param label 需要设置富文本的标签对象
+ @param title 例如 订单总额:
+ @param sum 例如 ￥10.00
+ */
+- (void)setAttStrWithlabel:(UILabel *)label title:(NSString *)title sum:(NSString *)sum;
+
 @end

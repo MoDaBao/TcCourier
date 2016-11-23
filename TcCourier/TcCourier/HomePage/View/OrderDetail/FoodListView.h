@@ -11,6 +11,7 @@
 
 @interface FoodListView : UIView
 
-- (instancetype)initWithFoodArray:(NSArray *)foodArray;
+//- (instancetype)initWithFoodArray:(NSArray *)foodArray;
+- (void)loadDataWithFoodArray:(NSArray *)foodArray;
 
 @end

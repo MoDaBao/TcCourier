@@ -116,7 +116,7 @@
         // 分割线
         float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
         UIView *line = [[UIView alloc] init];
-        line.backgroundColor=[UIColor blackColor];
+        line.backgroundColor = [UIColor blackColor];
         [self.contentV addSubview:line];//线是否加
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(_contentV);

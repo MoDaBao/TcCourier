@@ -10,43 +10,54 @@
 
 @implementation FoodListView
 
-- (instancetype)initWithFoodArray:(NSArray *)foodArray {
-    if (self = [super init]) {
-        // 临时变量
-        UILabel *tempL = nil;
-        for (FoodModel *foodModel in foodArray) {
-            // 餐品名称
-            UILabel *foodNameL = [UILabel new];
-            [self addSubview:foodNameL];
-            foodNameL.font = kFont14;
-            foodNameL.text  = foodModel.title;
-            [foodNameL mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self);
-                if (tempL) {
-                    make.top.equalTo(tempL.mas_bottom).offset(5);
-                } else {
-                    make.top.equalTo(self);
-                }
-            }];
-            
-            tempL = foodNameL;
-            
-            // 餐品的价格和数量
-            UILabel *priceAndCountL = [UILabel new];
-            [self addSubview:priceAndCountL];
-            priceAndCountL.font = kFont14;
-            priceAndCountL.textColor = [UIColor colorWithRed:0.84 green:0.14 blue:0.15 alpha:1.00];
-            [priceAndCountL mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self);
-                make.top.equalTo(foodNameL);
-            }];
-            priceAndCountL.text = [NSString stringWithFormat:@"￥%@  %@份",foodModel.price, foodModel.quantity];
-        }
+- (void)loadDataWithFoodArray:(NSArray *)foodArray {
+    // 临时变量
+    UILabel *tempL = nil;
+    for (FoodModel *foodModel in foodArray) {
+        // 餐品名称
+        UILabel *foodNameL = [UILabel new];
+        [self addSubview:foodNameL];
+        foodNameL.font = kFont14;
+        foodNameL.text  = foodModel.title;
+        foodNameL.numberOfLines = 0;
+        [foodNameL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self);
+            if (tempL) {
+                make.top.equalTo(tempL.mas_bottom).offset(5);
+            } else {
+                make.top.equalTo(self);
+            }
+            make.width.equalTo(self.mas_centerX);// 设置宽度为自身的一半
+        }];
         
+        tempL = foodNameL;
+        
+        // 餐品的价格
+        UILabel *priceL = [UILabel new];
+        [self addSubview:priceL];
+        priceL.font = kFont14;
+        priceL.textColor = [UIColor colorWithRed:0.84 green:0.14 blue:0.15 alpha:1.00];
+        [priceL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_centerX);
+            make.top.equalTo(foodNameL);
+        }];
+        priceL.text = [NSString stringWithFormat:@"￥%@",foodModel.price];
+        
+        
+        // 餐品数量
+        UILabel *countL = [UILabel new];
+        [self addSubview:countL];
+        countL.font = kFont14;
+        countL.textColor = priceL.textColor;
+        [countL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(priceL);
+            make.right.equalTo(self);
+        }];
+        countL.text = [NSString stringWithFormat:@"%@份",foodModel.quantity];
         
     }
-    return self;
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

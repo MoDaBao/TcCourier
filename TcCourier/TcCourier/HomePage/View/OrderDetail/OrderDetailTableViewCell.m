@@ -8,6 +8,7 @@
 
 #import "OrderDetailTableViewCell.h"
 #import "AddressListView.h"
+#import "OrderShopDetailListView.m"
 
 @interface OrderDetailTableViewCell ()
 
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) UILabel *receiverPhoneL;// 收货人电话
 @property (nonatomic, strong) AddressListView *storeAddressListV;// 商家地址列表
 @property (nonatomic, strong) AddressListView *receiverAddressListV;// 收货地址列表
+@property (nonatomic, strong) OrderShopDetailListView *orderShopDetailListView;// 商家-餐品详情列表
 @end
 
 @implementation OrderDetailTableViewCell
@@ -122,7 +124,7 @@
         // 分割线
         float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
         UIView *line1 = [[UIView alloc] init];
-        line1.backgroundColor=[UIColor blackColor];
+        line1.backgroundColor = [UIColor blackColor];
         [self.contentV addSubview:line1];//线是否加
         [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(_contentV);
@@ -192,13 +194,17 @@
         
         // 分割线
         UIView *line2 = [[UIView alloc] init];
-        line2.backgroundColor=[UIColor blackColor];
+        line2.backgroundColor = [UIColor blackColor];
         [self.contentV addSubview:line2];//线是否加
         [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(_contentV);
             make.top.equalTo(_receiverAddressListV.mas_bottom).offset(_margin);
             make.height.equalTo(@(sortaPixel));
         }];
+        
+        // 商家-餐品详情列表
+        _orderShopDetailListView = [OrderShopDetailListView new];
+        
     }
     return self;
 }
@@ -234,13 +240,13 @@
     _service_timeL.text = [NSString stringWithFormat:@"期望送达时间:%@",orderModel.service_time];
     
     // 加载 收货人
-    _receiverL.text = [NSString stringWithFormat:@"收货人:%@",orderModel.addressInfo.name];
+    _receiverL.text = [NSString stringWithFormat:@"收货人: %@",orderModel.addressInfo.name];
     
     // 加载 收货人号码
-    NSString *str = [NSString stringWithFormat:@"收货号码:%@",orderModel.addressInfo.mobile];
+    NSString *str = [NSString stringWithFormat:@"收货号码: %@",orderModel.addressInfo.mobile];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
-    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.61 blue:0.58 alpha:1.00] range:NSMakeRange(5,orderModel.addressInfo.mobile.length)];
-    [attStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(5,orderModel.addressInfo.mobile.length)];
+    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.61 blue:0.58 alpha:1.00] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
+    [attStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
     _receiverPhoneL.attributedText = attStr;
     
     // 加载店铺地址

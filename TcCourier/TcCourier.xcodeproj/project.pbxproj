@@ -283,12 +283,14 @@
 				E7B3227B1DE43CC100A75DE0 /* TodayInfoView.h */,
 				E7B3227C1DE43CC100A75DE0 /* TodayInfoView.m */,
 			);
-			path = TodayCount;
+			name = TodayCount;
+			path = ../TodayCount;
 			sourceTree = "<group>";
 		};
 		E7B3227D1DE43CC100A75DE0 /* WaitReceiving */ = {
 			isa = PBXGroup;
 			children = (
+				E7B322781DE43CC100A75DE0 /* TodayCount */,
 				E7B3227E1DE43CC100A75DE0 /* OvertimePaidView.h */,
 				E7B3227F1DE43CC100A75DE0 /* OvertimePaidView.m */,
 				E7B322801DE43CC100A75DE0 /* ShopView.h */,
@@ -451,7 +453,6 @@
 				E7B322691DE43CC100A75DE0 /* AlreadyDone */,
 				E7B3226E1DE43CC100A75DE0 /* HomePage */,
 				E7B322731DE43CC100A75DE0 /* OrderDetail */,
-				E7B322781DE43CC100A75DE0 /* TodayCount */,
 				E7B3227D1DE43CC100A75DE0 /* WaitReceiving */,
 				E7729E511DDC4E6700BF5B69 /* AddressListView.h */,
 				E7729E521DDC4E6700BF5B69 /* AddressListView.m */,

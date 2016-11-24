@@ -11,6 +11,7 @@
 
 @interface OrderShopDetailListView : UIView
 
-- (instancetype)initWithSotreInfoArray:(NSArray *)storeInfoArray;
+
+- (void)loadOrderShopDetailListViewWithSotreInfoArray:(NSArray *)storeInfoArray;
 
 @end

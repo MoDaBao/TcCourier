@@ -204,6 +204,12 @@
         
         // 商家-餐品详情列表
         _orderShopDetailListView = [OrderShopDetailListView new];
+        [self.contentV addSubview:_orderShopDetailListView];
+        [_orderShopDetailListView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.equalTo(self.contentV);
+            make.top.equalTo(line2.mas_bottom).offset(_margin);
+//            make.height// 需要计算高度
+        }];
         
     }
     return self;
@@ -255,6 +261,9 @@
     // 加载收货地址
     [_receiverAddressListV loadLabelWithAddressInfoModel:orderModel.addressInfo font:_orderInfoL.font width:kScreenWidth - 20];
     
+    // 加载 商家-餐品详情列表
+    [_orderShopDetailListView loadOrderShopDetailListViewWithSotreInfoArray:orderModel.storeInfoArray];
+    
     
 }
 
@@ -271,6 +280,11 @@
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.80 green:0.15 blue:0.15 alpha:1.00] range:NSMakeRange(title.length,str.length - title.length)];
     label.attributedText = attStr;
+}
+
+// 计算_orderShopDetailListView的高度
+- (void)getOrderShopDetailListViewHeightWithStoreArray:(NSArray *)sotreArray {
+    
 }
 
 - (void)awakeFromNib {

@@ -169,6 +169,7 @@
 - (void)test {
     OrderDetailViewController *orderVC = [[OrderDetailViewController alloc] init];
     [self.navigationController pushViewController:orderVC animated:YES];
+    orderVC.orderNumber = @"147859731967";
     
 //    NSString *foodId = @"22053";
 //    NSString *foodStr = [NSString stringWithFormat:@"%d_%@",2,@"169"];

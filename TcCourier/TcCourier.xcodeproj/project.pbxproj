@@ -12,28 +12,28 @@
 		E70B06631DB06C7900E4B5A6 /* UIView+ChangeFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B06621DB06C7900E4B5A6 /* UIView+ChangeFrame.m */; };
 		E70B06691DB0755500E4B5A6 /* 123.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E70B06681DB0755500E4B5A6 /* 123.jpg */; };
 		E71209361DD470EF0015825A /* TipMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71209351DD470EF0015825A /* TipMessageView.m */; };
+		E715932B1DE690BE00EAAC68 /* AddressListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E715930A1DE690BE00EAAC68 /* AddressListView.m */; };
+		E715932C1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715930D1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m */; };
+		E715932D1DE690BE00EAAC68 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E715930F1DE690BE00EAAC68 /* ChooseView.m */; };
+		E715932E1DE690BE00EAAC68 /* HomePageItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593121DE690BE00EAAC68 /* HomePageItemView.m */; };
+		E715932F1DE690BE00EAAC68 /* HomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593141DE690BE00EAAC68 /* HomePageView.m */; };
+		E71593301DE690BE00EAAC68 /* ShoppingInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593171DE690BE00EAAC68 /* ShoppingInfoView.m */; };
+		E71593311DE690BE00EAAC68 /* FoodListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E715931A1DE690BE00EAAC68 /* FoodListView.m */; };
+		E71593321DE690BE00EAAC68 /* OrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715931C1DE690BE00EAAC68 /* OrderDetailTableViewCell.m */; };
+		E71593341DE690BE00EAAC68 /* TodayInfoItemVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593211DE690BE00EAAC68 /* TodayInfoItemVIew.m */; };
+		E71593351DE690BE00EAAC68 /* TodayInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593231DE690BE00EAAC68 /* TodayInfoView.m */; };
+		E71593361DE690BE00EAAC68 /* OvertimePaidView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593261DE690BE00EAAC68 /* OvertimePaidView.m */; };
+		E71593371DE690BE00EAAC68 /* ShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593281DE690BE00EAAC68 /* ShopView.m */; };
+		E71593381DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */; };
+		E71593441DE6B76600EAAC68 /* OrderDetailShopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593431DE6B76600EAAC68 /* OrderDetailShopListView.m */; };
 		E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */; };
 		E740D8D81DC9DC1F00484F53 /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */; };
 		E75A77A71DE2C70800E344EE /* FoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A77A61DE2C70800E344EE /* FoodModel.m */; };
 		E7729E4A1DDB069500BF5B69 /* OrderInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E491DDB069500BF5B69 /* OrderInfoModel.m */; };
 		E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E4C1DDC040900BF5B69 /* StoreInfoModel.m */; };
 		E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E4F1DDC041900BF5B69 /* AddressInfoModel.m */; };
-		E7729E531DDC4E6700BF5B69 /* AddressListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E521DDC4E6700BF5B69 /* AddressListView.m */; };
 		E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */; };
 		E79034371DC71593004C1C8E /* ShopAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79034361DC71593004C1C8E /* ShopAddressViewController.m */; };
-		E7B322841DE43CC100A75DE0 /* AlredyDoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3226B1DE43CC100A75DE0 /* AlredyDoneTableViewCell.m */; };
-		E7B322851DE43CC100A75DE0 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3226D1DE43CC100A75DE0 /* ChooseView.m */; };
-		E7B322861DE43CC100A75DE0 /* HomePageItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322701DE43CC100A75DE0 /* HomePageItemView.m */; };
-		E7B322871DE43CC100A75DE0 /* HomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322721DE43CC100A75DE0 /* HomePageView.m */; };
-		E7B322881DE43CC100A75DE0 /* OrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322751DE43CC100A75DE0 /* OrderDetailTableViewCell.m */; };
-		E7B3228A1DE43CC100A75DE0 /* TodayInfoItemVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3227A1DE43CC100A75DE0 /* TodayInfoItemVIew.m */; };
-		E7B3228B1DE43CC100A75DE0 /* TodayInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3227C1DE43CC100A75DE0 /* TodayInfoView.m */; };
-		E7B3228C1DE43CC100A75DE0 /* OvertimePaidView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3227F1DE43CC100A75DE0 /* OvertimePaidView.m */; };
-		E7B3228D1DE43CC100A75DE0 /* ShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322811DE43CC100A75DE0 /* ShopView.m */; };
-		E7B3228E1DE43CC100A75DE0 /* WaitReceiveOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322831DE43CC100A75DE0 /* WaitReceiveOrderTableViewCell.m */; };
-		E7B322921DE43D9900A75DE0 /* ShoppingInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322911DE43D9900A75DE0 /* ShoppingInfoView.m */; };
-		E7B322951DE43E8300A75DE0 /* OrderShopDetailListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322941DE43E8300A75DE0 /* OrderShopDetailListView.m */; };
-		E7B322981DE4406B00A75DE0 /* FoodListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B322971DE4406B00A75DE0 /* FoodListView.m */; };
 		E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */; };
 		E7E856381DAF56700057D66F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856371DAF56700057D66F /* main.m */; };
 		E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E8563A1DAF56700057D66F /* AppDelegate.m */; };
@@ -95,6 +95,34 @@
 		E70B06681DB0755500E4B5A6 /* 123.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.jpg; sourceTree = "<group>"; };
 		E71209341DD470EF0015825A /* TipMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipMessageView.h; sourceTree = "<group>"; };
 		E71209351DD470EF0015825A /* TipMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipMessageView.m; sourceTree = "<group>"; };
+		E71593091DE690BE00EAAC68 /* AddressListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListView.h; sourceTree = "<group>"; };
+		E715930A1DE690BE00EAAC68 /* AddressListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListView.m; sourceTree = "<group>"; };
+		E715930C1DE690BE00EAAC68 /* AlredyDoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlredyDoneTableViewCell.h; sourceTree = "<group>"; };
+		E715930D1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlredyDoneTableViewCell.m; sourceTree = "<group>"; };
+		E715930E1DE690BE00EAAC68 /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
+		E715930F1DE690BE00EAAC68 /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
+		E71593111DE690BE00EAAC68 /* HomePageItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageItemView.h; sourceTree = "<group>"; };
+		E71593121DE690BE00EAAC68 /* HomePageItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageItemView.m; sourceTree = "<group>"; };
+		E71593131DE690BE00EAAC68 /* HomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageView.h; sourceTree = "<group>"; };
+		E71593141DE690BE00EAAC68 /* HomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageView.m; sourceTree = "<group>"; };
+		E71593161DE690BE00EAAC68 /* ShoppingInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingInfoView.h; sourceTree = "<group>"; };
+		E71593171DE690BE00EAAC68 /* ShoppingInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingInfoView.m; sourceTree = "<group>"; };
+		E71593191DE690BE00EAAC68 /* FoodListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodListView.h; sourceTree = "<group>"; };
+		E715931A1DE690BE00EAAC68 /* FoodListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodListView.m; sourceTree = "<group>"; };
+		E715931B1DE690BE00EAAC68 /* OrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailTableViewCell.h; sourceTree = "<group>"; };
+		E715931C1DE690BE00EAAC68 /* OrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailTableViewCell.m; sourceTree = "<group>"; };
+		E71593201DE690BE00EAAC68 /* TodayInfoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoItemView.h; sourceTree = "<group>"; };
+		E71593211DE690BE00EAAC68 /* TodayInfoItemVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoItemVIew.m; sourceTree = "<group>"; };
+		E71593221DE690BE00EAAC68 /* TodayInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoView.h; sourceTree = "<group>"; };
+		E71593231DE690BE00EAAC68 /* TodayInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoView.m; sourceTree = "<group>"; };
+		E71593251DE690BE00EAAC68 /* OvertimePaidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvertimePaidView.h; sourceTree = "<group>"; };
+		E71593261DE690BE00EAAC68 /* OvertimePaidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvertimePaidView.m; sourceTree = "<group>"; };
+		E71593271DE690BE00EAAC68 /* ShopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopView.h; sourceTree = "<group>"; };
+		E71593281DE690BE00EAAC68 /* ShopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopView.m; sourceTree = "<group>"; };
+		E71593291DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderTableViewCell.h; sourceTree = "<group>"; };
+		E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderTableViewCell.m; sourceTree = "<group>"; };
+		E71593421DE6B76600EAAC68 /* OrderDetailShopListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailShopListView.h; sourceTree = "<group>"; };
+		E71593431DE6B76600EAAC68 /* OrderDetailShopListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailShopListView.m; sourceTree = "<group>"; };
 		E732C8AF1DBDD9A000B18AA0 /* WaitReceiveOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderViewController.h; sourceTree = "<group>"; };
 		E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderViewController.m; sourceTree = "<group>"; };
 		E740D8D61DC9DC1F00484F53 /* DeliveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
@@ -107,38 +135,10 @@
 		E7729E4C1DDC040900BF5B69 /* StoreInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInfoModel.m; sourceTree = "<group>"; };
 		E7729E4E1DDC041900BF5B69 /* AddressInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoModel.h; sourceTree = "<group>"; };
 		E7729E4F1DDC041900BF5B69 /* AddressInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoModel.m; sourceTree = "<group>"; };
-		E7729E511DDC4E6700BF5B69 /* AddressListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListView.h; sourceTree = "<group>"; };
-		E7729E521DDC4E6700BF5B69 /* AddressListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListView.m; sourceTree = "<group>"; };
 		E790342A1DC09335004C1C8E /* AlreadyDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyDoneViewController.h; sourceTree = "<group>"; };
 		E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyDoneViewController.m; sourceTree = "<group>"; };
 		E79034351DC71592004C1C8E /* ShopAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopAddressViewController.h; sourceTree = "<group>"; };
 		E79034361DC71593004C1C8E /* ShopAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopAddressViewController.m; sourceTree = "<group>"; };
-		E7B3226A1DE43CC100A75DE0 /* AlredyDoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlredyDoneTableViewCell.h; sourceTree = "<group>"; };
-		E7B3226B1DE43CC100A75DE0 /* AlredyDoneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlredyDoneTableViewCell.m; sourceTree = "<group>"; };
-		E7B3226C1DE43CC100A75DE0 /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
-		E7B3226D1DE43CC100A75DE0 /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
-		E7B3226F1DE43CC100A75DE0 /* HomePageItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageItemView.h; sourceTree = "<group>"; };
-		E7B322701DE43CC100A75DE0 /* HomePageItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageItemView.m; sourceTree = "<group>"; };
-		E7B322711DE43CC100A75DE0 /* HomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageView.h; sourceTree = "<group>"; };
-		E7B322721DE43CC100A75DE0 /* HomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageView.m; sourceTree = "<group>"; };
-		E7B322741DE43CC100A75DE0 /* OrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailTableViewCell.h; sourceTree = "<group>"; };
-		E7B322751DE43CC100A75DE0 /* OrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailTableViewCell.m; sourceTree = "<group>"; };
-		E7B322791DE43CC100A75DE0 /* TodayInfoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoItemView.h; sourceTree = "<group>"; };
-		E7B3227A1DE43CC100A75DE0 /* TodayInfoItemVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoItemVIew.m; sourceTree = "<group>"; };
-		E7B3227B1DE43CC100A75DE0 /* TodayInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoView.h; sourceTree = "<group>"; };
-		E7B3227C1DE43CC100A75DE0 /* TodayInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoView.m; sourceTree = "<group>"; };
-		E7B3227E1DE43CC100A75DE0 /* OvertimePaidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvertimePaidView.h; sourceTree = "<group>"; };
-		E7B3227F1DE43CC100A75DE0 /* OvertimePaidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvertimePaidView.m; sourceTree = "<group>"; };
-		E7B322801DE43CC100A75DE0 /* ShopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopView.h; sourceTree = "<group>"; };
-		E7B322811DE43CC100A75DE0 /* ShopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopView.m; sourceTree = "<group>"; };
-		E7B322821DE43CC100A75DE0 /* WaitReceiveOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderTableViewCell.h; sourceTree = "<group>"; };
-		E7B322831DE43CC100A75DE0 /* WaitReceiveOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderTableViewCell.m; sourceTree = "<group>"; };
-		E7B322901DE43D9900A75DE0 /* ShoppingInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingInfoView.h; sourceTree = "<group>"; };
-		E7B322911DE43D9900A75DE0 /* ShoppingInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingInfoView.m; sourceTree = "<group>"; };
-		E7B322931DE43E8300A75DE0 /* OrderShopDetailListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderShopDetailListView.h; sourceTree = "<group>"; };
-		E7B322941DE43E8300A75DE0 /* OrderShopDetailListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderShopDetailListView.m; sourceTree = "<group>"; };
-		E7B322961DE4406B00A75DE0 /* FoodListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodListView.h; sourceTree = "<group>"; };
-		E7B322971DE4406B00A75DE0 /* FoodListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodListView.m; sourceTree = "<group>"; };
 		E7BA1E171DCC777D001B0081 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		E7E856331DAF56700057D66F /* TcCourier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TcCourier.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,74 +240,87 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E7B322691DE43CC100A75DE0 /* AlreadyDone */ = {
+		E71593081DE690BE00EAAC68 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E7B3226A1DE43CC100A75DE0 /* AlredyDoneTableViewCell.h */,
-				E7B3226B1DE43CC100A75DE0 /* AlredyDoneTableViewCell.m */,
-				E7B3226C1DE43CC100A75DE0 /* ChooseView.h */,
-				E7B3226D1DE43CC100A75DE0 /* ChooseView.m */,
+				E71593091DE690BE00EAAC68 /* AddressListView.h */,
+				E715930A1DE690BE00EAAC68 /* AddressListView.m */,
+				E715930B1DE690BE00EAAC68 /* AlreadyDone */,
+				E71593101DE690BE00EAAC68 /* HomePage */,
+				E71593151DE690BE00EAAC68 /* MapView */,
+				E71593181DE690BE00EAAC68 /* OrderDetail */,
+				E715931F1DE690BE00EAAC68 /* TodayCount */,
+				E71593241DE690BE00EAAC68 /* WaitReceiving */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E715930B1DE690BE00EAAC68 /* AlreadyDone */ = {
+			isa = PBXGroup;
+			children = (
+				E715930C1DE690BE00EAAC68 /* AlredyDoneTableViewCell.h */,
+				E715930D1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m */,
+				E715930E1DE690BE00EAAC68 /* ChooseView.h */,
+				E715930F1DE690BE00EAAC68 /* ChooseView.m */,
 			);
 			path = AlreadyDone;
 			sourceTree = "<group>";
 		};
-		E7B3226E1DE43CC100A75DE0 /* HomePage */ = {
+		E71593101DE690BE00EAAC68 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
-				E7B3226F1DE43CC100A75DE0 /* HomePageItemView.h */,
-				E7B322701DE43CC100A75DE0 /* HomePageItemView.m */,
-				E7B322711DE43CC100A75DE0 /* HomePageView.h */,
-				E7B322721DE43CC100A75DE0 /* HomePageView.m */,
+				E71593111DE690BE00EAAC68 /* HomePageItemView.h */,
+				E71593121DE690BE00EAAC68 /* HomePageItemView.m */,
+				E71593131DE690BE00EAAC68 /* HomePageView.h */,
+				E71593141DE690BE00EAAC68 /* HomePageView.m */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
 		};
-		E7B322731DE43CC100A75DE0 /* OrderDetail */ = {
+		E71593151DE690BE00EAAC68 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
-				E7B322741DE43CC100A75DE0 /* OrderDetailTableViewCell.h */,
-				E7B322751DE43CC100A75DE0 /* OrderDetailTableViewCell.m */,
-				E7B322961DE4406B00A75DE0 /* FoodListView.h */,
-				E7B322971DE4406B00A75DE0 /* FoodListView.m */,
-				E7B322931DE43E8300A75DE0 /* OrderShopDetailListView.h */,
-				E7B322941DE43E8300A75DE0 /* OrderShopDetailListView.m */,
+				E71593161DE690BE00EAAC68 /* ShoppingInfoView.h */,
+				E71593171DE690BE00EAAC68 /* ShoppingInfoView.m */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		E71593181DE690BE00EAAC68 /* OrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E71593191DE690BE00EAAC68 /* FoodListView.h */,
+				E715931A1DE690BE00EAAC68 /* FoodListView.m */,
+				E715931B1DE690BE00EAAC68 /* OrderDetailTableViewCell.h */,
+				E715931C1DE690BE00EAAC68 /* OrderDetailTableViewCell.m */,
+				E71593421DE6B76600EAAC68 /* OrderDetailShopListView.h */,
+				E71593431DE6B76600EAAC68 /* OrderDetailShopListView.m */,
 			);
 			path = OrderDetail;
 			sourceTree = "<group>";
 		};
-		E7B322781DE43CC100A75DE0 /* TodayCount */ = {
+		E715931F1DE690BE00EAAC68 /* TodayCount */ = {
 			isa = PBXGroup;
 			children = (
-				E7B322791DE43CC100A75DE0 /* TodayInfoItemView.h */,
-				E7B3227A1DE43CC100A75DE0 /* TodayInfoItemVIew.m */,
-				E7B3227B1DE43CC100A75DE0 /* TodayInfoView.h */,
-				E7B3227C1DE43CC100A75DE0 /* TodayInfoView.m */,
+				E71593201DE690BE00EAAC68 /* TodayInfoItemView.h */,
+				E71593211DE690BE00EAAC68 /* TodayInfoItemVIew.m */,
+				E71593221DE690BE00EAAC68 /* TodayInfoView.h */,
+				E71593231DE690BE00EAAC68 /* TodayInfoView.m */,
 			);
-			name = TodayCount;
-			path = ../TodayCount;
+			path = TodayCount;
 			sourceTree = "<group>";
 		};
-		E7B3227D1DE43CC100A75DE0 /* WaitReceiving */ = {
+		E71593241DE690BE00EAAC68 /* WaitReceiving */ = {
 			isa = PBXGroup;
 			children = (
-				E7B322781DE43CC100A75DE0 /* TodayCount */,
-				E7B3227E1DE43CC100A75DE0 /* OvertimePaidView.h */,
-				E7B3227F1DE43CC100A75DE0 /* OvertimePaidView.m */,
-				E7B322801DE43CC100A75DE0 /* ShopView.h */,
-				E7B322811DE43CC100A75DE0 /* ShopView.m */,
-				E7B322821DE43CC100A75DE0 /* WaitReceiveOrderTableViewCell.h */,
-				E7B322831DE43CC100A75DE0 /* WaitReceiveOrderTableViewCell.m */,
+				E71593251DE690BE00EAAC68 /* OvertimePaidView.h */,
+				E71593261DE690BE00EAAC68 /* OvertimePaidView.m */,
+				E71593271DE690BE00EAAC68 /* ShopView.h */,
+				E71593281DE690BE00EAAC68 /* ShopView.m */,
+				E71593291DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.h */,
+				E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */,
 			);
 			path = WaitReceiving;
-			sourceTree = "<group>";
-		};
-		E7B3228F1DE43D9900A75DE0 /* MapView */ = {
-			isa = PBXGroup;
-			children = (
-				E7B322901DE43D9900A75DE0 /* ShoppingInfoView.h */,
-				E7B322911DE43D9900A75DE0 /* ShoppingInfoView.m */,
-			);
-			path = MapView;
 			sourceTree = "<group>";
 		};
 		E7E8562A1DAF566F0057D66F = {
@@ -403,9 +416,9 @@
 		E7E856851DAF67080057D66F /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				E71593081DE690BE00EAAC68 /* View */,
 				E7E856861DAF67080057D66F /* Controller */,
 				E7E856891DAF67080057D66F /* Model */,
-				E7E8568A1DAF67080057D66F /* View */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -444,20 +457,6 @@
 				E75A77A61DE2C70800E344EE /* FoodModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		E7E8568A1DAF67080057D66F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				E7B3228F1DE43D9900A75DE0 /* MapView */,
-				E7B322691DE43CC100A75DE0 /* AlreadyDone */,
-				E7B3226E1DE43CC100A75DE0 /* HomePage */,
-				E7B322731DE43CC100A75DE0 /* OrderDetail */,
-				E7B3227D1DE43CC100A75DE0 /* WaitReceiving */,
-				E7729E511DDC4E6700BF5B69 /* AddressListView.h */,
-				E7729E521DDC4E6700BF5B69 /* AddressListView.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		E7E8568B1DAF67080057D66F /* Login */ = {
@@ -762,57 +761,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B322871DE43CC100A75DE0 /* HomePageView.m in Sources */,
+				E715932F1DE690BE00EAAC68 /* HomePageView.m in Sources */,
 				E70B06631DB06C7900E4B5A6 /* UIView+ChangeFrame.m in Sources */,
+				E71593341DE690BE00EAAC68 /* TodayInfoItemVIew.m in Sources */,
 				E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */,
 				E7E856981DAF67080057D66F /* LoginViewController.m in Sources */,
 				E7E8567E1DAF62B70057D66F /* MainTabBar.m in Sources */,
 				E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */,
+				E71593321DE690BE00EAAC68 /* OrderDetailTableViewCell.m in Sources */,
 				E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */,
 				E7FB7FA91DD19E640023148C /* UIScrollView+MJRefresh.m in Sources */,
 				E7FB7FA81DD19E640023148C /* UIScrollView+MJExtension.m in Sources */,
 				E7E856801DAF62B70057D66F /* MainTabBarController.m in Sources */,
 				E71209361DD470EF0015825A /* TipMessageView.m in Sources */,
-				E7B322981DE4406B00A75DE0 /* FoodListView.m in Sources */,
 				E7E8567F1DAF62B70057D66F /* MainTabBarButton.m in Sources */,
-				E7B322851DE43CC100A75DE0 /* ChooseView.m in Sources */,
+				E715932D1DE690BE00EAAC68 /* ChooseView.m in Sources */,
 				E7FB7FAD1DD19E7B0023148C /* MyMD5.m in Sources */,
 				E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */,
-				E7B3228A1DE43CC100A75DE0 /* TodayInfoItemVIew.m in Sources */,
-				E7B322921DE43D9900A75DE0 /* ShoppingInfoView.m in Sources */,
 				E7FB7FA61DD19E640023148C /* MJRefreshFooterView.m in Sources */,
+				E71593371DE690BE00EAAC68 /* ShopView.m in Sources */,
 				E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
+				E71593361DE690BE00EAAC68 /* OvertimePaidView.m in Sources */,
 				E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */,
-				E7B3228E1DE43CC100A75DE0 /* WaitReceiveOrderTableViewCell.m in Sources */,
-				E7B322861DE43CC100A75DE0 /* HomePageItemView.m in Sources */,
+				E715932E1DE690BE00EAAC68 /* HomePageItemView.m in Sources */,
+				E71593311DE690BE00EAAC68 /* FoodListView.m in Sources */,
 				E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */,
 				E7FB2BE51DB755880045E871 /* SettingView.m in Sources */,
 				E7729E4A1DDB069500BF5B69 /* OrderInfoModel.m in Sources */,
 				E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */,
-				E7B3228D1DE43CC100A75DE0 /* ShopView.m in Sources */,
+				E71593441DE6B76600EAAC68 /* OrderDetailShopListView.m in Sources */,
 				E7FB5AAB1DD2FF8E006DFADD /* TcCourierInfoManager.m in Sources */,
 				E7FB7FA71DD19E640023148C /* MJRefreshHeaderView.m in Sources */,
 				E7E8567D1DAF62B70057D66F /* MainNavigationController.m in Sources */,
 				E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */,
-				E7B3228B1DE43CC100A75DE0 /* TodayInfoView.m in Sources */,
 				E75A77A71DE2C70800E344EE /* FoodModel.m in Sources */,
 				E7FB2BE21DB751BF0045E871 /* StarttAppraiseRateView.m in Sources */,
+				E71593351DE690BE00EAAC68 /* TodayInfoView.m in Sources */,
 				E7FB7FA51DD19E640023148C /* MJRefreshConst.m in Sources */,
 				E7FB2BCA1DB5F44D0045E871 /* TcLoginButton.m in Sources */,
-				E7B322841DE43CC100A75DE0 /* AlredyDoneTableViewCell.m in Sources */,
+				E715932C1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m in Sources */,
+				E71593301DE690BE00EAAC68 /* ShoppingInfoView.m in Sources */,
 				E7FB7FAA1DD19E640023148C /* UIView+MJExtension.m in Sources */,
-				E7B3228C1DE43CC100A75DE0 /* OvertimePaidView.m in Sources */,
 				E740D8D81DC9DC1F00484F53 /* DeliveryViewController.m in Sources */,
 				E7FB7FA41DD19E640023148C /* MJRefreshBaseView.m in Sources */,
-				E7B322881DE43CC100A75DE0 /* OrderDetailTableViewCell.m in Sources */,
 				E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				E7E856381DAF56700057D66F /* main.m in Sources */,
-				E7729E531DDC4E6700BF5B69 /* AddressListView.m in Sources */,
 				E70B06601DB06C3C00E4B5A6 /* MOTextField.m in Sources */,
 				E7FB2BEA1DB7595D0045E871 /* SettingItemView.m in Sources */,
-				E7B322951DE43E8300A75DE0 /* OrderShopDetailListView.m in Sources */,
 				E79034371DC71593004C1C8E /* ShopAddressViewController.m in Sources */,
+				E715932B1DE690BE00EAAC68 /* AddressListView.m in Sources */,
+				E71593381DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

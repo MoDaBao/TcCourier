@@ -27,7 +27,7 @@
             } else {
                 make.top.equalTo(self);
             }
-            make.width.equalTo(self.mas_centerX);// 设置宽度为自身的一半
+            make.width.equalTo(self.mas_width).multipliedBy(0.4);// 设置宽度为自身的0.4倍
         }];
         
         tempL = foodNameL;
@@ -38,7 +38,7 @@
         priceL.font = kFont14;
         priceL.textColor = [UIColor colorWithRed:0.84 green:0.14 blue:0.15 alpha:1.00];
         [priceL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_centerX);
+            make.left.equalTo(foodNameL.mas_right).offset(5);
             make.top.equalTo(foodNameL);
         }];
         priceL.text = [NSString stringWithFormat:@"￥%@",foodModel.price];
@@ -51,7 +51,7 @@
         countL.textColor = priceL.textColor;
         [countL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(priceL);
-            make.right.equalTo(self);
+            make.right.equalTo(self).offset(-5);
         }];
         countL.text = [NSString stringWithFormat:@"%@份",foodModel.quantity];
         

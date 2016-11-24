@@ -33,9 +33,10 @@
 #pragma mark -----网络请求-----
 
 - (void)requestData {
-    
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_no=%@&pid=%@",@"pdaorderinfo", @"pda", @"147859731967", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    NSDictionary *dic = @{@"api":@"pdaorderinfo", @"core":@"pda", @"order_no":@"147859731967", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    //147859731967
+    //147937270420
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_no=%@&pid=%@",@"pdaorderinfo", @"pda", _orderNumber, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdaorderinfo", @"core":@"pda", @"order_no":_orderNumber, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
     
@@ -45,7 +46,7 @@
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"dict = %@",dict);
+//        NSLog(@"dict = %@",dict);
 //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (0 == [dict[@"status"] floatValue]) {
             NSDictionary *dataDic = dict[@"data"][@"order"][0];
@@ -136,7 +137,41 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 400;
+    CGFloat margin = 5;
+    
+    // 计算地址列表视图的宽度
+    CGFloat addressViewWidth = kScreenWidth - 20 - margin * 2 - [UILabel getWidthWithTitle:@"店家地址:" font:kFont14];
+    
+    // 计算店铺地址的高度
+    CGFloat storeHeight = 0;
+    for (StoreInfoModel *store in self.dataSourceModel.storeInfoArray) {
+        storeHeight = storeHeight + [UILabel getHeightByWidth:addressViewWidth title:store.address font:kFont14] + margin;
+    }
+    storeHeight -= margin;
+    
+    // 计算收货地址的高度
+    CGFloat receiverHeight = 0;
+    AddressInfoModel *address = self.dataSourceModel.addressInfo;
+    receiverHeight = [UILabel getHeightByWidth:addressViewWidth title:address.detail_addr font:kFont14];
+    
+    // 计算shopname的宽度
+    CGFloat shopNameWidth = (kScreenWidth - 20) * .35;
+    
+    // 计算foodname的宽度
+    CGFloat foodNameWidth = (kScreenWidth - 20 - margin * 2 - 15 - shopNameWidth - margin) *  .4;
+    CGFloat foodDetailHeight = 0;
+    for (StoreInfoModel *storeModel in self.dataSourceModel.storeInfoArray) {
+        CGFloat shopNameHeight = [UILabel getHeightByWidth:shopNameWidth title:storeModel.store_name font:kFont14];
+        CGFloat foodHeight = 0;
+        for (FoodModel *food in storeModel.foodArray) {
+            foodHeight += [UILabel getHeightByWidth:foodNameWidth title:food.title font:kFont14] + margin;
+        }
+        foodHeight -= margin;
+        foodDetailHeight = shopNameWidth > foodHeight ? shopNameHeight : foodHeight;
+        foodDetailHeight += [UILabel getHeightByWidth:kScreenWidth - 20 - 20 title:storeModel.remark font:kFont14];
+    }
+    
+    return 350 + storeHeight + receiverHeight + foodDetailHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

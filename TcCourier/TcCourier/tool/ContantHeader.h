@@ -15,6 +15,7 @@
 #define kStatusHeight 20 // 状态条高度
 #define kNavigationBarHeight 64 // 导航栏高度+状态条的高度
 #define KTabBarHeight 44 // 标签栏高度
+#define kBaseWordHeight [UILabel getWidthWithTitle:@"的" font:[UIFont systemFontOfSize:14]];//14号字体的中文的高度
 
 #define kOrangeColor [UIColor colorWithRed:252 / 255.0 green:135 / 255.0 blue:3 / 255.0 alpha:1.0] // 整体橙色
 #define kBGGary [UIColor colorWithRed:238 / 255.0 green:238 / 255.0 blue:238 / 255.0 alpha:1.0] // 灰色背景

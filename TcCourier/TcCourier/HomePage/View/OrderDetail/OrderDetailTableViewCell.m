@@ -8,7 +8,7 @@
 
 #import "OrderDetailTableViewCell.h"
 #import "AddressListView.h"
-#import "OrderShopDetailListView.m"
+#import "OrderDetailShopListView.h"
 
 @interface OrderDetailTableViewCell ()
 
@@ -28,7 +28,10 @@
 @property (nonatomic, strong) UILabel *receiverPhoneL;// 收货人电话
 @property (nonatomic, strong) AddressListView *storeAddressListV;// 商家地址列表
 @property (nonatomic, strong) AddressListView *receiverAddressListV;// 收货地址列表
-@property (nonatomic, strong) OrderShopDetailListView *orderShopDetailListView;// 商家-餐品详情列表
+@property (nonatomic, strong) OrderDetailShopListView *orderDetailShopListView;// 商家-餐品详情列表
+@property (nonatomic, strong) UILabel *orderNumberL;// 订单编号
+@property (nonatomic, strong) UILabel *orderTimeL;// 下单时间
+@property (nonatomic, strong) UILabel *arriveTimeL;// 跑腿送达时间
 @end
 
 @implementation OrderDetailTableViewCell
@@ -170,6 +173,7 @@
             make.height.equalTo(@10);// 临时的约束
             make.right.equalTo(self.contentV.mas_right);
         }];
+        _storeAddressListV.backgroundColor = [UIColor redColor];
         
         // 收货地址标签
         UILabel *shouhuodizhi = [UILabel new];
@@ -191,6 +195,7 @@
             make.right.equalTo(self.contentV);
             make.height.equalTo(@10);
         }];
+        _receiverAddressListV.backgroundColor = [UIColor yellowColor];
         
         // 分割线
         UIView *line2 = [[UIView alloc] init];
@@ -203,14 +208,41 @@
         }];
         
         // 商家-餐品详情列表
-        _orderShopDetailListView = [OrderShopDetailListView new];
-        [self.contentV addSubview:_orderShopDetailListView];
-        [_orderShopDetailListView mas_makeConstraints:^(MASConstraintMaker *make) {
+        _orderDetailShopListView = [OrderDetailShopListView new];
+        [self.contentV addSubview:_orderDetailShopListView];
+        [_orderDetailShopListView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(self.contentV);
-            make.top.equalTo(line2.mas_bottom).offset(_margin);
-//            make.height// 需要计算高度
+            make.top.equalTo(line2.mas_bottom);
+            make.height.equalTo(@10);// 临时高度
+        }];
+        _orderDetailShopListView.backgroundColor = [UIColor orangeColor];
+        
+        // 订单编号
+        _orderNumberL = [UILabel new];
+        [self.contentV addSubview:_orderNumberL];
+        _orderNumberL.font = kFont14;
+        [_orderNumberL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(shouhuodizhi);
+            make.top.equalTo(_orderDetailShopListView.mas_bottom).offset(_margin);
         }];
         
+        // 下单时间
+        _orderTimeL = [UILabel new];
+        [self.contentV addSubview:_orderTimeL];
+        _orderTimeL.font = kFont14;
+        [_orderTimeL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_orderNumberL);
+            make.top.equalTo(_orderNumberL.mas_bottom).offset(_margin);
+        }];
+        
+        // 跑腿送达时间
+        _arriveTimeL = [UILabel new];
+        [self.contentV addSubview:_arriveTimeL];
+        _arriveTimeL.font = kFont14;
+        [_arriveTimeL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_orderTimeL);
+            make.top.equalTo(_orderTimeL.mas_bottom).offset(_margin);
+        }];
     }
     return self;
 }
@@ -262,8 +294,16 @@
     [_receiverAddressListV loadLabelWithAddressInfoModel:orderModel.addressInfo font:_orderInfoL.font width:kScreenWidth - 20];
     
     // 加载 商家-餐品详情列表
-    [_orderShopDetailListView loadOrderShopDetailListViewWithSotreInfoArray:orderModel.storeInfoArray];
+    [_orderDetailShopListView loadOrderShopDetailListViewWithSotreInfoArray:orderModel.storeInfoArray];
     
+    // 加载订单编号
+    _orderNumberL.text = [NSString stringWithFormat:@"订单编号:%@",orderModel.order_number];
+    
+    // 加载下单时间
+    _orderTimeL.text = [NSString stringWithFormat:@"下单时间:%@",orderModel.ctime];
+    
+    // 加载 跑腿送达时间
+    _arriveTimeL.text = [NSString stringWithFormat:@"跑腿送达时间:%@",orderModel.pda_finly];
     
 }
 

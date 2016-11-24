@@ -10,6 +10,7 @@
 #import "ChooseView.h"
 #import "OrderInfoModel.h"
 #import "AlredyDoneTableViewCell.h"
+#import "OrderDetailViewController.h"
 
 @interface AlreadyDoneViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -233,6 +234,13 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    OrderInfoModel *model = self.dataArray[indexPath.row];
+    OrderDetailViewController *orderVC = [[OrderDetailViewController alloc] init];
+    orderVC.orderNumber = model.order_number;
+    [self.navigationController pushViewController:orderVC animated:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

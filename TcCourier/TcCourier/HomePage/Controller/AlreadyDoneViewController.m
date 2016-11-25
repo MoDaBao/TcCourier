@@ -218,7 +218,7 @@
     // 计算收货地址的高度
     CGFloat receiverHeight = 0;
     AddressInfoModel *address = model.addressInfo;
-    receiverHeight = [UILabel getHeightByWidth:listViewWidth title:address.detail_addr font:kFont14];
+    receiverHeight = [UILabel getHeightByWidth:listViewWidth title:[NSString stringWithFormat:@"%@%@",address.address, address.detail_addr] font:kFont14];
     
     return 130 + (orderInfoLHeight - baseH) + (storeHeight - baseH) + (receiverHeight - baseH);
 }

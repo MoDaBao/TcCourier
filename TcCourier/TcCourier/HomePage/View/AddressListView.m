@@ -47,7 +47,7 @@
     _tempL = nil;
     
     for (StoreInfoModel *s in array) {
-        _height = _height + [UILabel getHeightByWidth:width title:s.address font:font];
+        _height += [UILabel getHeightByWidth:width title:s.address font:font];
     }
     
     for (NSInteger i = 0; i < array.count; i ++) {
@@ -57,6 +57,7 @@
         label.font = font;
         label.text = store.address;
         label.numberOfLines = 0;
+//        label.backgroundColor = [UIColor blueColor];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             if (0 == i) {
                 make.left.and.top.equalTo(self);
@@ -67,9 +68,9 @@
             make.width.equalTo(self);
         }];
         _tempL = label;
-        
+        _height += 5;
     }
-    _height = _height + (array.count - 1) * 5;
+    _height -= 5;
 //    NSLog(@"height = %f, width = %f",_height, width);
     [self mas_updateConstraints:^(MASConstraintMaker *make) {// 更新高度的约束
         make.height.equalTo(@(_height));
@@ -89,13 +90,14 @@
     UILabel *label = [UILabel new];
     [self addSubview:label];
     label.font = font;
-    label.text = addressModel.detail_addr;
+    label.text = [NSString stringWithFormat:@"%@%@",addressModel.address, addressModel.detail_addr];
     label.numberOfLines = 0;
+//    label.backgroundColor = [UIColor blueColor];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self);
         make.left.and.top.equalTo(self);
     }];
-    _height = [UILabel getHeightByWidth:width title:addressModel.detail_addr font:font];
+    _height = [UILabel getHeightByWidth:width title:label.text font:font];
     [self mas_updateConstraints:^(MASConstraintMaker *make) {// 更新高度的约束
         make.height.equalTo(@(_height));
     }];

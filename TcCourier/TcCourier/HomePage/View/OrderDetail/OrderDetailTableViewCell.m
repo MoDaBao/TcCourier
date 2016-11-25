@@ -32,6 +32,10 @@
 @property (nonatomic, strong) UILabel *orderNumberL;// 订单编号
 @property (nonatomic, strong) UILabel *orderTimeL;// 下单时间
 @property (nonatomic, strong) UILabel *arriveTimeL;// 跑腿送达时间
+
+@property (nonatomic, strong) UIView *line2;// 收货地址 下面的分割线
+@property (nonatomic, strong) UILabel *shouhuodizhi;
+
 @end
 
 @implementation OrderDetailTableViewCell
@@ -127,7 +131,7 @@
         // 分割线
         float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
         UIView *line1 = [[UIView alloc] init];
-        line1.backgroundColor = [UIColor blackColor];
+        line1.backgroundColor = [UIColor lightGrayColor];
         [self.contentV addSubview:line1];//线是否加
         [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(_contentV);
@@ -173,17 +177,17 @@
             make.height.equalTo(@10);// 临时的约束
             make.right.equalTo(self.contentV.mas_right);
         }];
-        _storeAddressListV.backgroundColor = [UIColor redColor];
+//        _storeAddressListV.backgroundColor = [UIColor redColor];
         
         // 收货地址标签
-        UILabel *shouhuodizhi = [UILabel new];
-        shouhuodizhi.text = @"收货地址:";
-        [self.contentV addSubview:shouhuodizhi];
-        shouhuodizhi.font = kFont14;
-        [shouhuodizhi mas_makeConstraints:^(MASConstraintMaker *make) {
+        _shouhuodizhi = [UILabel new];
+        _shouhuodizhi.text = @"收货地址:";
+        [self.contentV addSubview:_shouhuodizhi];
+        _shouhuodizhi.font = kFont14;
+        [_shouhuodizhi mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(dianjiadizhi);
             make.top.equalTo(_storeAddressListV.mas_bottom).offset(_margin);
-            make.width.equalTo(@([UILabel getWidthWithTitle:shouhuodizhi.text font:kFont14]));
+            make.width.equalTo(@([UILabel getWidthWithTitle:_shouhuodizhi.text font:kFont14]));
         }];
         
         // 收货地址列表标签
@@ -191,17 +195,17 @@
         [self.contentV addSubview:_receiverAddressListV];
         [_receiverAddressListV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_storeAddressListV);
-            make.top.equalTo(shouhuodizhi);
+            make.top.equalTo(_shouhuodizhi);
             make.right.equalTo(self.contentV);
             make.height.equalTo(@10);
         }];
-        _receiverAddressListV.backgroundColor = [UIColor yellowColor];
+//        _receiverAddressListV.backgroundColor = [UIColor yellowColor];
         
         // 分割线
-        UIView *line2 = [[UIView alloc] init];
-        line2.backgroundColor = [UIColor blackColor];
-        [self.contentV addSubview:line2];//线是否加
-        [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        _line2 = [[UIView alloc] init];
+        _line2.backgroundColor = [UIColor lightGrayColor];
+        [self.contentV addSubview:_line2];//线是否加
+        [_line2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(_contentV);
             make.top.equalTo(_receiverAddressListV.mas_bottom).offset(_margin);
             make.height.equalTo(@(sortaPixel));
@@ -212,17 +216,17 @@
         [self.contentV addSubview:_orderDetailShopListView];
         [_orderDetailShopListView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(self.contentV);
-            make.top.equalTo(line2.mas_bottom);
+            make.top.equalTo(_line2.mas_bottom);
             make.height.equalTo(@10);// 临时高度
         }];
-        _orderDetailShopListView.backgroundColor = [UIColor orangeColor];
+//        _orderDetailShopListView.backgroundColor = [UIColor orangeColor];
         
         // 订单编号
         _orderNumberL = [UILabel new];
         [self.contentV addSubview:_orderNumberL];
         _orderNumberL.font = kFont14;
         [_orderNumberL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(shouhuodizhi);
+            make.left.equalTo(_shouhuodizhi);
             make.top.equalTo(_orderDetailShopListView.mas_bottom).offset(_margin);
         }];
         
@@ -288,10 +292,16 @@
     _receiverPhoneL.attributedText = attStr;
     
     // 加载店铺地址
-    [_storeAddressListV loadLabelWithArray:orderModel.storeInfoArray font:_orderInfoL.font width:kScreenWidth - 20];
+    [_storeAddressListV loadLabelWithArray:orderModel.storeInfoArray font:_orderInfoL.font width:(kScreenWidth - 20 - 5 * 2 - [UILabel getWidthWithTitle:@"店铺地址:" font:kFont14])];
     
     // 加载收货地址
-    [_receiverAddressListV loadLabelWithAddressInfoModel:orderModel.addressInfo font:_orderInfoL.font width:kScreenWidth - 20];
+    [_receiverAddressListV loadLabelWithAddressInfoModel:orderModel.addressInfo font:_orderInfoL.font width:(kScreenWidth - 20 - 5 * 2 - [UILabel getWidthWithTitle:@"收货地址:" font:kFont14])];
+//    if (orderModel.addressInfo.address.length == 0) {
+//        [_line2 mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(_shouhuodizhi.mas_bottom).offset(_margin);
+//        }];
+//        _line2.backgroundColor = [UIColor redColor];
+//    }
     
     // 加载 商家-餐品详情列表
     [_orderDetailShopListView loadOrderShopDetailListViewWithSotreInfoArray:orderModel.storeInfoArray];

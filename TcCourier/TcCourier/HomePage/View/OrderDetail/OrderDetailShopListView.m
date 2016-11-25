@@ -62,7 +62,7 @@
             // 需要计算高度
             make.height.equalTo(@([self getFoodListViewHeightWithFoodArray:storeInfoModel.foodArray]));
         }];
-        foodListView.backgroundColor = [UIColor lightGrayColor];
+//        foodListView.backgroundColor = [UIColor lightGrayColor];
         [foodListView loadDataWithFoodArray:storeInfoModel.foodArray];
         CGFloat shopNameLHeight = [UILabel getHeightByWidth:kShopNameLWidth title:shopNameL.text font:shopNameL.font];
         CGFloat foodListViewHeight = [self getFoodListViewHeightWithFoodArray:storeInfoModel.foodArray];
@@ -71,7 +71,7 @@
         // 分割线
         float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
         UIView *line1 = [[UIView alloc] init];
-        line1.backgroundColor = [UIColor blackColor];
+        line1.backgroundColor = [UIColor lightGrayColor];
         [self addSubview:line1];
         [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(10);
@@ -95,7 +95,7 @@
         
         // 分割线
         UIView *line2 = [[UIView alloc] init];
-        line2.backgroundColor = [UIColor blackColor];
+        line2.backgroundColor = [UIColor lightGrayColor];
         [self addSubview:line2];
         [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(self);
@@ -108,7 +108,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                NSLog(@"%f",_height);
+//                NSLog(@"%f",_height);
                 make.height.equalTo(@(_height));
             }];
         });

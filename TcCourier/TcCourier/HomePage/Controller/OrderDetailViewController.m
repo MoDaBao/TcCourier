@@ -137,6 +137,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     CGFloat margin = 5;
     
     // 计算地址列表视图的宽度
@@ -145,33 +146,44 @@
     // 计算店铺地址的高度
     CGFloat storeHeight = 0;
     for (StoreInfoModel *store in self.dataSourceModel.storeInfoArray) {
-        storeHeight = storeHeight + [UILabel getHeightByWidth:addressViewWidth title:store.address font:kFont14] + margin;
+        storeHeight += [UILabel getHeightByWidth:addressViewWidth title:store.address font:kFont14] + 5;
     }
-    storeHeight -= margin;
+    storeHeight -= 5;
     
     // 计算收货地址的高度
     CGFloat receiverHeight = 0;
     AddressInfoModel *address = self.dataSourceModel.addressInfo;
-    receiverHeight = [UILabel getHeightByWidth:addressViewWidth title:address.detail_addr font:kFont14];
+    receiverHeight = [UILabel getHeightByWidth:addressViewWidth title:[NSString stringWithFormat:@"%@%@",address.address, address.detail_addr] font:kFont14];
     
     // 计算shopname的宽度
     CGFloat shopNameWidth = (kScreenWidth - 20) * .35;
     
     // 计算foodname的宽度
     CGFloat foodNameWidth = (kScreenWidth - 20 - margin * 2 - 15 - shopNameWidth - margin) *  .4;
+    
+    // 分割线高度
+    float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
+    
+    // 店铺-餐品详情
     CGFloat foodDetailHeight = 0;
     for (StoreInfoModel *storeModel in self.dataSourceModel.storeInfoArray) {
-        CGFloat shopNameHeight = [UILabel getHeightByWidth:shopNameWidth title:storeModel.store_name font:kFont14];
+        foodDetailHeight += 5;// icon与上面分割线的距离
+        CGFloat shopNameHeight = [UILabel getHeightByWidth:shopNameWidth title:storeModel.store_name font:kFont14];// 商店名标签的高度
         CGFloat foodHeight = 0;
         for (FoodModel *food in storeModel.foodArray) {
-            foodHeight += [UILabel getHeightByWidth:foodNameWidth title:food.title font:kFont14] + margin;
+            foodHeight += [UILabel getHeightByWidth:foodNameWidth title:food.title font:kFont14] + 5;// 累加食物名称的高度和间隔
         }
-        foodHeight -= margin;
-        foodDetailHeight = shopNameWidth > foodHeight ? shopNameHeight : foodHeight;
-        foodDetailHeight += [UILabel getHeightByWidth:kScreenWidth - 20 - 20 title:storeModel.remark font:kFont14];
+        foodHeight -= 5;// 减掉多加了一次的间隔高度
+        foodDetailHeight += (shopNameHeight > foodHeight ? shopNameHeight : foodHeight);// 判断是shopName的高度大还是食物列表高度大
+        foodDetailHeight += sortaPixel + 5;
+        foodDetailHeight += [UILabel getHeightByWidth:kScreenWidth - 20 - 20 title:[NSString stringWithFormat:@"备注:%@",storeModel.remark] font:kFont14];// 加上备注的高度
+        foodDetailHeight += 5 + sortaPixel;
+        
+        foodDetailHeight += 5;
     }
     
-    return 350 + storeHeight + receiverHeight + foodDetailHeight;
+//    return 355 + storeHeight + receiverHeight + foodDetailHeight;
+    return 239 + storeHeight + receiverHeight + foodDetailHeight + 70;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

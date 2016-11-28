@@ -12,20 +12,69 @@
 
 @interface WaitReceiveOrderViewController ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+
 @end
 
 @implementation WaitReceiveOrderViewController
 
 
+#pragma mark -----lazyLoading-----
+
+- (NSMutableArray *)dataArray {
+    if (!_dataArray) {
+        self.dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
+
+
+#pragma mark -----网络请求-----
+
+- (void)requestData {
+    
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@",@"pdawaitingorder",@"pda"];
+    NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda"};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {
+            
+            [self.dataArray removeAllObjects];
+          
+            // 刷新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+}
+
 #pragma mark -----视图方法-----
 
 - (void)createView {
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight) style:UITableViewStylePlain];
-    [tableView registerClass:[WaitReceiveOrderTableViewCell class] forCellReuseIdentifier:@"reuse"];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [self.view addSubview:tableView];
+    // 加载tableView
+    self.tableView = [UITableView new];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.tableView];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.bottom.and.right.equalTo(self.view);
+        make.top.equalTo(self.view).offset(kNavigationBarHeight);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,6 +97,8 @@
     
     [self createView];
     
+    [self requestData];
+    
     
     
 }
@@ -63,7 +114,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

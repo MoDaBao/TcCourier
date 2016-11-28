@@ -15,6 +15,7 @@
 //#import "ShopAddressViewController.h"
 #import "DeliveryViewController.h"
 #import "OrderDetailViewController.h"
+#import "TipMessageView.h"
 
 @interface HomePageViewController ()
 
@@ -146,7 +147,7 @@
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"dict = %@",dict);
+//        NSLog(@"dict = %@",dict[@"msg"]);
         if (0 == [dict[@"status"] floatValue]) {// 请求成功
             // 更新本地存储的在线状态
             [[TcCourierInfoManager shareInstance] saveTcCourierOnlineStatus:[NSString stringWithFormat:@"%d", _isWork]];
@@ -154,6 +155,14 @@
             
         } else {
             _isWork = !_isWork;
+            // 提示框
+            TipMessageView *tipView = [[TipMessageView alloc] initWithTip:dict[@"msg"]];
+            [self.view addSubview:tipView];
+            [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.view);
+                make.height.equalTo(@100);
+                make.width.equalTo(@200);
+            }];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

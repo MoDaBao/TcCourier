@@ -56,16 +56,16 @@
             
             [self.dataArray removeAllObjects];
             
-            for (NSDictionary *d in dataArray) {
+            for (NSDictionary *orderDic in dataArray) {
                 OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
-                [orderModel setValuesForKeysWithDictionary:d];
-                NSArray *arr = d[@"store"];
+                [orderModel setValuesForKeysWithDictionary:orderDic];
+                NSArray *arr = orderDic[@"store"];
                 for (NSDictionary *storedic in arr) {
                     StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
                     [storemodel setValuesForKeysWithDictionary:storedic];
                     [orderModel.storeInfoArray addObject:storemodel];
                 }
-                [orderModel.addressInfo setValuesForKeysWithDictionary:d[@"address"]];
+                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
                 [self.dataArray addObject:orderModel];
             }
             

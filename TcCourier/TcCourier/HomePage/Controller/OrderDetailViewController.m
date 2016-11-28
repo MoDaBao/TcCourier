@@ -65,7 +65,11 @@
             
             // 回到主线程刷新UI
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self createView];
+                if (_tableView) {
+                    [self.tableView reloadData];
+                } else {
+                    [self createView];
+                }
             });
             
             

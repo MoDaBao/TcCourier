@@ -7,23 +7,65 @@
 //
 
 #import "DeliveryViewController.h"
+#import "OrderInfoModel.h"
 
-@interface DeliveryViewController ()
+@interface DeliveryViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
 @implementation DeliveryViewController
 
 
+#pragma mark -----lazyLoading-----
+
+- (NSMutableArray *)dataArray {
+    if (!_dataArray) {
+        self.dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
+
+
 #pragma mark -----网络请求-----
 
 - (void)requestData {
+    
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@",@"pdadistribution", @"pda", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdadistribution", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.requestSerializer = [AFHTTPRequestSerializer serializer];
     session.responseSerializer = [AFHTTPResponseSerializer serializer];
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {
+            
+            [self.dataArray removeAllObjects];
+            
+            NSDictionary *dataDic = dict[@"data"];
+            for (NSDictionary *orderDic in dataDic[@"order"]) {
+                OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                [orderModel setValuesForKeysWithDictionary:orderDic];
+                NSArray *arr = orderDic[@"store"];
+                for (NSDictionary *storedic in arr) {
+                    StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                    [storemodel setValuesForKeysWithDictionary:storedic];
+                    [orderModel.storeInfoArray addObject:storemodel];
+                }
+                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                [self.dataArray addObject:orderModel];
+            }
+            
+            
+        } else {
+            NSLog(@"msg = %@",dict[@"msg"]);
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error is %@",error);
@@ -33,7 +75,17 @@
 #pragma mark -----视图方法-----
 
 - (void)createView {
-    
+    // 加载tableView
+    self.tableView = [UITableView new];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.tableView];
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.bottom.and.right.equalTo(self.view);
+        make.top.equalTo(self.view).offset(kNavigationBarHeight);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,7 +102,9 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = backItem;
     
-    [self createView];
+//    [self createView];
+    
+    [self requestData];
     
     
 }
@@ -60,6 +114,25 @@
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark -----tableView代理方法-----
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
 }
 
 - (void)didReceiveMemoryWarning {

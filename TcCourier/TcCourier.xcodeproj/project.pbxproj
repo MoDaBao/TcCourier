@@ -23,7 +23,6 @@
 		E71593341DE690BE00EAAC68 /* TodayInfoItemVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593211DE690BE00EAAC68 /* TodayInfoItemVIew.m */; };
 		E71593351DE690BE00EAAC68 /* TodayInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593231DE690BE00EAAC68 /* TodayInfoView.m */; };
 		E71593361DE690BE00EAAC68 /* OvertimePaidView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593261DE690BE00EAAC68 /* OvertimePaidView.m */; };
-		E71593371DE690BE00EAAC68 /* ShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593281DE690BE00EAAC68 /* ShopView.m */; };
 		E71593381DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */; };
 		E71593441DE6B76600EAAC68 /* OrderDetailShopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593431DE6B76600EAAC68 /* OrderDetailShopListView.m */; };
 		E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */; };
@@ -35,6 +34,12 @@
 		E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */; };
 		E79034371DC71593004C1C8E /* ShopAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79034361DC71593004C1C8E /* ShopAddressViewController.m */; };
 		E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */; };
+		E7CCD2E71DED555500B24256 /* DeliveryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2E61DED555500B24256 /* DeliveryTableViewCell.m */; };
+		E7CCD2EA1DED69F800B24256 /* TotalAmountAndPaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2E91DED69F800B24256 /* TotalAmountAndPaymentView.m */; };
+		E7CCD2ED1DED7B6700B24256 /* ReceiverAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2EC1DED7B6700B24256 /* ReceiverAddressView.m */; };
+		E7CCD2F01DEE754B00B24256 /* RunFeeAndTiFeeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2EF1DEE754B00B24256 /* RunFeeAndTiFeeView.m */; };
+		E7CCD2F31DEEB17000B24256 /* TimeOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2F21DEEB17000B24256 /* TimeOutView.m */; };
+		E7CCD2F61DEEB99F00B24256 /* ShopButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2F51DEEB99F00B24256 /* ShopButtonView.m */; };
 		E7E856381DAF56700057D66F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856371DAF56700057D66F /* main.m */; };
 		E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E8563A1DAF56700057D66F /* AppDelegate.m */; };
 		E7E856461DAF56700057D66F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7E856441DAF56700057D66F /* LaunchScreen.storyboard */; };
@@ -117,8 +122,6 @@
 		E71593231DE690BE00EAAC68 /* TodayInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoView.m; sourceTree = "<group>"; };
 		E71593251DE690BE00EAAC68 /* OvertimePaidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvertimePaidView.h; sourceTree = "<group>"; };
 		E71593261DE690BE00EAAC68 /* OvertimePaidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvertimePaidView.m; sourceTree = "<group>"; };
-		E71593271DE690BE00EAAC68 /* ShopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopView.h; sourceTree = "<group>"; };
-		E71593281DE690BE00EAAC68 /* ShopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopView.m; sourceTree = "<group>"; };
 		E71593291DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderTableViewCell.h; sourceTree = "<group>"; };
 		E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderTableViewCell.m; sourceTree = "<group>"; };
 		E71593421DE6B76600EAAC68 /* OrderDetailShopListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailShopListView.h; sourceTree = "<group>"; };
@@ -141,6 +144,18 @@
 		E79034361DC71593004C1C8E /* ShopAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopAddressViewController.m; sourceTree = "<group>"; };
 		E7BA1E171DCC777D001B0081 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		E7CCD2E51DED555500B24256 /* DeliveryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryTableViewCell.h; sourceTree = "<group>"; };
+		E7CCD2E61DED555500B24256 /* DeliveryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryTableViewCell.m; sourceTree = "<group>"; };
+		E7CCD2E81DED69F800B24256 /* TotalAmountAndPaymentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalAmountAndPaymentView.h; sourceTree = "<group>"; };
+		E7CCD2E91DED69F800B24256 /* TotalAmountAndPaymentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalAmountAndPaymentView.m; sourceTree = "<group>"; };
+		E7CCD2EB1DED7B6700B24256 /* ReceiverAddressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverAddressView.h; sourceTree = "<group>"; };
+		E7CCD2EC1DED7B6700B24256 /* ReceiverAddressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverAddressView.m; sourceTree = "<group>"; };
+		E7CCD2EE1DEE754B00B24256 /* RunFeeAndTiFeeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunFeeAndTiFeeView.h; sourceTree = "<group>"; };
+		E7CCD2EF1DEE754B00B24256 /* RunFeeAndTiFeeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunFeeAndTiFeeView.m; sourceTree = "<group>"; };
+		E7CCD2F11DEEB17000B24256 /* TimeOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeOutView.h; sourceTree = "<group>"; };
+		E7CCD2F21DEEB17000B24256 /* TimeOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeOutView.m; sourceTree = "<group>"; };
+		E7CCD2F41DEEB99F00B24256 /* ShopButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopButtonView.h; sourceTree = "<group>"; };
+		E7CCD2F51DEEB99F00B24256 /* ShopButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopButtonView.m; sourceTree = "<group>"; };
 		E7E856331DAF56700057D66F /* TcCourier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TcCourier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7E856371DAF56700057D66F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E7E856391DAF56700057D66F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -245,6 +260,7 @@
 			children = (
 				E71593091DE690BE00EAAC68 /* AddressListView.h */,
 				E715930A1DE690BE00EAAC68 /* AddressListView.m */,
+				E7CCD2E41DED553500B24256 /* Delivery */,
 				E715930B1DE690BE00EAAC68 /* AlreadyDone */,
 				E71593101DE690BE00EAAC68 /* HomePage */,
 				E71593151DE690BE00EAAC68 /* MapView */,
@@ -315,12 +331,29 @@
 			children = (
 				E71593251DE690BE00EAAC68 /* OvertimePaidView.h */,
 				E71593261DE690BE00EAAC68 /* OvertimePaidView.m */,
-				E71593271DE690BE00EAAC68 /* ShopView.h */,
-				E71593281DE690BE00EAAC68 /* ShopView.m */,
 				E71593291DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.h */,
 				E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */,
 			);
 			path = WaitReceiving;
+			sourceTree = "<group>";
+		};
+		E7CCD2E41DED553500B24256 /* Delivery */ = {
+			isa = PBXGroup;
+			children = (
+				E7CCD2E51DED555500B24256 /* DeliveryTableViewCell.h */,
+				E7CCD2E61DED555500B24256 /* DeliveryTableViewCell.m */,
+				E7CCD2E81DED69F800B24256 /* TotalAmountAndPaymentView.h */,
+				E7CCD2E91DED69F800B24256 /* TotalAmountAndPaymentView.m */,
+				E7CCD2EB1DED7B6700B24256 /* ReceiverAddressView.h */,
+				E7CCD2EC1DED7B6700B24256 /* ReceiverAddressView.m */,
+				E7CCD2EE1DEE754B00B24256 /* RunFeeAndTiFeeView.h */,
+				E7CCD2EF1DEE754B00B24256 /* RunFeeAndTiFeeView.m */,
+				E7CCD2F11DEEB17000B24256 /* TimeOutView.h */,
+				E7CCD2F21DEEB17000B24256 /* TimeOutView.m */,
+				E7CCD2F41DEEB99F00B24256 /* ShopButtonView.h */,
+				E7CCD2F51DEEB99F00B24256 /* ShopButtonView.m */,
+			);
+			path = Delivery;
 			sourceTree = "<group>";
 		};
 		E7E8562A1DAF566F0057D66F = {
@@ -763,6 +796,7 @@
 			files = (
 				E715932F1DE690BE00EAAC68 /* HomePageView.m in Sources */,
 				E70B06631DB06C7900E4B5A6 /* UIView+ChangeFrame.m in Sources */,
+				E7CCD2F01DEE754B00B24256 /* RunFeeAndTiFeeView.m in Sources */,
 				E71593341DE690BE00EAAC68 /* TodayInfoItemVIew.m in Sources */,
 				E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */,
 				E7E856981DAF67080057D66F /* LoginViewController.m in Sources */,
@@ -771,6 +805,7 @@
 				E71593321DE690BE00EAAC68 /* OrderDetailTableViewCell.m in Sources */,
 				E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */,
 				E7FB7FA91DD19E640023148C /* UIScrollView+MJRefresh.m in Sources */,
+				E7CCD2ED1DED7B6700B24256 /* ReceiverAddressView.m in Sources */,
 				E7FB7FA81DD19E640023148C /* UIScrollView+MJExtension.m in Sources */,
 				E7E856801DAF62B70057D66F /* MainTabBarController.m in Sources */,
 				E71209361DD470EF0015825A /* TipMessageView.m in Sources */,
@@ -779,12 +814,12 @@
 				E7FB7FAD1DD19E7B0023148C /* MyMD5.m in Sources */,
 				E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */,
 				E7FB7FA61DD19E640023148C /* MJRefreshFooterView.m in Sources */,
-				E71593371DE690BE00EAAC68 /* ShopView.m in Sources */,
 				E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
 				E71593361DE690BE00EAAC68 /* OvertimePaidView.m in Sources */,
 				E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */,
 				E715932E1DE690BE00EAAC68 /* HomePageItemView.m in Sources */,
+				E7CCD2F31DEEB17000B24256 /* TimeOutView.m in Sources */,
 				E71593311DE690BE00EAAC68 /* FoodListView.m in Sources */,
 				E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */,
 				E7FB2BE51DB755880045E871 /* SettingView.m in Sources */,
@@ -792,8 +827,11 @@
 				E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */,
 				E71593441DE6B76600EAAC68 /* OrderDetailShopListView.m in Sources */,
 				E7FB5AAB1DD2FF8E006DFADD /* TcCourierInfoManager.m in Sources */,
+				E7CCD2EA1DED69F800B24256 /* TotalAmountAndPaymentView.m in Sources */,
 				E7FB7FA71DD19E640023148C /* MJRefreshHeaderView.m in Sources */,
 				E7E8567D1DAF62B70057D66F /* MainNavigationController.m in Sources */,
+				E7CCD2F61DEEB99F00B24256 /* ShopButtonView.m in Sources */,
+				E7CCD2E71DED555500B24256 /* DeliveryTableViewCell.m in Sources */,
 				E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */,
 				E75A77A71DE2C70800E344EE /* FoodModel.m in Sources */,
 				E7FB2BE21DB751BF0045E871 /* StarttAppraiseRateView.m in Sources */,

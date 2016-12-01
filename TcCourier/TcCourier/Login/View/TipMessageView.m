@@ -43,7 +43,7 @@
         
         
         [UIView animateWithDuration:.4 animations:^{
-            self.alpha = .4;
+            self.alpha = .5;
         } completion:^(BOOL finished) {
             [self hide];
         }];

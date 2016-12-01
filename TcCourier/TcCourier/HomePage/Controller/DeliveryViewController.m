@@ -7,7 +7,7 @@
 //
 
 #import "DeliveryViewController.h"
-#import "OrderInfoModel.h"
+#import "DeliveryTableViewCell.h"
 
 @interface DeliveryViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -43,7 +43,7 @@
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (0 == [dict[@"status"] floatValue]) {
             
             [self.dataArray removeAllObjects];
@@ -61,7 +61,11 @@
                 [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
                 [self.dataArray addObject:orderModel];
             }
+//            NSLog(@"dataArray = %@",self.dataArray);
             
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
             
         } else {
             NSLog(@"msg = %@",dict[@"msg"]);
@@ -79,8 +83,9 @@
     self.tableView = [UITableView new];
     self.tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundColor = kBGGary;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.bottom.and.right.equalTo(self.view);
@@ -99,14 +104,15 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"配送中";
     self.view.backgroundColor = kBGGary;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = backItem;
     
-//    [self createView];
+    [self createView];
     
     [self requestData];
-    
-    
+
 }
 
 
@@ -124,15 +130,27 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.dataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 300;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    OrderInfoModel *model = self.dataArray[indexPath.row];
+    NSString *reuseIdentifier = @"reuse";
+    DeliveryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[DeliveryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    [cell setDataWithModel:model];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = kBGGary;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -49,6 +49,7 @@
         self.contentV.layer.borderWidth = 1;
         self.contentV.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.contentV.layer.cornerRadius = 5;
+        self.contentV.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_contentV];
         [self.contentV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));

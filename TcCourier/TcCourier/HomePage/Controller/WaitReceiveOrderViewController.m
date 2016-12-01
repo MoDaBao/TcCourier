@@ -7,7 +7,6 @@
 //
 
 #import "WaitReceiveOrderViewController.h"
-#import "ShopView.h"
 #import "WaitReceiveOrderTableViewCell.h"
 
 @interface WaitReceiveOrderViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -70,6 +69,7 @@
     [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = kBGGary;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.bottom.and.right.equalTo(self.view);
@@ -126,10 +126,14 @@
     WaitReceiveOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     if (!cell) {
         cell = [[WaitReceiveOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = kBGGary;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -91,6 +91,7 @@
     [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = kBGGary;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.bottom.and.right.equalTo(self.view);
@@ -200,6 +201,11 @@
     [cell setDataWithModel:self.dataSourceModel index:indexPath.row];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = kBGGary;
+}
+
 
 /*
 #pragma mark - Navigation

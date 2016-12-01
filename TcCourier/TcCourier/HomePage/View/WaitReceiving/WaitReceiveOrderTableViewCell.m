@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UILabel *receiveAddressL;// 收货地址
 @property (nonatomic, strong) UILabel *courierCost;// 跑腿费
 @property (nonatomic, strong) UILabel *commissionL;// 跑腿提成
-@property (nonatomic, strong) ShopView *shopView;
+//@property (nonatomic, strong) ShopView *shopView;
 
 
 @end
@@ -34,6 +34,7 @@
         self.contentV.layer.borderWidth = 1;
         self.contentV.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.contentV.layer.cornerRadius = 5;
+        self.contentV.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_contentV];
         
         

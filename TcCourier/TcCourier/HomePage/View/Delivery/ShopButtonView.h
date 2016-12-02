@@ -11,4 +11,6 @@
 
 @interface ShopButtonView : UIView
 
+- (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray;
+
 @end

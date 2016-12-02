@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddressInfoModel.h"
 
 @interface ReceiverAddressView : UIView
 
-- (void)loadReceiverAddress:(NSString *)address;
+- (void)loadReceiverAddress:(AddressInfoModel *)addressInfoModel;
 
 @end

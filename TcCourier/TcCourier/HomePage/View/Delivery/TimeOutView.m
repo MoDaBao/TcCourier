@@ -19,6 +19,11 @@
 */
 
 - (void)loadTimeOut:(NSString *)timeOut {
+    
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
+    
     UILabel *titleL = [UILabel new];
     [self addSubview:titleL];
     [titleL mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -36,6 +41,17 @@
     }];
     timeOutL.font = kFont14;
     [self setAttStrWithlabel:timeOutL title:@"剩余时间:" sum:timeOut];
+    
+    // 分割线
+    float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = [UIColor blackColor];
+    [self addSubview:line];//线是否加
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self);
+        make.bottom.equalTo(self.mas_bottom);
+        make.height.equalTo(@(sortaPixel));
+    }];
 }
 
 /**

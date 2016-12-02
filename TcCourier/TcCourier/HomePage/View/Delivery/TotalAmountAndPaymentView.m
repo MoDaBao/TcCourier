@@ -19,6 +19,11 @@
 */
 
 - (void)loadTotalAmount:(NSString *)total payment:(NSString *)payment {
+    
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
+    
     UIImageView *icon = [UIImageView new];
     [self addSubview:icon];
     [icon mas_makeConstraints:^(MASConstraintMaker *make) {

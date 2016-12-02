@@ -10,4 +10,6 @@
 
 @interface TimeOutView : UIView
 
+- (void)loadTimeOut:(NSString *)timeOut;
+
 @end

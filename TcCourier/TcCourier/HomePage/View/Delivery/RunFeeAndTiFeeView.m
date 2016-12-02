@@ -19,6 +19,11 @@
 */
 
 - (void)loadRunFee:(NSString *)runFee tiFee:(NSString *)tiFee {
+    
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
+    
     UILabel *runFeeL = [UILabel new];
     [self addSubview:runFeeL];
     [runFeeL mas_makeConstraints:^(MASConstraintMaker *make) {

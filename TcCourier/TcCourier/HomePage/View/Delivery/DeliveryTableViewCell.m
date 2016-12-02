@@ -11,6 +11,7 @@
 #import "ReceiverAddressView.h"
 #import "RunFeeAndTiFeeView.h"
 #import "TimeOutView.h"
+#import "ShopButtonView.h"
 
 @interface DeliveryTableViewCell ()
 @property (nonatomic, assign) CGFloat margin;
@@ -23,6 +24,8 @@
 
 @property (nonatomic, strong) UIView *line4;// 分割线4
 @property (nonatomic, strong) TimeOutView *timeOutView;// 超时赔付
+
+@property (nonatomic, strong) ShopButtonView *shopBtnView;// 店铺信息+配送按钮
 
 
 
@@ -63,6 +66,18 @@
             make.left.equalTo(_orderNumberL);
             make.top.equalTo(_orderNumberL.mas_bottom).offset(_margin);
         }];
+        
+//        UIImageView *jiantou = [UIImageView new];
+//        [self.contentV addSubview:jiantou];
+//        CGFloat jiantouW = 8;
+//        [jiantou mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(@(-_margin));
+//            // 17 X 29
+//            make.width.equalTo(@(jiantouW));
+//            make.height.equalTo(@(jiantouW * 1.0 / 17 * 29));
+//            make.top.equalTo(_orderTimeL.mas_top).offset(-jiantouW * 1.0 / 17 * 29  * .5);
+//        }];
+//        jiantou.image = [UIImage imageNamed:@"youbianjian"];
         
         // 分割线
         float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
@@ -141,6 +156,16 @@
             make.height.equalTo(@40);
         }];
         
+        // 店铺信息+配送按钮
+        _shopBtnView = [ShopButtonView new];
+        [self.contentV addSubview:_shopBtnView];
+        [_shopBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.equalTo(self.contentV);
+            make.top.equalTo(_timeOutView.mas_bottom);
+            make.height.equalTo(@40);
+        }];
+        
+        
     }
     return self;
 }
@@ -151,9 +176,23 @@
     // 加载订单总额和支付方式
     [_totalAndPaymentView loadTotalAmount:orderModel.order_price payment:orderModel.payment];
     // 加载收货人地址
-    [_receiverAddressView loadReceiverAddress:orderModel.addressInfo.address];
+    [_receiverAddressView loadReceiverAddress:orderModel.addressInfo];
     // 加载跑腿费和跑腿提成
     [_runFeeAndTiFeeView loadRunFee:orderModel.order_run_fee tiFee:orderModel.ti_run_fee];
+    
+    // 超时赔付
+    if ([orderModel.is_timeout isEqualToString:@"0"]) {// 没有超时赔付
+        _timeOutView = nil;
+        [_shopBtnView mas_updateConstraints:^(MASConstraintMaker *make) {
+             make.top.equalTo(_line4.mas_bottom);
+        }];
+    } else {// 有超时赔付
+        [_timeOutView loadTimeOut:orderModel.timeout];
+    }
+    
+    // 店铺信息+配送按钮
+    [_shopBtnView loadViewWithStoreInfoArray:orderModel.storeInfoArray];
+    
 }
 
 - (void)awakeFromNib {

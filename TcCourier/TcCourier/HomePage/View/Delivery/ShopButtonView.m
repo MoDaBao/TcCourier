@@ -7,18 +7,26 @@
 //
 
 #import "ShopButtonView.h"
+#import "ShopAddressViewController.h"
+#import "AppDelegate.h"
+#import "MainTabBarController.h"
+#import "DeliveryViewController.h"
+
+#define kDeliveryBtnBGRed [UIColor colorWithRed:0.93 green:0.33 blue:0.31 alpha:1.00]
+#define kDeliveryBtnBGGray [UIColor colorWithRed:0.38 green:0.38 blue:0.39 alpha:1.00]
+
+@interface ShopButtonView ()
+
+@property (nonatomic, strong) NSArray *storeInfoArray;
+
+@end
 
 @implementation ShopButtonView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 - (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray {
+    
+    _storeInfoArray = storeInfoArray;
     
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
@@ -26,6 +34,8 @@
     CGFloat height = 0;
     CGFloat margin = 5;
     UIView *temp = nil;
+    NSInteger btntag = 1000;
+    NSInteger buttontag = 2000;
     for (StoreInfoModel *storeInfoModel in storeInfoArray) {
         UIImageView *icon = [UIImageView new];
         [self addSubview:icon];
@@ -100,8 +110,13 @@
         btn.layer.cornerRadius = margin;
         [btn setTitle:storeInfoModel.orderStatus forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor colorWithRed:0.93 green:0.33 blue:0.31 alpha:1.00]];// 暂时先设置这个颜色
         btn.titleLabel.font = kFont14;
+        [btn addTarget:self action:@selector(statusBtn:) forControlEvents:UIControlEventTouchUpInside];
+        btn.tag = btntag++;// 设置tag值
+        // 设置按钮背景色
+        [self setBtnBGColorWithSotreInfoModel:storeInfoModel btn:btn];
+        // 设置按钮标题
+        [self setBtnTitleWithStoreInfoModel:storeInfoModel btn:btn];
         
         height += margin + 35;
         
@@ -120,6 +135,16 @@
         }
         
         height += margin;
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self addSubview:button];
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.top.equalTo(icon);
+            make.right.equalTo(jiantou);
+            make.bottom.equalTo(btn.mas_top);
+        }];
+        [button addTarget:self action:@selector(addressBtn:) forControlEvents:UIControlEventTouchUpInside];
+        button.tag = buttontag++;
     }
     
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -128,6 +153,110 @@
     
 //    self.backgroundColor = [UIColor orangeColor];
 }
+
+
+#pragma mark-----设置按钮的文字和背景颜色-----
+
+// 设置按钮的标题
+- (void)setBtnTitleWithStoreInfoModel:(StoreInfoModel *)storeInfoModel btn:(UIButton *)btn {
+    if ([storeInfoModel.orderStatus isEqualToString:@"等待跑腿取餐"]) {
+        [btn setTitle:@"确认取餐" forState:UIControlStateNormal];
+    } else if ([storeInfoModel.orderStatus isEqualToString:@"跑腿正在配送"]) {
+        [btn setTitle:@"确认送达" forState:UIControlStateNormal];
+    } else if ([storeInfoModel.orderStatus isEqualToString:@"已关闭"]) {
+        [btn setTitle:@"商户已取消订单" forState:UIControlStateNormal];
+    } else if ([storeInfoModel.orderStatus isEqualToString:@"等待店铺接单"]) {
+        [btn setTitle:@"等待商户接单" forState:UIControlStateNormal];
+    }
+}
+
+// 设置按钮的背景色
+- (void)setBtnBGColorWithSotreInfoModel:(StoreInfoModel *)storeInfoModel btn:(UIButton *)btn {
+    if ([storeInfoModel.orderStatus isEqualToString:@"等待跑腿取餐"] || [storeInfoModel.orderStatus isEqualToString:@"跑腿正在配送"]) {
+        [btn setBackgroundColor:kDeliveryBtnBGRed];
+    } else if ([storeInfoModel.orderStatus isEqualToString:@"已关闭"] || [storeInfoModel.orderStatus isEqualToString:@"等待店铺接单"]) {
+        [btn setBackgroundColor:kDeliveryBtnBGGray];
+    }
+}
+
+
+#pragma mark-----按钮方法-----
+
+// 配送按钮方法
+- (void)statusBtn:(UIButton *)btn {
+    StoreInfoModel *store = _storeInfoArray[btn.tag - 1000];
+    if ([store.orderStatus isEqualToString:@"等待跑腿取餐"]) {
+        [self requestForTakeMealsWithStoreInfoModel:store];
+    } else if ([store.orderStatus isEqualToString:@"跑腿正在配送"]) {
+        [self requestForDeliveryWithStoreInfoModel:store];
+    } else {
+        NSLog(@"点击了按钮");
+    }
+    
+}
+
+// 跳转至地图页面
+- (void)addressBtn:(UIButton *)btn {
+    StoreInfoModel *store = _storeInfoArray[btn.tag - 2000];
+    NSLog(@"跳转至地图页面显示商家地址");
+    
+    ShopAddressViewController *shopAddressVC = [[ShopAddressViewController alloc] init];
+    shopAddressVC.storeInfoModel = store;
+    
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;
+    if (tabVC.selectedIndex == 0) {
+        if ([tabVC.homeVc.navigationController.viewControllers.lastObject isKindOfClass:[DeliveryViewController class]]) {
+            DeliveryViewController *deliveryVC = (DeliveryViewController *)tabVC.homeVc.navigationController.viewControllers.lastObject;
+            [deliveryVC.navigationController pushViewController:shopAddressVC animated:YES];
+        }
+    }
+}
+
+
+#pragma mark -----网络请求-----
+
+// 取餐
+- (void)requestForTakeMealsWithStoreInfoModel:(StoreInfoModel *)storeInfoModel {
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_id=%@&pid=%@",@"pdatakefood", @"pda",storeInfoModel.order_id, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdatakefood", @"core":@"pda", @"order_id":storeInfoModel.order_id, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {// 确认取餐成功
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+}
+
+// 送达
+- (void)requestForDeliveryWithStoreInfoModel:(StoreInfoModel *)storeInfoModel {
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_id=%@&pid=%@",@"pdadelivery", @"pda",storeInfoModel.order_id, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdadelivery", @"core":@"pda", @"order_id":storeInfoModel.order_id, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {// 确认送达成功
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+}
+
+
 
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreInfoModel.h"
 
 @interface ShopAddressViewController : UIViewController
+
+@property (nonatomic, strong) StoreInfoModel *storeInfoModel;
 
 @end

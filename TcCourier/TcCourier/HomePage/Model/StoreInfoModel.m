@@ -21,9 +21,9 @@
         } else if ([value isEqualToString:@"3"]) {
             self.orderStatus = @"待付款";
         } else if ([value isEqualToString:@"6"]) {
-            self.orderStatus = @"待退款";
+            self.orderStatus = @"已关闭";
         } else if ([value isEqualToString:@"10"]) {
-            self.orderStatus = @"待评价";
+            self.orderStatus = @"已完成";
         } else if ([value isEqualToString:@"13"]) {
             self.orderStatus = @"待跑腿接单";
         } else if ([value isEqualToString:@"14"]) {
@@ -31,7 +31,7 @@
         } else if ([value isEqualToString:@"4"]) {
             self.orderStatus = @"等待跑腿取餐";
         } else if ([value isEqualToString:@"12"]) {
-            self.orderStatus = @"跑腿取餐正在配送";
+            self.orderStatus = @"跑腿正在配送";
         }
     }
 }

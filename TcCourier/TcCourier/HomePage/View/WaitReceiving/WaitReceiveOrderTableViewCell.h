@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OvertimePaidView.h"
+#import "OrderInfoModel.h"
 
 @interface WaitReceiveOrderTableViewCell : UITableViewCell
+
+- (void)setDataWithModel:(OrderInfoModel *)orderModel;
 
 @end

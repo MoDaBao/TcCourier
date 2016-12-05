@@ -8,6 +8,13 @@
 
 #import "TimeOutView.h"
 
+@interface TimeOutView ()
+
+@property (nonatomic, copy) NSString *timeOut;
+@property (nonatomic, strong) UILabel *timeOutL;
+
+@end
+
 @implementation TimeOutView
 
 /*
@@ -19,7 +26,7 @@
 */
 
 - (void)loadTimeOut:(NSString *)timeOut {
-    
+    _timeOut = timeOut;
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
@@ -33,14 +40,14 @@
     titleL.font = kFont14;
     titleL.text = @"超时赔付:";
     
-    UILabel *timeOutL = [UILabel new];
-    [self addSubview:timeOutL];
-    [timeOutL mas_makeConstraints:^(MASConstraintMaker *make) {
+    _timeOutL = [UILabel new];
+    [self addSubview:_timeOutL];
+    [_timeOutL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(@-5);
     }];
-    timeOutL.font = kFont14;
-    [self setAttStrWithlabel:timeOutL title:@"剩余时间:" sum:timeOut];
+    _timeOutL.font = kFont14;
+    [self setAttStrWithlabel:_timeOutL title:@"剩余时间:" sum:timeOut];
     
     // 分割线
     float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
@@ -52,6 +59,12 @@
         make.bottom.equalTo(self.mas_bottom);
         make.height.equalTo(@(sortaPixel));
     }];
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshTime) userInfo:nil repeats:YES];
+}
+// 每秒刷新时间
+- (void)refreshTime {
+    
 }
 
 /**

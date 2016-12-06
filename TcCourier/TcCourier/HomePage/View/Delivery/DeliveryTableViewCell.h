@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderInfoModel.h"
+#import "ShopButtonView.h"
 
 @interface DeliveryTableViewCell : UITableViewCell
 

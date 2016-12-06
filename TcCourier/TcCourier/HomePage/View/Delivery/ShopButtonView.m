@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "DeliveryViewController.h"
+#import "TipMessageView.h"
 
 #define kDeliveryBtnBGRed [UIColor colorWithRed:0.93 green:0.33 blue:0.31 alpha:1.00]
 #define kDeliveryBtnBGGray [UIColor colorWithRed:0.38 green:0.38 blue:0.39 alpha:1.00]
@@ -18,11 +19,25 @@
 @interface ShopButtonView ()
 
 @property (nonatomic, strong) NSArray *storeInfoArray;
+@property (nonatomic, strong) StoreInfoModel *store;
 
 @end
 
 @implementation ShopButtonView
 
+- (instancetype)init {
+    if (self = [super init]) {
+        AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;
+        if (tabVC.selectedIndex == 0) {
+            if ([tabVC.homeVc.navigationController.viewControllers.lastObject isKindOfClass:[DeliveryViewController class]]) {
+                DeliveryViewController *deliveryVC = (DeliveryViewController *)tabVC.homeVc.navigationController.viewControllers.lastObject;
+                self.delegate = deliveryVC;
+            }
+        }
+    }
+    return self;
+}
 
 - (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray {
     
@@ -180,15 +195,34 @@
 }
 
 
+#pragma mark -----alertView代理方法-----
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 3001) {// 取餐中
+        if (buttonIndex == 1) {// 点击确定
+            [self requestForTakeMealsWithStoreInfoModel:_store];
+        }
+    } else if (alertView.tag == 3002) {// 配送中
+        if (buttonIndex == 1) {// 点击确定
+            [self requestForDeliveryWithStoreInfoModel:_store];
+        }
+    }
+}
+
+
 #pragma mark-----按钮方法-----
 
 // 配送按钮方法
 - (void)statusBtn:(UIButton *)btn {
-    StoreInfoModel *store = _storeInfoArray[btn.tag - 1000];
-    if ([store.orderStatus isEqualToString:@"等待跑腿取餐"]) {
-        [self requestForTakeMealsWithStoreInfoModel:store];
-    } else if ([store.orderStatus isEqualToString:@"跑腿正在配送"]) {
-        [self requestForDeliveryWithStoreInfoModel:store];
+    _store = _storeInfoArray[btn.tag - 1000];
+    if ([_store.orderStatus isEqualToString:@"等待跑腿取餐"]) {// 取餐中
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认已取餐？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 3001;
+        [alert show];
+    } else if ([_store.orderStatus isEqualToString:@"跑腿正在配送"]) {// 配送中
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认已送达？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 3002;
+        [alert show];
     } else {
         NSLog(@"点击了按钮");
     }
@@ -228,9 +262,18 @@
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        if (0 == [dict[@"status"] floatValue]) {// 确认取餐成功
-            
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (0 == [dict[@"status"] floatValue]) {// 确认取餐成功
+                if ([self.delegate respondsToSelector:@selector(refreshDeliveryCell)]) {
+                    [self.delegate refreshDeliveryCell];
+                }
+            } else {
+                if ([self.delegate respondsToSelector:@selector(showTipMessageViewWithTip:)]) {
+                    [self.delegate showTipMessageViewWithTip:@"确认取餐失败"];
+                }
+            }
+        });
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error is %@",error);
     }];
@@ -248,9 +291,19 @@
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        if (0 == [dict[@"status"] floatValue]) {// 确认送达成功
-            
-        }
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (0 == [dict[@"status"] floatValue]) {// 确认送达成功
+                if ([self.delegate respondsToSelector:@selector(refreshDeliveryCell)]) {
+                    [self.delegate refreshDeliveryCell];
+                }
+            } else {
+                if ([self.delegate respondsToSelector:@selector(showTipMessageViewWithTip:)]) {
+                    [self.delegate showTipMessageViewWithTip:@"确认送达失败"];
+                }
+            }
+        });
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error is %@",error);
     }];

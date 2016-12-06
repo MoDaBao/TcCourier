@@ -8,11 +8,14 @@
 
 #import "DeliveryViewController.h"
 #import "DeliveryTableViewCell.h"
+#import "FeHourGlass.h"
+#import "TipMessageView.h"
 
-@interface DeliveryViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface DeliveryViewController ()<UITableViewDelegate, UITableViewDataSource, ShopButtonViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) FeHourGlass *hourGlass;
 
 @end
 
@@ -65,6 +68,10 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
+                if (_hourGlass) {
+                    [_hourGlass removeFromSuperview];
+                    _hourGlass = nil;
+                }
             });
             
         } else {
@@ -167,6 +174,43 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = kBGGary;
+}
+
+
+#pragma mark-----ShopButtonViewDelegate-----
+
+- (void)refreshDeliveryCell {
+    
+    CGFloat height = 100;
+    CGFloat width = 100;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((kScreenWidth - width) * .5, (kScreenHeight - kNavigationBarHeight - height) * .5, width, height)];
+    if (!_hourGlass) {
+        _hourGlass = [[FeHourGlass alloc] initWithView:view];
+        _hourGlass.layer.cornerRadius = 8;
+        [self.view addSubview:_hourGlass];
+        [_hourGlass mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.and.height.equalTo(@100);
+            make.center.equalTo(self.view);
+        }];
+    }
+    [_hourGlass showWhileExecutingBlock:^{
+        sleep(1);
+    } completion:^{
+        [self requestData];
+    }];
+    
+    
+}
+
+- (void)showTipMessageViewWithTip:(NSString *)tip {
+    // 提示框
+    TipMessageView *tipView = [[TipMessageView alloc] initWithTip:tip];
+    [self.view addSubview:tipView];
+    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.height.equalTo(@100);
+        make.width.equalTo(@200);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

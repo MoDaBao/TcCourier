@@ -34,6 +34,8 @@
 		E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */; };
 		E79034371DC71593004C1C8E /* ShopAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79034361DC71593004C1C8E /* ShopAddressViewController.m */; };
 		E7ABA57F1DF1619E007F0638 /* ReceiverAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA57E1DF1619E007F0638 /* ReceiverAddressViewController.m */; };
+		E7ABA5821DF6678D007F0638 /* FeHourGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA5811DF6678D007F0638 /* FeHourGlass.m */; };
+		E7ABA5851DF667B8007F0638 /* UIColor+flat.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA5841DF667B8007F0638 /* UIColor+flat.m */; };
 		E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */; };
 		E7CCD2E71DED555500B24256 /* DeliveryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2E61DED555500B24256 /* DeliveryTableViewCell.m */; };
 		E7CCD2EA1DED69F800B24256 /* TotalAmountAndPaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2E91DED69F800B24256 /* TotalAmountAndPaymentView.m */; };
@@ -145,6 +147,10 @@
 		E79034361DC71593004C1C8E /* ShopAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopAddressViewController.m; sourceTree = "<group>"; };
 		E7ABA57D1DF1619E007F0638 /* ReceiverAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverAddressViewController.h; sourceTree = "<group>"; };
 		E7ABA57E1DF1619E007F0638 /* ReceiverAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverAddressViewController.m; sourceTree = "<group>"; };
+		E7ABA5801DF6678D007F0638 /* FeHourGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeHourGlass.h; sourceTree = "<group>"; };
+		E7ABA5811DF6678D007F0638 /* FeHourGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeHourGlass.m; sourceTree = "<group>"; };
+		E7ABA5831DF667B8007F0638 /* UIColor+flat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+flat.h"; sourceTree = "<group>"; };
+		E7ABA5841DF667B8007F0638 /* UIColor+flat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+flat.m"; sourceTree = "<group>"; };
 		E7BA1E171DCC777D001B0081 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		E7CCD2E51DED555500B24256 /* DeliveryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryTableViewCell.h; sourceTree = "<group>"; };
@@ -436,6 +442,10 @@
 		E7E856811DAF64C40057D66F /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				E7ABA5801DF6678D007F0638 /* FeHourGlass.h */,
+				E7ABA5811DF6678D007F0638 /* FeHourGlass.m */,
+				E7ABA5831DF667B8007F0638 /* UIColor+flat.h */,
+				E7ABA5841DF667B8007F0638 /* UIColor+flat.m */,
 				E7FB7F921DD19E640023148C /* MJRefresh */,
 				E70B06611DB06C7900E4B5A6 /* UIView+ChangeFrame.h */,
 				E70B06621DB06C7900E4B5A6 /* UIView+ChangeFrame.m */,
@@ -806,6 +816,7 @@
 				E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */,
 				E7E856981DAF67080057D66F /* LoginViewController.m in Sources */,
 				E7E8567E1DAF62B70057D66F /* MainTabBar.m in Sources */,
+				E7ABA5851DF667B8007F0638 /* UIColor+flat.m in Sources */,
 				E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */,
 				E71593321DE690BE00EAAC68 /* OrderDetailTableViewCell.m in Sources */,
 				E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */,
@@ -844,6 +855,7 @@
 				E71593351DE690BE00EAAC68 /* TodayInfoView.m in Sources */,
 				E7FB7FA51DD19E640023148C /* MJRefreshConst.m in Sources */,
 				E7FB2BCA1DB5F44D0045E871 /* TcLoginButton.m in Sources */,
+				E7ABA5821DF6678D007F0638 /* FeHourGlass.m in Sources */,
 				E715932C1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m in Sources */,
 				E71593301DE690BE00EAAC68 /* ShoppingInfoView.m in Sources */,
 				E7FB7FAA1DD19E640023148C /* UIView+MJExtension.m in Sources */,

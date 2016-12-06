@@ -11,7 +11,6 @@
 #import "ReceiverAddressView.h"
 #import "RunFeeAndTiFeeView.h"
 #import "TimeOutView.h"
-#import "ShopButtonView.h"
 
 @interface DeliveryTableViewCell ()
 @property (nonatomic, assign) CGFloat margin;

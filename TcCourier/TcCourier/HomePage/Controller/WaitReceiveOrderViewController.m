@@ -8,8 +8,9 @@
 
 #import "WaitReceiveOrderViewController.h"
 #import "WaitReceiveOrderTableViewCell.h"
+#import "TipMessageView.h"
 
-@interface WaitReceiveOrderViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface WaitReceiveOrderViewController ()<UITableViewDelegate, UITableViewDataSource, WaitReceiveOrderTableViewCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -33,8 +34,8 @@
 
 - (void)requestData {
     
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@",@"pdawaitingorder",@"pda"];
-    NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda"};
+    NSString *str = [NSString stringWithFormat:@"ad=%@&api=%@&core=%@",@"pdawaitingorder",@"1", @"pda"];
+    NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda", @"ad":@"1"};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
     
@@ -44,10 +45,24 @@
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (0 == [dict[@"status"] floatValue]) {
             
             [self.dataArray removeAllObjects];
+            
+            NSDictionary *dataDic = dict[@"data"];
+            for (NSDictionary *orderDic in dataDic[@"order"]) {
+                OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                [orderModel setValuesForKeysWithDictionary:orderDic];
+                NSArray *arr = orderDic[@"store"];
+                for (NSDictionary *storedic in arr) {
+                    StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                    [storemodel setValuesForKeysWithDictionary:storedic];
+                    [orderModel.storeInfoArray addObject:storemodel];
+                }
+                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                [self.dataArray addObject:orderModel];
+            }
           
             // 刷新UI
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -118,21 +133,54 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 400;
+    
+    OrderInfoModel *orderInfoModel = self.dataArray[indexPath.row];
+    CGFloat margin = 5;
+    CGFloat height = 0;
+    for (StoreInfoModel *storeInfoModel in orderInfoModel.storeInfoArray) {
+        height += margin + 15;// icon
+        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:[NSString stringWithFormat:@"地址:%@",storeInfoModel.address] font:[UIFont systemFontOfSize:12]];// 地址
+        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:[NSString stringWithFormat:@"备注:%@",storeInfoModel.remark] font:kFont14];// 备注
+        height += margin + 35;// 配送按钮
+        height += margin;
+    }
+    
+    if ([orderInfoModel.is_timeout isEqualToString:@"1"]) {
+        height += 40;
+    }
+    
+    
+    return 150 + height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *reuseIdentifier = @"reuse";
-    WaitReceiveOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    WaitReceiveOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
         cell = [[WaitReceiveOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
     }
+    [cell setDataWithModel:self.dataArray[indexPath.row]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = kBGGary;
+}
+
+
+#pragma mark -----WaitReceiverCellDelegate-----
+
+- (void)waitReceiverCellShowTipMessageWithTip:(NSString *)tip {
+    // 提示框
+    TipMessageView *tipView = [[TipMessageView alloc] initWithTip:tip];
+    [self.view addSubview:tipView];
+    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.height.equalTo(@100);
+        make.width.equalTo(@200);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

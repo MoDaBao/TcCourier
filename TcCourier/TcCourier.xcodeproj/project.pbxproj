@@ -12,6 +12,9 @@
 		E70B06631DB06C7900E4B5A6 /* UIView+ChangeFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B06621DB06C7900E4B5A6 /* UIView+ChangeFrame.m */; };
 		E70B06691DB0755500E4B5A6 /* 123.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E70B06681DB0755500E4B5A6 /* 123.jpg */; };
 		E71209361DD470EF0015825A /* TipMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71209351DD470EF0015825A /* TipMessageView.m */; };
+		E712D10C1DFE5D26005D63C9 /* PersonCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E712D10B1DFE5D26005D63C9 /* PersonCenterView.m */; };
+		E712D10F1E011BB4005D63C9 /* ReceiverAddressInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E712D10E1E011BB4005D63C9 /* ReceiverAddressInfoView.m */; };
+		E712D1121E01409F005D63C9 /* DeliveryTimeOutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E712D1111E01409F005D63C9 /* DeliveryTimeOutTableViewCell.m */; };
 		E715932B1DE690BE00EAAC68 /* AddressListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E715930A1DE690BE00EAAC68 /* AddressListView.m */; };
 		E715932C1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715930D1DE690BE00EAAC68 /* AlredyDoneTableViewCell.m */; };
 		E715932D1DE690BE00EAAC68 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E715930F1DE690BE00EAAC68 /* ChooseView.m */; };
@@ -22,7 +25,6 @@
 		E71593321DE690BE00EAAC68 /* OrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715931C1DE690BE00EAAC68 /* OrderDetailTableViewCell.m */; };
 		E71593341DE690BE00EAAC68 /* TodayInfoItemVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593211DE690BE00EAAC68 /* TodayInfoItemVIew.m */; };
 		E71593351DE690BE00EAAC68 /* TodayInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593231DE690BE00EAAC68 /* TodayInfoView.m */; };
-		E71593361DE690BE00EAAC68 /* OvertimePaidView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593261DE690BE00EAAC68 /* OvertimePaidView.m */; };
 		E71593381DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */; };
 		E71593441DE6B76600EAAC68 /* OrderDetailShopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593431DE6B76600EAAC68 /* OrderDetailShopListView.m */; };
 		E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */; };
@@ -36,6 +38,7 @@
 		E7ABA57F1DF1619E007F0638 /* ReceiverAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA57E1DF1619E007F0638 /* ReceiverAddressViewController.m */; };
 		E7ABA5821DF6678D007F0638 /* FeHourGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA5811DF6678D007F0638 /* FeHourGlass.m */; };
 		E7ABA5851DF667B8007F0638 /* UIColor+flat.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA5841DF667B8007F0638 /* UIColor+flat.m */; };
+		E7ABA5881DF6AA27007F0638 /* ShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA5871DF6AA27007F0638 /* ShopView.m */; };
 		E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */; };
 		E7CCD2E71DED555500B24256 /* DeliveryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2E61DED555500B24256 /* DeliveryTableViewCell.m */; };
 		E7CCD2EA1DED69F800B24256 /* TotalAmountAndPaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCD2E91DED69F800B24256 /* TotalAmountAndPaymentView.m */; };
@@ -103,6 +106,12 @@
 		E70B06681DB0755500E4B5A6 /* 123.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 123.jpg; sourceTree = "<group>"; };
 		E71209341DD470EF0015825A /* TipMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipMessageView.h; sourceTree = "<group>"; };
 		E71209351DD470EF0015825A /* TipMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipMessageView.m; sourceTree = "<group>"; };
+		E712D10A1DFE5D26005D63C9 /* PersonCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterView.h; sourceTree = "<group>"; };
+		E712D10B1DFE5D26005D63C9 /* PersonCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterView.m; sourceTree = "<group>"; };
+		E712D10D1E011BB4005D63C9 /* ReceiverAddressInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiverAddressInfoView.h; sourceTree = "<group>"; };
+		E712D10E1E011BB4005D63C9 /* ReceiverAddressInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceiverAddressInfoView.m; sourceTree = "<group>"; };
+		E712D1101E01409F005D63C9 /* DeliveryTimeOutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryTimeOutTableViewCell.h; sourceTree = "<group>"; };
+		E712D1111E01409F005D63C9 /* DeliveryTimeOutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryTimeOutTableViewCell.m; sourceTree = "<group>"; };
 		E71593091DE690BE00EAAC68 /* AddressListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListView.h; sourceTree = "<group>"; };
 		E715930A1DE690BE00EAAC68 /* AddressListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListView.m; sourceTree = "<group>"; };
 		E715930C1DE690BE00EAAC68 /* AlredyDoneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlredyDoneTableViewCell.h; sourceTree = "<group>"; };
@@ -123,8 +132,6 @@
 		E71593211DE690BE00EAAC68 /* TodayInfoItemVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoItemVIew.m; sourceTree = "<group>"; };
 		E71593221DE690BE00EAAC68 /* TodayInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayInfoView.h; sourceTree = "<group>"; };
 		E71593231DE690BE00EAAC68 /* TodayInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayInfoView.m; sourceTree = "<group>"; };
-		E71593251DE690BE00EAAC68 /* OvertimePaidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvertimePaidView.h; sourceTree = "<group>"; };
-		E71593261DE690BE00EAAC68 /* OvertimePaidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvertimePaidView.m; sourceTree = "<group>"; };
 		E71593291DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderTableViewCell.h; sourceTree = "<group>"; };
 		E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderTableViewCell.m; sourceTree = "<group>"; };
 		E71593421DE6B76600EAAC68 /* OrderDetailShopListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailShopListView.h; sourceTree = "<group>"; };
@@ -151,6 +158,8 @@
 		E7ABA5811DF6678D007F0638 /* FeHourGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeHourGlass.m; sourceTree = "<group>"; };
 		E7ABA5831DF667B8007F0638 /* UIColor+flat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+flat.h"; sourceTree = "<group>"; };
 		E7ABA5841DF667B8007F0638 /* UIColor+flat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+flat.m"; sourceTree = "<group>"; };
+		E7ABA5861DF6AA27007F0638 /* ShopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopView.h; sourceTree = "<group>"; };
+		E7ABA5871DF6AA27007F0638 /* ShopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopView.m; sourceTree = "<group>"; };
 		E7BA1E171DCC777D001B0081 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		E7CCD2E51DED555500B24256 /* DeliveryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryTableViewCell.h; sourceTree = "<group>"; };
@@ -307,6 +316,8 @@
 			children = (
 				E71593161DE690BE00EAAC68 /* ShoppingInfoView.h */,
 				E71593171DE690BE00EAAC68 /* ShoppingInfoView.m */,
+				E712D10D1E011BB4005D63C9 /* ReceiverAddressInfoView.h */,
+				E712D10E1E011BB4005D63C9 /* ReceiverAddressInfoView.m */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -338,10 +349,10 @@
 		E71593241DE690BE00EAAC68 /* WaitReceiving */ = {
 			isa = PBXGroup;
 			children = (
-				E71593251DE690BE00EAAC68 /* OvertimePaidView.h */,
-				E71593261DE690BE00EAAC68 /* OvertimePaidView.m */,
 				E71593291DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.h */,
 				E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */,
+				E7ABA5861DF6AA27007F0638 /* ShopView.h */,
+				E7ABA5871DF6AA27007F0638 /* ShopView.m */,
 			);
 			path = WaitReceiving;
 			sourceTree = "<group>";
@@ -351,6 +362,8 @@
 			children = (
 				E7CCD2E51DED555500B24256 /* DeliveryTableViewCell.h */,
 				E7CCD2E61DED555500B24256 /* DeliveryTableViewCell.m */,
+				E712D1101E01409F005D63C9 /* DeliveryTimeOutTableViewCell.h */,
+				E712D1111E01409F005D63C9 /* DeliveryTimeOutTableViewCell.m */,
 				E7CCD2E81DED69F800B24256 /* TotalAmountAndPaymentView.h */,
 				E7CCD2E91DED69F800B24256 /* TotalAmountAndPaymentView.m */,
 				E7CCD2EB1DED7B6700B24256 /* ReceiverAddressView.h */,
@@ -585,6 +598,8 @@
 				E7FB2BE41DB755880045E871 /* SettingView.m */,
 				E7FB2BE81DB7595D0045E871 /* SettingItemView.h */,
 				E7FB2BE91DB7595D0045E871 /* SettingItemView.m */,
+				E712D10A1DFE5D26005D63C9 /* PersonCenterView.h */,
+				E712D10B1DFE5D26005D63C9 /* PersonCenterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -820,6 +835,7 @@
 				E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */,
 				E71593321DE690BE00EAAC68 /* OrderDetailTableViewCell.m in Sources */,
 				E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */,
+				E712D1121E01409F005D63C9 /* DeliveryTimeOutTableViewCell.m in Sources */,
 				E7FB7FA91DD19E640023148C /* UIScrollView+MJRefresh.m in Sources */,
 				E7CCD2ED1DED7B6700B24256 /* ReceiverAddressView.m in Sources */,
 				E7FB7FA81DD19E640023148C /* UIScrollView+MJExtension.m in Sources */,
@@ -833,7 +849,6 @@
 				E7FB7FA61DD19E640023148C /* MJRefreshFooterView.m in Sources */,
 				E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
-				E71593361DE690BE00EAAC68 /* OvertimePaidView.m in Sources */,
 				E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */,
 				E715932E1DE690BE00EAAC68 /* HomePageItemView.m in Sources */,
 				E7CCD2F31DEEB17000B24256 /* TimeOutView.m in Sources */,
@@ -845,10 +860,12 @@
 				E71593441DE6B76600EAAC68 /* OrderDetailShopListView.m in Sources */,
 				E7FB5AAB1DD2FF8E006DFADD /* TcCourierInfoManager.m in Sources */,
 				E7CCD2EA1DED69F800B24256 /* TotalAmountAndPaymentView.m in Sources */,
+				E7ABA5881DF6AA27007F0638 /* ShopView.m in Sources */,
 				E7FB7FA71DD19E640023148C /* MJRefreshHeaderView.m in Sources */,
 				E7E8567D1DAF62B70057D66F /* MainNavigationController.m in Sources */,
 				E7CCD2F61DEEB99F00B24256 /* ShopButtonView.m in Sources */,
 				E7CCD2E71DED555500B24256 /* DeliveryTableViewCell.m in Sources */,
+				E712D10C1DFE5D26005D63C9 /* PersonCenterView.m in Sources */,
 				E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */,
 				E75A77A71DE2C70800E344EE /* FoodModel.m in Sources */,
 				E7FB2BE21DB751BF0045E871 /* StarttAppraiseRateView.m in Sources */,
@@ -863,6 +880,7 @@
 				E7FB7FA41DD19E640023148C /* MJRefreshBaseView.m in Sources */,
 				E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */,
 				E7E856381DAF56700057D66F /* main.m in Sources */,
+				E712D10F1E011BB4005D63C9 /* ReceiverAddressInfoView.m in Sources */,
 				E70B06601DB06C3C00E4B5A6 /* MOTextField.m in Sources */,
 				E7FB2BEA1DB7595D0045E871 /* SettingItemView.m in Sources */,
 				E79034371DC71593004C1C8E /* ShopAddressViewController.m in Sources */,
@@ -1012,7 +1030,7 @@
 				INFOPLIST_FILE = TcCourier/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dabao.TcCourier;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wenlingouyi.TcCourier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1027,7 +1045,7 @@
 				INFOPLIST_FILE = TcCourier/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dabao.TcCourier;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wenlingouyi.TcCourier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

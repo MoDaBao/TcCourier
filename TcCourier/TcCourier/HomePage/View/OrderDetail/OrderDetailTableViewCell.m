@@ -252,13 +252,13 @@
     return self;
 }
 
-- (void)setDataWithModel:(OrderInfoModel *)orderModel index:(NSInteger)index {
+- (void)setDataWithModel:(OrderInfoModel *)orderModel index:(NSInteger)index orderStatus:(NSString *)orderStatus {
     
     // 加载 支付方式——距离——订单状态
     if ([orderModel.is_timeout isEqualToString:@"1"]) {// 有超时赔付
-        _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - 超时赔付 - %@",orderModel.payment, orderModel.distance, @"已完成"];
+        _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - 超时赔付 - %@",orderModel.payment, orderModel.distance, orderStatus];
     } else {// 无超时赔付
-        _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - %@",orderModel.payment, orderModel.distance, @"已完成"];
+        _orderInfoL.text = [NSString stringWithFormat:@"%@ - 距%@km - %@",orderModel.payment, orderModel.distance, orderStatus];
     }
     
     // 加载 订单总额
@@ -286,11 +286,14 @@
     _receiverL.text = [NSString stringWithFormat:@"收货人: %@",orderModel.addressInfo.name];
     
     // 加载 收货人号码
-    NSString *str = [NSString stringWithFormat:@"收货号码: %@",orderModel.addressInfo.mobile];
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
-    [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.61 blue:0.58 alpha:1.00] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
-    [attStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
-    _receiverPhoneL.attributedText = attStr;
+    if (![orderStatus isEqualToString:@"已完成"]) {
+        NSString *str = [NSString stringWithFormat:@"收货号码: %@",orderModel.addressInfo.mobile];
+        NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+        [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.61 blue:0.58 alpha:1.00] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
+        [attStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
+        _receiverPhoneL.attributedText = attStr;
+    }
+    
     
     // 加载店铺地址
     [_storeAddressListV loadLabelWithArray:orderModel.storeInfoArray font:_orderInfoL.font width:(kScreenWidth - 20 - 5 * 2 - [UILabel getWidthWithTitle:@"店铺地址:" font:kFont14])];

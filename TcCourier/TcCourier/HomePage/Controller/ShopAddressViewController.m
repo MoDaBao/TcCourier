@@ -11,6 +11,8 @@
 
 @interface ShopAddressViewController ()
 
+@property (nonatomic, strong) MAMapView *mapView;
+
 @end
 
 @implementation ShopAddressViewController
@@ -19,12 +21,23 @@
 
 - (void)createView {
     
-    ShoppingInfoView *shopView = [ShoppingInfoView new];
+    ShoppingInfoView *shopView = [[ShoppingInfoView alloc] initWithShopName:_storeInfoModel.store_name tel:_storeInfoModel.tel distance:@"123123" address:_storeInfoModel.address];
     [self.view addSubview:shopView];
     [shopView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.equalTo(self.view);
         make.height.equalTo(@120);
     }];
+    
+    
+//    _mapView = [MAMapView new];
+//    [self.view addSubview:_mapView];
+//    [_mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(@(kScreenWidth));
+//        make.top.equalTo(@(kNavigationBarHeight));
+//        make.bottom.equalTo(shopView.mas_top);
+//        make.height.equalTo(@(kScreenHeight - kNavigationBarHeight - shopView.height));
+//    }];
+//    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,6 +53,8 @@
     self.navigationItem.title = @"商家地址";
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = backItem;
+    
+    [AMapServices sharedServices].apiKey = @"da19e16cdec56b6928db29d74dbd5ee8";
     
     [self createView];
 }

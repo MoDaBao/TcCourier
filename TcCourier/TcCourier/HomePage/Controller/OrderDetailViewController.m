@@ -47,7 +47,7 @@
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 //        NSLog(@"dict = %@",dict);
-//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (0 == [dict[@"status"] floatValue]) {
             NSDictionary *dataDic = dict[@"data"][@"order"][0];
             [self.dataSourceModel setValuesForKeysWithDictionary:dataDic];
@@ -198,7 +198,7 @@
         cell = [[OrderDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [cell setDataWithModel:self.dataSourceModel index:indexPath.row];
+    [cell setDataWithModel:self.dataSourceModel index:indexPath.row orderStatus:_orderStatus];
     return cell;
 }
 

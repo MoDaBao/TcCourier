@@ -12,6 +12,7 @@
 #import "TcLoginButton.h"
 #import "ModifyPasswordViewController.h"
 #import "LoginViewController.h"
+#import "PersonCenterView.h"
 
 @interface PersonCenterViewController ()<UIAlertViewDelegate>
 
@@ -33,7 +34,7 @@
     // logo
     CGFloat logoWidth = 60 * kScaleForWidth;
     CGFloat logoHeight = logoWidth / 101 * 139;
-    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenWidth - logoWidth) * 0.5, 100 * kScaleForWidth, logoWidth, logoHeight)];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenWidth - logoWidth) * 0.5, 55 * kScaleForWidth, logoWidth, logoHeight)];
     logoImageView.image = [UIImage imageNamed:@"chicken-home"];
     [scrollView addSubview:logoImageView];
     
@@ -43,7 +44,7 @@
     CGFloat usernameW = [UILabel getWidthWithTitle:userName
                                               font:usernameFont];
     CGFloat usernameH = [UILabel getHeightWithTitle:userName font:usernameFont];
-    UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.width - usernameW) * .5, logoImageView.y + logoHeight + 10, usernameW, usernameH)];
+    UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.width - usernameW) * .5, logoImageView.y + logoHeight + 5, usernameW, usernameH)];
     usernameLabel.text = userName;
     usernameLabel.textAlignment = NSTextAlignmentCenter;
     usernameLabel.font = usernameFont;
@@ -61,31 +62,56 @@
     [scrollView addSubview:totalRateLabel];
     
     // 总好评率视图
-    StarttAppraiseRateView *startRateView = [[StarttAppraiseRateView alloc] initWithFrame:CGRectMake((kScreenWidth - kHeartWidth * 5) * .5, totalRateLabel.y + totalRateH + 10, kHeartWidth * 5, kHeartHeight) goodRate:totalRate];
+    StarttAppraiseRateView *startRateView = [[StarttAppraiseRateView alloc] initWithFrame:CGRectMake((kScreenWidth - kHeartWidth * 5) * .5, totalRateLabel.y + totalRateH + 5, kHeartWidth * 5, kHeartHeight) goodRate:totalRate];
     [scrollView addSubview:startRateView];
     
-    // 设置视图
-    SettingView *settingView = [[SettingView alloc] initWithFrame:CGRectMake(0, startRateView.y + startRateView.height + 30, kScreenWidth, 100)];
-    [scrollView addSubview:settingView];
-    settingView.passwordItem.clickBlock = ^(void) {// 修改密码的block实现
+//    // 设置视图
+//    SettingView *settingView = [[SettingView alloc] initWithFrame:CGRectMake(0, startRateView.y + startRateView.height + 30, kScreenWidth, 100)];
+//    [scrollView addSubview:settingView];
+//    settingView.passwordItem.clickBlock = ^(void) {// 修改密码的block实现
+//        ModifyPasswordViewController *modifyVC = [[ModifyPasswordViewController alloc] init];
+//        [self.navigationController pushViewController:modifyVC animated:YES];
+//        
+//    };
+//    settingView.contactItem.clickBlock = ^(void) {// 联系客服的block实现
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"商服电话:81691580\n工作时间：9:00-19:00" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
+//        alertView.tag = 2333;
+//        [alertView show];
+//    };
+    
+    PersonCenterView *personView = [PersonCenterView new];
+    [self.view addSubview:personView];
+    [personView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.and.left.equalTo(self.view);
+        make.top.equalTo(startRateView.mas_bottom).offset(5);
+        make.height.equalTo(@235);
+    }];
+    personView.modifyBlock = ^(void) {
         ModifyPasswordViewController *modifyVC = [[ModifyPasswordViewController alloc] init];
         [self.navigationController pushViewController:modifyVC animated:YES];
-        
     };
-    settingView.contactItem.clickBlock = ^(void) {// 联系客服的block实现
+    personView.contactBlock = ^ (void) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"商服电话:81691580\n工作时间：9:00-19:00" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
         alertView.tag = 2333;
         [alertView show];
-        
-        
     };
     
+    
+    
     // 退出按钮
-    CGFloat margin = 40;
-    CGFloat btnH = 40;
-    TcLoginButton *logout = [[TcLoginButton alloc] initWithFrame:CGRectMake(margin, kScreenHeight - KTabBarHeight - 40 - btnH, kScreenWidth - margin * 2, btnH) title:@"退出登录" titleColor:[UIColor whiteColor] bgColor:[UIColor colorWithRed:83 / 255.0 green:83 / 255.0 blue:83 / 255.0 alpha:1.0]];
+//    CGFloat margin = 40;
+//    CGFloat btnH = 40;
+    TcLoginButton *logout = [[TcLoginButton alloc] initWithTitle:@"退出登录" titleColor:[UIColor whiteColor] bgColor:[UIColor colorWithRed:0.55 green:0.55 blue:0.55 alpha:1.00]];
     [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:logout];
+    [logout mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(personView.mas_bottom).offset(50);
+        make.left.equalTo(scrollView.mas_left).offset(40);
+//        make.right.equalTo(@-40);
+        make.width.equalTo(@(kScreenWidth - 80));
+//        make.right.equalTo(scrollView)
+        make.height.equalTo(@40);
+    }];
     
     
 }
@@ -120,11 +146,11 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 2333) {// 联系客服的弹窗
         if (buttonIndex == 1) {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",@"81691580"]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",@"81691580"]];
             [[UIApplication sharedApplication] openURL:url];
         }
     } else if (alertView.tag == 2334) { // 退出登录的弹窗
-        if (0 == buttonIndex) {// 点击确定
+        if (1 == buttonIndex) {// 点击确定
             // 删除用户的登录信息
             [[TcCourierInfoManager shareInstance] removeAllTcCourierInfo];
             
@@ -156,7 +182,7 @@
  */
 - (void)logout {
     
-    UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要退出登录吗" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要退出登录吗" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alertV.tag = 2334;
     [alertV show];
     

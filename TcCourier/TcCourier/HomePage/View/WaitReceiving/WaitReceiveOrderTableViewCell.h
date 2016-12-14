@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "OrderInfoModel.h"
 
+@protocol WaitReceiveOrderTableViewCellDelegate <NSObject>
+
+- (void)waitReceiverCellShowTipMessageWithTip:(NSString *)tip;
+
+@end
+
 @interface WaitReceiveOrderTableViewCell : UITableViewCell
+
+@property (nonatomic, assign) id<WaitReceiveOrderTableViewCellDelegate> delegate;
 
 - (void)setDataWithModel:(OrderInfoModel *)orderModel;
 

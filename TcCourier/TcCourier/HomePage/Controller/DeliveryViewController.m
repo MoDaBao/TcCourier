@@ -10,6 +10,8 @@
 #import "DeliveryTableViewCell.h"
 #import "FeHourGlass.h"
 #import "TipMessageView.h"
+#import "OrderDetailViewController.h"
+#import "DeliveryTimeOutTableViewCell.h"
 
 @interface DeliveryViewController ()<UITableViewDelegate, UITableViewDataSource, ShopButtonViewDelegate>
 
@@ -46,7 +48,7 @@
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (0 == [dict[@"status"] floatValue]) {
             
             [self.dataArray removeAllObjects];
@@ -162,15 +164,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OrderInfoModel *model = self.dataArray[indexPath.row];
-    NSString *reuseIdentifier = @"reuse";
-    DeliveryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell) {
-        cell = [[DeliveryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if ([model.is_timeout isEqualToString:@"1"]) {// 有超时赔付
+        NSString *reuseIdentifier = @"reuse";
+        DeliveryTimeOutTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        if (!cell) {
+            cell = [[DeliveryTimeOutTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        [cell setDataWithModel:model];
+        return cell;
+    } else {// 无超时赔付
+        NSString *reuse = @"reuse1";
+        DeliveryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
+        if (!cell) {
+            cell = [[DeliveryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        [cell setDataWithModel:model];
+        return cell;
     }
-    [cell setDataWithModel:model];
-    return cell;
+    
+    
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    OrderInfoModel *model = self.dataArray[indexPath.row];
+    OrderDetailViewController *orderVC = [[OrderDetailViewController alloc] init];
+    orderVC.orderNumber = model.order_number;
+    orderVC.orderStatus = @"配送中";
+    [self.navigationController pushViewController:orderVC animated:YES];
+}
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = kBGGary;

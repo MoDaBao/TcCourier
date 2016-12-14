@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *store_id;
 @property (nonatomic, copy) NSString *store_name;
+@property (nonatomic, copy) NSString *Purchasing;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *tel;
 @property (nonatomic, copy) NSString *longitudeG;

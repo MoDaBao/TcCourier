@@ -27,6 +27,9 @@
 
 #import "TcCourierInfoManager.h"
 
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <MAMapKit/MAMapKit.h>
+
 
 
 #endif /* PrefixHeader_pch */

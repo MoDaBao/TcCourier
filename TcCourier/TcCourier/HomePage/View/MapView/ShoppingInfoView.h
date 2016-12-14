@@ -10,4 +10,9 @@
 
 @interface ShoppingInfoView : UIView
 
+@property (nonatomic, assign) CGFloat height;// 视图自身的高度
+
+- (instancetype)initWithShopName:(NSString *)shopName tel:(NSString *)tel distance:(NSString *)distance address:(NSString *)address;
+
+
 @end

@@ -238,6 +238,7 @@
     OrderInfoModel *model = self.dataArray[indexPath.row];
     OrderDetailViewController *orderVC = [[OrderDetailViewController alloc] init];
     orderVC.orderNumber = model.order_number;
+    orderVC.orderStatus = @"已完成";
     [self.navigationController pushViewController:orderVC animated:YES];
     
 }

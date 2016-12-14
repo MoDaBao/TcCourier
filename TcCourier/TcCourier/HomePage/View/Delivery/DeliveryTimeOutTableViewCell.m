@@ -1,18 +1,19 @@
 //
-//  DeliveryTableViewCell.m
+//  DeliveryTimeOutTableViewCell.m
 //  TcCourier
 //
-//  Created by 莫大宝 on 2016/11/29.
+//  Created by 莫大宝 on 2016/12/14.
 //  Copyright © 2016年 dabao. All rights reserved.
 //
 
-#import "DeliveryTableViewCell.h"
+#import "DeliveryTimeOutTableViewCell.h"
 #import "TotalAmountAndPaymentView.h"
 #import "ReceiverAddressView.h"
 #import "RunFeeAndTiFeeView.h"
 #import "TimeOutView.h"
 
-@interface DeliveryTableViewCell ()
+@interface DeliveryTimeOutTableViewCell ()
+
 @property (nonatomic, assign) CGFloat margin;
 @property (nonatomic, strong) UIView *contentV;
 @property (nonatomic, strong) UILabel *orderNumberL;// 订单编号
@@ -21,15 +22,14 @@
 @property (nonatomic, strong) ReceiverAddressView *receiverAddressView;// 收货人地址
 @property (nonatomic, strong) RunFeeAndTiFeeView *runFeeAndTiFeeView;// 跑腿费和跑腿提成
 
+@property (nonatomic, strong) TimeOutView *timeOutView;// 超时赔付
+
 @property (nonatomic, strong) ShopButtonView *shopBtnView;// 店铺信息
-
-
-
-
 
 @end
 
-@implementation DeliveryTableViewCell
+@implementation DeliveryTimeOutTableViewCell
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -117,7 +117,7 @@
         _runFeeAndTiFeeView = [RunFeeAndTiFeeView new];
         [self.contentV addSubview:_runFeeAndTiFeeView];
         [_runFeeAndTiFeeView mas_makeConstraints:^(MASConstraintMaker *make) {
-             make.left.and.right.equalTo(self.contentV);
+            make.left.and.right.equalTo(self.contentV);
             make.top.equalTo(line3.mas_bottom);
             make.height.equalTo(@40);
         }];
@@ -131,18 +131,26 @@
             make.top.equalTo(_runFeeAndTiFeeView.mas_bottom);
             make.height.equalTo(@(sortaPixel));
         }];
-
+        
+        // 超时赔付
+        _timeOutView = [TimeOutView new];
+        [self.contentV addSubview:_timeOutView];
+        [_timeOutView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.equalTo(self.contentV);
+            make.top.equalTo(line4.mas_bottom);
+            make.height.equalTo(@40);
+        }];
         
         // 店铺信息
         _shopBtnView = [ShopButtonView new];
         [self.contentV addSubview:_shopBtnView];
         [_shopBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(self.contentV);
-            make.top.equalTo(line4.mas_bottom);
+            make.top.equalTo(_timeOutView.mas_bottom);
             make.height.equalTo(@40);
         }];
         
-//        _shopBtnView.backgroundColor = [UIColor yellowColor];
+//        _shopBtnView.backgroundColor = [UIColor orangeColor];
         
         
     }
@@ -159,12 +167,15 @@
     // 加载跑腿费和跑腿提成
     [_runFeeAndTiFeeView loadRunFee:orderModel.order_run_fee tiFee:orderModel.ti_run_fee];
     
+    // 超时赔付
+    [_timeOutView loadTimeOut:orderModel.timeout];
     
     // 店铺信息+配送按钮
     [_shopBtnView loadViewWithStoreInfoArray:orderModel.storeInfoArray];
     
     
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

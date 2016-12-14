@@ -12,5 +12,6 @@
 @interface OrderDetailViewController : UIViewController
 
 @property (nonatomic, copy) NSString *orderNumber;
+@property (nonatomic, copy) NSString *orderStatus;
 
 @end

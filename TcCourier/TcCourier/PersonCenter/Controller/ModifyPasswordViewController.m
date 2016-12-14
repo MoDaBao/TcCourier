@@ -44,9 +44,15 @@
     _repeatTF.tf.delegate = self;
     [self.view addSubview:_repeatTF];
     
-    TcLoginButton *modifyBtn = [[TcLoginButton alloc] initWithFrame:CGRectMake(40, _repeatTF.y + tfHeight + 60, kScreenWidth - 40 * 2, 40) title:@"修改密码" titleColor:[UIColor whiteColor] bgColor:kOrangeColor];
+    TcLoginButton *modifyBtn = [[TcLoginButton alloc] initWithTitle:@"修改密码" titleColor:[UIColor whiteColor] bgColor:kOrangeColor];
     [modifyBtn addTarget:self action:@selector(modifyPwd) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:modifyBtn];
+    [modifyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_repeatTF.mas_bottom).offset(50);
+        make.left.equalTo(@40);
+        make.right.equalTo(@-40);
+        make.height.equalTo(@40);
+    }];
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = backItem;

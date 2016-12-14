@@ -8,7 +8,11 @@
 
 #import "ReceiverAddressViewController.h"
 
+
 @interface ReceiverAddressViewController ()
+
+@property (nonatomic, strong) MAMapView *mapView;
+
 
 @end
 
@@ -18,7 +22,13 @@
 #pragma mark -----视图方法-----
 
 - (void)createView {
-    
+//    _mapView = [MAMapView new];
+//    [self.view addSubview:_mapView];
+//    [_mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.and.right.equalTo(self.view);
+//        make.top.equalTo(@(kNavigationBarHeight));
+//        make.bottom.equalTo(self.view);
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -36,9 +46,11 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = backItem;
     
+    [AMapServices sharedServices].apiKey = @"da19e16cdec56b6928db29d74dbd5ee8";
+    
     [self createView];
     
-    NSLog(@"address = %@ \n log = %@ \n lati = %@",_addressInfoModel.address, _addressInfoModel.longitudeG, _addressInfoModel.latitudeG);
+//    NSLog(@"address = %@ \n log = %@ \n lati = %@",_addressInfoModel.address, _addressInfoModel.longitudeG, _addressInfoModel.latitudeG);
     
 }
 

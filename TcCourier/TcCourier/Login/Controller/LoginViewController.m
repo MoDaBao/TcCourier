@@ -52,10 +52,14 @@
     logo.image = [UIImage imageNamed:@"avatar"];
     [self.view addSubview:logo];
     
-    _loginBtn = [[TcLoginButton alloc] initWithFrame:CGRectMake(contentMargin, contentV.y + contentV.height + 60, contentV.width, 40) title:@"登录" titleColor:[UIColor whiteColor] bgColor:kOrangeColor];
+    _loginBtn = [[TcLoginButton alloc] initWithTitle:@"登录" titleColor:[UIColor whiteColor] bgColor:kOrangeColor];
     [_loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_loginBtn];
-    
+    [_loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentV.mas_bottom).offset(50);
+        make.right.and.left.equalTo(contentV);
+        make.height.equalTo(@40);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

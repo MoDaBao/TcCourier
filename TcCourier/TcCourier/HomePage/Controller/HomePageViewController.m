@@ -104,13 +104,13 @@
     [self createView];
     
     // 测试按钮
-    UIButton *testBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    testBtn.frame = CGRectMake(100, 100, 100, 40);
-    [testBtn setTitle:@"test" forState:UIControlStateNormal];
-    [testBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:testBtn];
-    
-    [[TcCourierInfoManager shareInstance] saveTcCourierOnlineStatus:@"1"];
+//    UIButton *testBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    testBtn.frame = CGRectMake(100, 100, 100, 40);
+//    [testBtn setTitle:@"test" forState:UIControlStateNormal];
+//    [testBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:testBtn];
+//    
+//    [[TcCourierInfoManager shareInstance] saveTcCourierOnlineStatus:@"1"];
     
     
 

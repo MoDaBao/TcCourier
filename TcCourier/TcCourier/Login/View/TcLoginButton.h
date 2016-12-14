@@ -11,6 +11,6 @@
 @interface TcLoginButton : UIButton
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title titleColor:(UIColor *)titleColor bgColor:(UIColor *)bgColor;
-
+- (instancetype)initWithTitle:(NSString *)title titleColor:(UIColor *)titleColor bgColor:(UIColor *)bgColor;
 
 @end

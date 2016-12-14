@@ -18,7 +18,7 @@
  @param orderModel 订单模型
  @param index 当前cell的index值
  */
-- (void)setDataWithModel:(OrderInfoModel *)orderModel index:(NSInteger)index;
+- (void)setDataWithModel:(OrderInfoModel *)orderModel index:(NSInteger)index orderStatus:(NSString *)orderStatus;
 
 
 /**

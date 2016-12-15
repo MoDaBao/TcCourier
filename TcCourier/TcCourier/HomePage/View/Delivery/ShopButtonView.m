@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) NSArray *storeInfoArray;
 @property (nonatomic, strong) StoreInfoModel *store;
+@property (nonatomic, copy) NSString *orderNumber;
 
 @end
 
@@ -39,9 +40,10 @@
     return self;
 }
 
-- (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray {
+- (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray orderNumber:(NSString *)orderNumber {
     
     _storeInfoArray = storeInfoArray;
+    _orderNumber = orderNumber;
     
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
@@ -231,11 +233,12 @@
 
 // 跳转至地图页面
 - (void)addressBtn:(UIButton *)btn {
-    StoreInfoModel *store = _storeInfoArray[btn.tag - 2000];
+//    StoreInfoModel *store = _storeInfoArray[btn.tag - 2000];
     NSLog(@"跳转至地图页面显示商家地址");
     
     ShopAddressViewController *shopAddressVC = [[ShopAddressViewController alloc] init];
-    shopAddressVC.storeInfoModel = store;
+    shopAddressVC.orderNumber = _orderNumber;
+    shopAddressVC.index = btn.tag - 2000;
     
     AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;

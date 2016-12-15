@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrderInfoModel.h"
 
 @interface ReceiverAddressViewController : UIViewController
 
-@property (nonatomic, strong) AddressInfoModel *addressInfoModel;
+@property (nonatomic, copy) NSString *orderNumber;
 
 @end

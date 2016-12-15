@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSString *remark;
 @property (nonatomic, copy) NSString *orderStatus;
 @property (nonatomic, copy) NSString *order_id;
+@property (nonatomic, copy) NSString *lng;// 距离
 
 @property (nonatomic, strong) NSMutableArray *foodArray;
 

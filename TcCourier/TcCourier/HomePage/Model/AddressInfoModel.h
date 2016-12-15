@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString *longitudeG;
 @property (nonatomic, copy) NSString *latitudeG;
 @property (nonatomic, copy) NSString *detail_addr;
+@property (nonatomic, copy) NSString *lng;// 距离
 
 
 @end

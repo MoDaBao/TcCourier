@@ -122,7 +122,10 @@
         _height += margin + [UILabel getHeightByWidth:150 title:addressL.text font:addressL.font] + margin;
         
         
-        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+//        [self mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.equalTo(@(_height));
+//        }];
+        [self mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(_height));
         }];
         

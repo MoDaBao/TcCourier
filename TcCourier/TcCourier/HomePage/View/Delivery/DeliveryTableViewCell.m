@@ -142,7 +142,7 @@
             make.height.equalTo(@40);
         }];
         
-//        _shopBtnView.backgroundColor = [UIColor yellowColor];
+//        _shopBtnView.backgroundColor = [
         
         
     }
@@ -155,13 +155,13 @@
     // 加载订单总额和支付方式
     [_totalAndPaymentView loadTotalAmount:orderModel.order_price payment:orderModel.payment];
     // 加载收货人地址
-    [_receiverAddressView loadReceiverAddress:orderModel.addressInfo];
+    [_receiverAddressView loadReceiverAddress:orderModel.addressInfo orderNumber:orderModel.order_number];
     // 加载跑腿费和跑腿提成
     [_runFeeAndTiFeeView loadRunFee:orderModel.order_run_fee tiFee:orderModel.ti_run_fee];
     
     
     // 店铺信息+配送按钮
-    [_shopBtnView loadViewWithStoreInfoArray:orderModel.storeInfoArray];
+    [_shopBtnView loadViewWithStoreInfoArray:orderModel.storeInfoArray orderNumber:orderModel.order_number];
     
     
 }

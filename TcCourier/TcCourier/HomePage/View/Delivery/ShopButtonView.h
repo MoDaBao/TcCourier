@@ -20,6 +20,9 @@
 
 @property (nonatomic, assign) id<ShopButtonViewDelegate> delegate;
 
-- (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray;
+- (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray orderNumber:(NSString *)orderNumber;
 
 @end
+
+
+

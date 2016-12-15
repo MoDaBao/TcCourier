@@ -39,6 +39,16 @@ Copyright © 2014 AutoNavi. All Rights Reserved.
 Copyright © 2014 AutoNavi. All Rights Reserved.
 
 
+## AMapNavi
+
+Copyright © 2014 AutoNavi. All Rights Reserved.
+
+
+## AMapSearch
+
+Copyright © 2014 AutoNavi. All Rights Reserved.
+
+
 ## Masonry
 
 Copyright (c) 2011-2012 Masonry Team - https://github.com/Masonry

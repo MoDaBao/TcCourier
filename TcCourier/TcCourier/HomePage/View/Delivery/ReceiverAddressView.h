@@ -11,6 +11,6 @@
 
 @interface ReceiverAddressView : UIView
 
-- (void)loadReceiverAddress:(AddressInfoModel *)addressInfoModel;
+- (void)loadReceiverAddress:(AddressInfoModel *)addressInfoModel orderNumber:(NSString *)orderNumber;
 
 @end

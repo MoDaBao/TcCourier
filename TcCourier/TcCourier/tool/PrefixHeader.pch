@@ -27,9 +27,12 @@
 
 #import "TcCourierInfoManager.h"
 
+// 高德SDK
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <MAMapKit/MAMapKit.h>
-
+#import <AMapNaviKit/AMapNaviKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 
 
 #endif /* PrefixHeader_pch */

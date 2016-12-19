@@ -105,12 +105,13 @@
     [logout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:logout];
     [logout mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(personView.mas_bottom).offset(50);
+//        make.top.equalTo(personView.mas_bottom).offset(45 * kScaleForHeight);
         make.left.equalTo(scrollView.mas_left).offset(40);
 //        make.right.equalTo(@-40);
         make.width.equalTo(@(kScreenWidth - 80));
 //        make.right.equalTo(scrollView)
         make.height.equalTo(@40);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-64);
     }];
     
     

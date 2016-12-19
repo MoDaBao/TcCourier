@@ -14,7 +14,7 @@
 
 @interface ReceiverAddressView ()
 
-//@property (nonatomic, strong) AddressInfoModel *addressInfoModel;
+@property (nonatomic, strong) AddressInfoModel *addressInfoModel;
 @property (nonatomic, copy) NSString *orderNumber;
 
 @end
@@ -31,7 +31,8 @@
 
 - (void)loadReceiverAddress:(AddressInfoModel *)addressInfoModel orderNumber:(NSString *)orderNumber {
 
-    _orderNumber = orderNumber;
+//    _orderNumber = orderNumber;
+    _addressInfoModel = addressInfoModel;
 
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
@@ -79,7 +80,8 @@
 
 - (void)click:(UIButton *)btn {
     ReceiverAddressViewController *receiverVC = [[ReceiverAddressViewController alloc] init];
-    receiverVC.orderNumber = _orderNumber;
+//    receiverVC.orderNumber = _orderNumber;
+    receiverVC.addressInfoModel = _addressInfoModel;
     
     AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;

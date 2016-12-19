@@ -8,6 +8,12 @@
 
 #import "ShoppingInfoView.h"
 
+@interface ShoppingInfoView ()
+
+@property (nonatomic, copy) NSString *phoneNumber;
+
+@end
+
 @implementation ShoppingInfoView
 
 /*
@@ -21,7 +27,9 @@
 
 - (instancetype)initWithShopName:(NSString *)shopName tel:(NSString *)tel distance:(NSString *)distance address:(NSString *)address {
     if (self = [super init]) {
-        _height = 0;
+        _selfheight = 0;
+        
+        _phoneNumber = tel;
         
         self.backgroundColor = [UIColor whiteColor];
         CGFloat margin = 10;
@@ -42,11 +50,11 @@
         shopNameL.textColor = [UIColor orangeColor];
         shopNameL.text = shopName;
         [shopNameL mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@30);
+            make.left.equalTo(@(30 * kScaleForWidth));
             make.top.equalTo(@(margin));
             
         }];
-        _height += margin + [UILabel getHeightWithTitle:shopNameL.text font:shopNameL.font];
+        _selfheight += margin + [UILabel getHeightWithTitle:shopNameL.text font:shopNameL.font];
         
         // 商家电话
         UIFont *smallFont = [UIFont systemFontOfSize:13];
@@ -58,18 +66,18 @@
         }];
         phoneL.font = smallFont;
         phoneL.text = [NSString stringWithFormat:@"商家电话:%@",tel];
-        _height += margin + [UILabel getHeightWithTitle:phoneL.text font:phoneL.font];
+        _selfheight += margin + [UILabel getHeightWithTitle:phoneL.text font:phoneL.font];
         
         // 商家距离
-        UILabel *disL = [UILabel new];
-        [self addSubview:disL];
-        [disL mas_makeConstraints:^(MASConstraintMaker *make) {
+        _disL = [UILabel new];
+        [self addSubview:_disL];
+        [_disL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(shopNameL);
             make.top.equalTo(phoneL.mas_bottom).with.offset(margin);
         }];
-        disL.text = [NSString stringWithFormat:@"商家距离:%@米",distance];
-        disL.font = smallFont;
-        _height += margin + [UILabel getHeightWithTitle:disL.text font:disL.font];
+        _disL.text = [NSString stringWithFormat:@"商家距离:%@米",distance];
+        _disL.font = smallFont;
+        _selfheight += margin + [UILabel getHeightWithTitle:_disL.text font:_disL.font];
         
         // 商家地址
         UILabel *addressTitle = [UILabel new];
@@ -78,7 +86,7 @@
         addressTitle.font = smallFont;
         [addressTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(shopNameL);
-            make.top.equalTo(disL.mas_bottom).with.offset(margin);
+            make.top.equalTo(_disL.mas_bottom).with.offset(margin);
 //            make.width.equalTo(@(kScreenWidth * 3 / 5));
             make.width.equalTo(@([UILabel getWidthWithTitle:addressTitle.text font:addressTitle.font]));
         }];
@@ -90,7 +98,7 @@
         [phoneBtn setBackgroundImage:[UIImage imageNamed:@"dianhua"] forState:UIControlStateNormal];
         [phoneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(phoneL);
-            make.right.equalTo(@-40);
+            make.right.equalTo(@(-30 * kScaleForWidth));
             make.width.and.height.equalTo(@35);
         }];
         [phoneBtn addTarget:self action:@selector(phone) forControlEvents:UIControlEventTouchUpInside];
@@ -119,14 +127,14 @@
             make.left.equalTo(addressTitle.mas_right);
         }];
         
-        _height += margin + [UILabel getHeightByWidth:150 title:addressL.text font:addressL.font] + margin;
+        _selfheight += margin + [UILabel getHeightByWidth:150 title:addressL.text font:addressL.font] + margin;
         
         
 //        [self mas_updateConstraints:^(MASConstraintMaker *make) {
 //            make.height.equalTo(@(_height));
 //        }];
         [self mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@(_height));
+            make.height.equalTo(@(_selfheight));
         }];
         
     }
@@ -136,6 +144,15 @@
 // 拨号
 - (void)phone {
     NSLog(@"bohao");
+    if (_phoneNumber.length > 0) {
+        NSString *num = [[NSString alloc] initWithFormat:@"telprompt://%@",self.phoneNumber]; //而这个方法则打电话前先弹框  是否打电话
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]]; //拨号
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前商家未提供电话号码" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+    
+
 }
 
 // 导航

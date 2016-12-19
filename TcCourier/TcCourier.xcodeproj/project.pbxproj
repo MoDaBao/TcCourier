@@ -58,6 +58,7 @@
 		E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856881DAF67080057D66F /* HomePageViewController.m */; };
 		E7E856981DAF67080057D66F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E8568E1DAF67080057D66F /* LoginViewController.m */; };
 		E7E856991DAF67080057D66F /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E856941DAF67080057D66F /* PersonCenterViewController.m */; };
+		E7ECF6B71E078A3F00CAAE83 /* SelectableOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ECF6B61E078A3F00CAAE83 /* SelectableOverlay.m */; };
 		E7FAAA711DB481F500B20084 /* UILabel+LabelHeightAndWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */; };
 		E7FB2BCA1DB5F44D0045E871 /* TcLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BC91DB5F44D0045E871 /* TcLoginButton.m */; };
 		E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2BCF1DB5F9160045E871 /* TodayCountViewController.m */; };
@@ -202,6 +203,8 @@
 		E7E8568E1DAF67080057D66F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E7E856931DAF67080057D66F /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
 		E7E856941DAF67080057D66F /* PersonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterViewController.m; sourceTree = "<group>"; };
+		E7ECF6B51E078A3F00CAAE83 /* SelectableOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableOverlay.h; sourceTree = "<group>"; };
+		E7ECF6B61E078A3F00CAAE83 /* SelectableOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableOverlay.m; sourceTree = "<group>"; };
 		E7FAAA6F1DB481F500B20084 /* UILabel+LabelHeightAndWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LabelHeightAndWidth.h"; sourceTree = "<group>"; };
 		E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LabelHeightAndWidth.m"; sourceTree = "<group>"; };
 		E7FB2BC81DB5F44D0045E871 /* TcLoginButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TcLoginButton.h; sourceTree = "<group>"; };
@@ -516,6 +519,8 @@
 				E7729E4F1DDC041900BF5B69 /* AddressInfoModel.m */,
 				E75A77A51DE2C70800E344EE /* FoodModel.h */,
 				E75A77A61DE2C70800E344EE /* FoodModel.m */,
+				E7ECF6B51E078A3F00CAAE83 /* SelectableOverlay.h */,
+				E7ECF6B61E078A3F00CAAE83 /* SelectableOverlay.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -708,6 +713,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = H33K3H36N8;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					E7E8564B1DAF56700057D66F = {
 						CreatedOnToolsVersion = 8.0;
@@ -837,6 +847,7 @@
 				E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */,
 				E712D1121E01409F005D63C9 /* DeliveryTimeOutTableViewCell.m in Sources */,
 				E7FB7FA91DD19E640023148C /* UIScrollView+MJRefresh.m in Sources */,
+				E7ECF6B71E078A3F00CAAE83 /* SelectableOverlay.m in Sources */,
 				E7CCD2ED1DED7B6700B24256 /* ReceiverAddressView.m in Sources */,
 				E7FB7FA81DD19E640023148C /* UIScrollView+MJExtension.m in Sources */,
 				E7E856801DAF62B70057D66F /* MainTabBarController.m in Sources */,

@@ -177,6 +177,28 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)saveLatitude:(NSString *)latitude {
+    [[NSUserDefaults standardUserDefaults] setObject:latitude forKey:@"latitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (NSString *)getLatitude {
+    NSString *latitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"latitude"];
+    if (!latitude) {
+        return @" ";
+    }
+    return latitude;
+}
 
+- (void)saveLongitude:(NSString *)longitude {
+    [[NSUserDefaults standardUserDefaults] setObject:longitude forKey:@"longitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (NSString *)getLongitude {
+    NSString *longitude = [[NSUserDefaults standardUserDefaults] objectForKey:@"longitude"];
+    if (!longitude) {
+        return @" ";
+    }
+    return longitude;
+}
 
 @end

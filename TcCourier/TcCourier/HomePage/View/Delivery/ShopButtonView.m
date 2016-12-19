@@ -237,8 +237,9 @@
     NSLog(@"跳转至地图页面显示商家地址");
     
     ShopAddressViewController *shopAddressVC = [[ShopAddressViewController alloc] init];
-    shopAddressVC.orderNumber = _orderNumber;
-    shopAddressVC.index = btn.tag - 2000;
+//    shopAddressVC.orderNumber = _orderNumber;
+//    shopAddressVC.index = btn.tag - 2000;
+    shopAddressVC.storeInfoModel = self.storeInfoArray[btn.tag - 2000];
     
     AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;

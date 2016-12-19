@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreInfoModel.h"
 
 @interface ShopAddressViewController : UIViewController
-
-@property (nonatomic, copy) NSString *orderNumber;
-@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) StoreInfoModel *storeInfoModel;
+//@property (nonatomic, copy) NSString *orderNumber;
+//@property (nonatomic, assign) NSInteger index;
 
 @end

@@ -14,10 +14,47 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) AMapLocationManager *locationManager;
+
 @end
 
 @implementation AppDelegate
 
+#pragma mark -----高德-----
+
+- (void)setLocationManager {
+    
+    // 定位
+    self.locationManager = [[AMapLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
+    //设置允许后台定位参数，保持不会被系统挂起
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    [self.locationManager setAllowsBackgroundLocationUpdates:YES];//iOS9(含)以上系统需设置
+    [self.locationManager startUpdatingLocation];// 开启持续定位
+    
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    
+    //开始定位
+//    [self.locationManager startUpdatingLocation];
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error {
+    //定位错误
+    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location {
+    //定位结果
+//    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    
+    [[TcCourierInfoManager shareInstance] saveLatitude:[NSString stringWithFormat:@"%f",location.coordinate.latitude]];
+    [[TcCourierInfoManager shareInstance] saveLongitude:[NSString stringWithFormat:@"%f",location.coordinate.longitude]];
+}
+
+
+#pragma mark -----AppDelegate方法-----
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -29,6 +66,9 @@
     MainTabBarController *mainTabVC = [[MainTabBarController alloc] init];
     self.window.rootViewController = mainTabVC;
     
+    // 设置高德SDK的key
+    [AMapServices sharedServices].apiKey = @"da19e16cdec56b6928db29d74dbd5ee8";
+    [self setLocationManager];
     
     [self.window makeKeyAndVisible];
     return YES;

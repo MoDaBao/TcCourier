@@ -80,4 +80,10 @@
 - (void)deleteScore;
 
 
+- (void)saveLatitude:(NSString *)latitude;
+- (NSString *)getLatitude;
+
+- (void)saveLongitude:(NSString *)longitude;
+- (NSString *)getLongitude;
+
 @end

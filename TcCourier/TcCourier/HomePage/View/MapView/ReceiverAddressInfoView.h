@@ -10,4 +10,10 @@
 
 @interface ReceiverAddressInfoView : UIView
 
+@property (nonatomic, assign) CGFloat selfheight;// 视图自身的高度
+@property (nonatomic, strong) UILabel *disL;
+
+- (instancetype)initWithReceiverName:(NSString *)receiverName tel:(NSString *)tel distance:(NSString *)distance address:(NSString *)address;
+
+
 @end

@@ -11,6 +11,9 @@
 @interface ReceiverAddressInfoView ()
 
 @property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, copy) NSString *endlatitude;
+@property (nonatomic, copy) NSString *endlongitude;
+@property (nonatomic, copy) NSString *address;
 
 @end
 
@@ -24,11 +27,14 @@
 }
 */
 
-- (instancetype)initWithReceiverName:(NSString *)receiverName tel:(NSString *)tel distance:(NSString *)distance address:(NSString *)address {
+- (instancetype)initWithReceiverName:(NSString *)receiverName tel:(NSString *)tel distance:(NSString *)distance address:(NSString *)address latitude:(NSString *)latitude longitude:(NSString *)longitude {
     if (self = [super init]) {
         _selfheight = 0;
         
         _phoneNumber = tel;
+        _endlatitude = latitude;
+        _endlongitude = longitude;
+        _address = address;
         
         self.backgroundColor = [UIColor whiteColor];
         CGFloat margin = 10;
@@ -151,6 +157,14 @@
 // 导航
 - (void)navigate {
     NSLog(@"daohang");
+    NSString *urlOfSource = [@"applicationName" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [NSString stringWithFormat:@"iosamap://path?sourceApplication=%@&backScheme=TcCourier&slat=%@&slon=%@&sname=%@&sid=B001&dlat=%@&dlon=%@&dname=%@&did=B002&dev=0&m=3&t=0", urlOfSource, [[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], @"当前位置", _endlatitude, _endlongitude, _address];
+    if ([[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]]) {
+        
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先安装高德地图" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 

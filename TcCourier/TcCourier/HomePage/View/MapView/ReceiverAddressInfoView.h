@@ -13,7 +13,7 @@
 @property (nonatomic, assign) CGFloat selfheight;// 视图自身的高度
 @property (nonatomic, strong) UILabel *disL;
 
-- (instancetype)initWithReceiverName:(NSString *)receiverName tel:(NSString *)tel distance:(NSString *)distance address:(NSString *)address;
+- (instancetype)initWithReceiverName:(NSString *)receiverName tel:(NSString *)tel distance:(NSString *)distance address:(NSString *)address latitude:(NSString *)latitude longitude:(NSString *)longitude;
 
 
 @end

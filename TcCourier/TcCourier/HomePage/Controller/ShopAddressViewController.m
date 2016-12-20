@@ -89,7 +89,7 @@
 
 - (void)createView {
     
-    _shopView = [[ShoppingInfoView alloc] initWithShopName:_storeInfoModel.store_name tel:_storeInfoModel.tel distance:@"-" address:_storeInfoModel.address];
+    _shopView = [[ShoppingInfoView alloc] initWithShopName:_storeInfoModel.store_name tel:_storeInfoModel.tel distance:@"-" address:_storeInfoModel.address latitude:_storeInfoModel.latitudeG longitude:_storeInfoModel.longitudeG];
     [self.view addSubview:_shopView];
     [_shopView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.equalTo(self.view);
@@ -99,9 +99,10 @@
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - _shopView.selfheight)];
     [self.view addSubview:_mapView];
     _mapView.delegate = self;
+    _mapView.showsUserLocation = YES;
+    _mapView.userTrackingMode = MAUserTrackingModeFollow;
     // 把地图中心点设为路径规划的起点
-    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake(self.latitude.floatValue, self.longitude.floatValue)];
-    
+//    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake(self.latitude.floatValue, self.longitude.floatValue)];
     
     //路径规划
     _driveManager = [[AMapNaviDriveManager alloc] init];

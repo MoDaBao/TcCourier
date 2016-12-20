@@ -94,7 +94,7 @@
 #pragma mark -----视图方法-----
 
 - (void)createView {
-    _receiverInfoView = [[ReceiverAddressInfoView alloc] initWithReceiverName:_addressInfoModel.name tel:_addressInfoModel.mobile distance:@"-" address:[NSString stringWithFormat:@"%@%@",_addressInfoModel.address, _addressInfoModel.detail_addr]];
+    _receiverInfoView = [[ReceiverAddressInfoView alloc] initWithReceiverName:_addressInfoModel.name tel:_addressInfoModel.mobile distance:@"-" address:[NSString stringWithFormat:@"%@%@",_addressInfoModel.address, _addressInfoModel.detail_addr] latitude:self.latitude longitude:self.longitude];
     [self.view addSubview:_receiverInfoView];
     [_receiverInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.equalTo(self.view);

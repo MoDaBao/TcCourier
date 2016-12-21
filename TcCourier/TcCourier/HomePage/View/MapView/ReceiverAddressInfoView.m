@@ -157,10 +157,19 @@
 // 导航
 - (void)navigate {
     NSLog(@"daohang");
-    NSString *urlOfSource = [@"applicationName" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *urlString = [NSString stringWithFormat:@"iosamap://path?sourceApplication=%@&backScheme=TcCourier&slat=%@&slon=%@&sname=%@&sid=B001&dlat=%@&dlon=%@&dname=%@&did=B002&dev=0&m=3&t=0", urlOfSource, [[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], @"当前位置", _endlatitude, _endlongitude, _address];
-    if ([[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]]) {
-        
+    NSString *urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=TcCourier&sid=BGVIS1&slat=%@&slon=%@&sname=我的位置&did=BGVIS2&dlat=%@&dlon=%@&dname=%@&dev=0&t=0",[[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], _endlatitude, _endlongitude, _address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *myLocationScheme = [NSURL URLWithString:urlString];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:myLocationScheme]) {
+        if ([[UIDevice currentDevice].systemVersion integerValue] >= 10) {
+            //iOS10以后,使用新API
+            [[UIApplication sharedApplication] openURL:myLocationScheme options:@{} completionHandler:^(BOOL success) {
+                NSLog(@"scheme调用结束");
+            }];
+        } else {
+            //iOS10以前,使用旧API
+            [[UIApplication sharedApplication] openURL:myLocationScheme];
+        }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先安装高德地图" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];

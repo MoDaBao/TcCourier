@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^BTNClickBlock)(void);
+
+
 @interface TodayInfoItemView : UIView
 
-
 //@property (nonatomic, strong) UILabel *valueLabel;
+@property (nonatomic, copy) BTNClickBlock btnClickBlock;
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title value:(NSString *)value;
 

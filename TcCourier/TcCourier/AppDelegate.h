@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AppDelegateSetAddressDelegate <NSObject>
+
+- (void)setAddress:(NSString *)address;
+
+@end
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, assign) id<AppDelegateSetAddressDelegate> addressDelegate;
 
 
 @end

@@ -8,6 +8,12 @@
 
 #import "TodayInfoItemVIew.h"
 
+@interface TodayInfoItemView ()
+
+@property (nonatomic, copy) NSString *pd;
+
+@end
+
 @implementation TodayInfoItemView
 
 /*
@@ -45,8 +51,34 @@
         valueLabel.textColor = [UIColor colorWithRed:205 / 255.0 green:36 / 255.0 blue:29 / 255.0 alpha:1.0];
         [self addSubview:valueLabel];
         
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = self.bounds;
+        [self addSubview:btn];
+        [btn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     return self;
+}
+
+- (void)click {
+    _pd = [NSString stringWithFormat:@"%ld",self.tag - 4000];
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pd=%@&pid=%@",@"pdastatisticalinfo", @"pda", _pd, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdastatisticalinfo", @"core":@"pda", @"pd":_pd, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+    
 }
 
 @end

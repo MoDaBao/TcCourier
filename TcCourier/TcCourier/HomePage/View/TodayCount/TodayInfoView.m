@@ -26,19 +26,7 @@
 }
 */
 
-//- (NSMutableArray *)dataArray {
-//    if (!_dataArray) {
-//        self.dataArray = [NSMutableArray array];
-////        [_dataArray addObject:@"今日有效单"];
-////        [_dataArray addObject:@"今日里程"];
-////        [_dataArray addObject:@"在线支付跑腿费"];
-////        [_dataArray addObject:@"货到付款跑腿费"];
-////        [_dataArray addObject:@"在线支付物品费"];
-////        [_dataArray addObject:@"货到付款物品费"];
-//        
-//    }
-//    return _dataArray;
-//}
+
 
 - (instancetype)initWithFrame:(CGRect)frame dataArray:(NSMutableArray *)dataArray {
     if (self = [super initWithFrame:frame]) {
@@ -63,6 +51,7 @@
             NSInteger col = i % totalColumn;
             TodayInfoItemView *view = [[TodayInfoItemView alloc] initWithFrame:CGRectMake(horizontalMargin + col * width, row * height, width, height) title:[self.dataArray[i] allKeys].firstObject value:[self.dataArray[i] allValues].firstObject];
 //            NSLog(@"%ld",(long)i);
+            view.tag = 4000 + i;
             [self addSubview:view];
         }
         
@@ -98,5 +87,10 @@
     }
     return self;
 }
+
+
+
+
+
 
 @end

@@ -117,6 +117,16 @@
 }
 
 
+#pragma mark -----Appdelegate代理方法----
+
+- (void)setAddress:(NSString *)address {
+    if (self.isWork == YES) {
+        self.courierAddress.text = address;
+    }
+    
+}
+
+
 #pragma mark -----代理方法-----
 
 /**

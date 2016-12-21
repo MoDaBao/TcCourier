@@ -9,6 +9,7 @@
 #import "MainTabBarController.h"
 #import "MainTabBar.h"
 #import "MainNavigationController.h"
+#import "AppDelegate.h"
 
 
 @interface MainTabBarController ()<MainTabBarDelegate>
@@ -60,7 +61,8 @@
 
     HomePageViewController *homeVC = [[HomePageViewController alloc] init];
     self.homeVc = homeVC;
-    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.addressDelegate = homeVC;
     
     PersonCenterViewController *personVC = [[PersonCenterViewController alloc]init];
     self.personVC = personVC;    

@@ -165,15 +165,8 @@
 - (void)navigate {
     NSLog(@"daohang");
     
-//iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=39.92848272&slon=116.39560823&sname=A&did=BGVIS2&dlat=39.98848272&dlon=116.47560823&dname=B&dev=0&t=0
-
     
-//    NSString *urlOfSource = [@"TcCourier" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    NSString *urlString = [NSString stringWithFormat:@"iosamap://path?sourceApplication=%@&backScheme=TcCourier&slat=%@&slon=%@&sname=%@&sid=B001&dlat=%@&dlon=%@&dname=%@&did=B002&dev=0&m=3&t=0", @"TcCourier", [[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], @"当前位置", _endlatitude, _endlongitude, _address];
-    
-//    iosamap://path?sourceApplication=%@&sid=BGVIS1&slat=%f&slon=%f&sname=我的位置&did=BGVIS2&dlat=%f&dlon=%f&dname=%@&dev=0&m=0&t=0
     NSString *urlString = [[NSString stringWithFormat:@"iosamap://path?sourceApplication=TcCourier&sid=BGVIS1&slat=%@&slon=%@&sname=我的位置&did=BGVIS2&dlat=%@&dlon=%@&dname=%@&dev=0&t=0",[[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], _endlatitude, _endlongitude, _address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    NSString *urlString = @"iosamap://path?sourceApplication=TcCourier&sid=BGVIS1&slat=39.92848272&slon=116.39560823&sname=A&did=BGVIS2&dlat=39.98848272&dlon=116.47560823&dname=B&dev=0&t=0";
     NSURL *myLocationScheme = [NSURL URLWithString:urlString];
 
     if ([[UIApplication sharedApplication] canOpenURL:myLocationScheme]) {

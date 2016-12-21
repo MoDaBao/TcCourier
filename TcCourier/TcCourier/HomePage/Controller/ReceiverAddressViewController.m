@@ -94,7 +94,7 @@
 #pragma mark -----视图方法-----
 
 - (void)createView {
-    _receiverInfoView = [[ReceiverAddressInfoView alloc] initWithReceiverName:_addressInfoModel.name tel:_addressInfoModel.mobile distance:@"-" address:[NSString stringWithFormat:@"%@%@",_addressInfoModel.address, _addressInfoModel.detail_addr] latitude:self.latitude longitude:self.longitude];
+    _receiverInfoView = [[ReceiverAddressInfoView alloc] initWithReceiverName:_addressInfoModel.name tel:_addressInfoModel.mobile distance:@"-" address:[NSString stringWithFormat:@"%@%@",_addressInfoModel.address, _addressInfoModel.detail_addr] latitude:_addressInfoModel.latitudeG longitude:_addressInfoModel.longitudeG];
     [self.view addSubview:_receiverInfoView];
     [_receiverInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.equalTo(self.view);
@@ -103,9 +103,11 @@
     
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kScreenWidth, kScreenHeight - kNavigationBarHeight - _receiverInfoView.selfheight)];
     [self.view addSubview:_mapView];
+    _mapView.showsUserLocation = YES;
+    _mapView.userTrackingMode = MAUserTrackingModeFollow;
     _mapView.delegate = self;
     // 把地图中心点设为路径规划的起点
-    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake(self.latitude.floatValue, self.longitude.floatValue)];
+//    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake(self.latitude.floatValue, self.longitude.floatValue)];
     
     
     //路径规划

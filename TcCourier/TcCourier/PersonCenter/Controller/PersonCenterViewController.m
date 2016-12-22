@@ -16,13 +16,54 @@
 
 @interface PersonCenterViewController ()<UIAlertViewDelegate>
 
+@property (nonatomic, copy) NSString *score;
+@property (nonatomic, copy) NSString *ordercount;
+@property (nonatomic, copy) NSString *ordertimeout;
+@property (nonatomic, strong) NSString *timeout;
+           
 @end
 
 @implementation PersonCenterViewController
 
+
+#pragma mark-----网络请求-----
+
+- (void)requestData {
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@",@"pdainfo", @"pda", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdainfo", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {
+            NSDictionary *dataDic = dict[@"data"][@"pda"];
+            _score = dataDic[@"score"];
+            _ordercount = dataDic[@"ordercount"];
+            _ordertimeout = dataDic[@"ordertimeout"];
+            _timeout = dataDic[@"timeout"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self createView];
+            });
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+}
+
+
 #pragma mark -----视图方法-----
 
 - (void)createView {
+    
+    
+    for (UIView *v in self.view.subviews) {
+        [v removeFromSuperview];
+    }
+    
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - KTabBarHeight)];
     scrollView.contentSize = CGSizeMake(scrollView.width, scrollView.height);
@@ -51,7 +92,7 @@
     [scrollView addSubview:usernameLabel];
     
     // 总好评率
-    CGFloat totalRate = [[TcCourierInfoManager shareInstance] getScore].floatValue / 5.0;// 好评率
+    CGFloat totalRate = _score.floatValue / 5.0;// 好评率
     NSString *totalRateStr = [NSString stringWithFormat:@"总好评率%%%02.0f",totalRate * 100];
     UIFont *totalRateFont = [UIFont systemFontOfSize:13];
     CGFloat totalRateW = [UILabel getWidthWithTitle:totalRateStr font:totalRateFont];
@@ -79,7 +120,7 @@
 //        [alertView show];
 //    };
     
-    PersonCenterView *personView = [PersonCenterView new];
+    PersonCenterView *personView = [[PersonCenterView alloc] initWithOrderCount:_ordercount ordertimeout:_ordertimeout timeout:_timeout];
     [self.view addSubview:personView];
     [personView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.and.left.equalTo(self.view);
@@ -111,7 +152,7 @@
         make.width.equalTo(@(kScreenWidth - 80));
 //        make.right.equalTo(scrollView)
         make.height.equalTo(@40);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-64);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-80 * kScaleForHeight);
     }];
     
     
@@ -125,7 +166,7 @@
     for (UIView *view in self.view.subviews) {
         [view removeFromSuperview];
     }
-    [self createView];
+    [self requestData];
     
 }
 

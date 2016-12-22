@@ -27,7 +27,7 @@
 }
 */
 
-- (instancetype)init {
+- (instancetype)initWithOrderCount:(NSString *)orderCount ordertimeout:(NSString *)ordertimeout timeout:(NSString *)timeout {
     if (self = [super init]) {
         
         self.backgroundColor = [UIColor whiteColor];
@@ -62,7 +62,7 @@
             make.centerX.equalTo(self);
         }];
         _effectiveOrderL.font = kFont14;
-        _effectiveOrderL.text = @"123";
+        _effectiveOrderL.text = [NSString stringWithFormat:@"%@单",orderCount];
         
         
         // 分割线1
@@ -105,7 +105,7 @@
             make.centerX.equalTo(timeoutCount);
         }];
         _timeoutCountL.font = kFont14;
-        _timeoutCountL.text = @"123";
+        _timeoutCountL.text = [NSString stringWithFormat:@"%@单",ordertimeout];
         
         // 超时赔付百分比-title
         UILabel *timeoutPercentage = [UILabel new];
@@ -125,7 +125,7 @@
             make.top.equalTo(_timeoutCountL);
         }];
         _timeoutPercentageL.font = kFont14;
-        _timeoutPercentageL.text = @"2333";
+        _timeoutPercentageL.text = [NSString stringWithFormat:@"%.2f%%",timeout.floatValue * 100];
         
         
         // 分割线

@@ -7,10 +7,14 @@
 //
 
 #import "TodayInfoItemVIew.h"
+#import "TodayCountViewController.h"
+#import "TodayCountDetailViewController.h"
+#import "TodayCountModel.h"
 
 @interface TodayInfoItemView ()
 
 @property (nonatomic, copy) NSString *pd;
+@property (nonatomic, copy) NSString *title;
 
 @end
 
@@ -26,6 +30,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title value:(NSString *)value {
     if (self = [super initWithFrame:frame]) {
+        
+        _title = title;
+        
 //        self.backgroundColor = [UIColor orangeColor];
         CGFloat centerY = frame.size.height * .5;
         UIFont *font = [UIFont systemFontOfSize:16];
@@ -61,7 +68,7 @@
 }
 
 - (void)click {
-    _pd = [NSString stringWithFormat:@"%ld",self.tag - 4000];
+    _pd = [NSString stringWithFormat:@"%ld",self.tag - 4000 > 0 ? self.tag - 4000 : 1];
     NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pd=%@&pid=%@",@"pdastatisticalinfo", @"pda", _pd, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
     NSDictionary *dic = @{@"api":@"pdastatisticalinfo", @"core":@"pda", @"pd":_pd, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
@@ -72,7 +79,20 @@
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"dict = %@",dict);
         if (0 == [dict[@"status"] floatValue]) {
+            NSMutableArray *dataArray = [NSMutableArray array];
+            for (NSDictionary *d in dict[@"data"][@"orders"]) {
+                TodayCountModel *model = [[TodayCountModel alloc] init];
+                [model setValuesForKeysWithDictionary:d];
+                [dataArray addObject:model];
+            }
+            
+            TodayCountViewController *todayVC = (TodayCountViewController *)[UIViewController getCurrentViewController];
+            TodayCountDetailViewController *todayDetailVC = [[TodayCountDetailViewController alloc] init];
+            todayDetailVC.navititle = _title;
+            todayDetailVC.dataArray = dataArray;
+            [todayVC.navigationController pushViewController:todayDetailVC animated:YES];
             
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -16,4 +16,6 @@ typedef void(^ContactBlock)(void);
 @property (nonatomic, copy) ModifyPasswordBlock modifyBlock;
 @property (nonatomic, copy) ContactBlock contactBlock;
 
+- (instancetype)initWithOrderCount:(NSString *)orderCount ordertimeout:(NSString *)ordertimeout timeout:(NSString *)timeout;
+
 @end

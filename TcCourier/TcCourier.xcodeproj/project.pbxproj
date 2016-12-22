@@ -27,6 +27,10 @@
 		E71593351DE690BE00EAAC68 /* TodayInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593231DE690BE00EAAC68 /* TodayInfoView.m */; };
 		E71593381DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */; };
 		E71593441DE6B76600EAAC68 /* OrderDetailShopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E71593431DE6B76600EAAC68 /* OrderDetailShopListView.m */; };
+		E727C1771E0B85B60096D17E /* UIViewController+GetCurrentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C1761E0B85B60096D17E /* UIViewController+GetCurrentViewController.m */; };
+		E727C17A1E0BA2C40096D17E /* TodayCountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C1791E0BA2C40096D17E /* TodayCountDetailViewController.m */; };
+		E727C17D1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C17C1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m */; };
+		E727C1801E0BD77F0096D17E /* TodayCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C17F1E0BD77F0096D17E /* TodayCountModel.m */; };
 		E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */; };
 		E740D8D81DC9DC1F00484F53 /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */; };
 		E75A77A71DE2C70800E344EE /* FoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A77A61DE2C70800E344EE /* FoodModel.m */; };
@@ -137,6 +141,14 @@
 		E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderTableViewCell.m; sourceTree = "<group>"; };
 		E71593421DE6B76600EAAC68 /* OrderDetailShopListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailShopListView.h; sourceTree = "<group>"; };
 		E71593431DE6B76600EAAC68 /* OrderDetailShopListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailShopListView.m; sourceTree = "<group>"; };
+		E727C1751E0B85B60096D17E /* UIViewController+GetCurrentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GetCurrentViewController.h"; sourceTree = "<group>"; };
+		E727C1761E0B85B60096D17E /* UIViewController+GetCurrentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GetCurrentViewController.m"; sourceTree = "<group>"; };
+		E727C1781E0BA2C40096D17E /* TodayCountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayCountDetailViewController.h; sourceTree = "<group>"; };
+		E727C1791E0BA2C40096D17E /* TodayCountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayCountDetailViewController.m; sourceTree = "<group>"; };
+		E727C17B1E0BD55B0096D17E /* TodayCountDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayCountDetailTableViewCell.h; sourceTree = "<group>"; };
+		E727C17C1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayCountDetailTableViewCell.m; sourceTree = "<group>"; };
+		E727C17E1E0BD77F0096D17E /* TodayCountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayCountModel.h; sourceTree = "<group>"; };
+		E727C17F1E0BD77F0096D17E /* TodayCountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayCountModel.m; sourceTree = "<group>"; };
 		E732C8AF1DBDD9A000B18AA0 /* WaitReceiveOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderViewController.h; sourceTree = "<group>"; };
 		E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderViewController.m; sourceTree = "<group>"; };
 		E740D8D61DC9DC1F00484F53 /* DeliveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
@@ -345,6 +357,8 @@
 				E71593211DE690BE00EAAC68 /* TodayInfoItemVIew.m */,
 				E71593221DE690BE00EAAC68 /* TodayInfoView.h */,
 				E71593231DE690BE00EAAC68 /* TodayInfoView.m */,
+				E727C17B1E0BD55B0096D17E /* TodayCountDetailTableViewCell.h */,
+				E727C17C1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m */,
 			);
 			path = TodayCount;
 			sourceTree = "<group>";
@@ -469,6 +483,8 @@
 				E7E856841DAF655F0057D66F /* ContantHeader.h */,
 				E7FAAA6F1DB481F500B20084 /* UILabel+LabelHeightAndWidth.h */,
 				E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */,
+				E727C1751E0B85B60096D17E /* UIViewController+GetCurrentViewController.h */,
+				E727C1761E0B85B60096D17E /* UIViewController+GetCurrentViewController.m */,
 				E7FB7FAB1DD19E7B0023148C /* MyMD5.h */,
 				E7FB7FAC1DD19E7B0023148C /* MyMD5.m */,
 			);
@@ -504,6 +520,8 @@
 				E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */,
 				E7BA1E171DCC777D001B0081 /* OrderDetailViewController.h */,
 				E7BA1E181DCC777D001B0081 /* OrderDetailViewController.m */,
+				E727C1781E0BA2C40096D17E /* TodayCountDetailViewController.h */,
+				E727C1791E0BA2C40096D17E /* TodayCountDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -521,6 +539,8 @@
 				E75A77A61DE2C70800E344EE /* FoodModel.m */,
 				E7ECF6B51E078A3F00CAAE83 /* SelectableOverlay.h */,
 				E7ECF6B61E078A3F00CAAE83 /* SelectableOverlay.m */,
+				E727C17E1E0BD77F0096D17E /* TodayCountModel.h */,
+				E727C17F1E0BD77F0096D17E /* TodayCountModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -838,6 +858,7 @@
 				E70B06631DB06C7900E4B5A6 /* UIView+ChangeFrame.m in Sources */,
 				E7CCD2F01DEE754B00B24256 /* RunFeeAndTiFeeView.m in Sources */,
 				E71593341DE690BE00EAAC68 /* TodayInfoItemVIew.m in Sources */,
+				E727C17D1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m in Sources */,
 				E7FB2BED1DB774910045E871 /* ModifyPasswordViewController.m in Sources */,
 				E7E856981DAF67080057D66F /* LoginViewController.m in Sources */,
 				E7E8567E1DAF62B70057D66F /* MainTabBar.m in Sources */,
@@ -850,6 +871,7 @@
 				E7ECF6B71E078A3F00CAAE83 /* SelectableOverlay.m in Sources */,
 				E7CCD2ED1DED7B6700B24256 /* ReceiverAddressView.m in Sources */,
 				E7FB7FA81DD19E640023148C /* UIScrollView+MJExtension.m in Sources */,
+				E727C1771E0B85B60096D17E /* UIViewController+GetCurrentViewController.m in Sources */,
 				E7E856801DAF62B70057D66F /* MainTabBarController.m in Sources */,
 				E71209361DD470EF0015825A /* TipMessageView.m in Sources */,
 				E7E8567F1DAF62B70057D66F /* MainTabBarButton.m in Sources */,
@@ -857,6 +879,7 @@
 				E7ABA57F1DF1619E007F0638 /* ReceiverAddressViewController.m in Sources */,
 				E7FB7FAD1DD19E7B0023148C /* MyMD5.m in Sources */,
 				E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */,
+				E727C17A1E0BA2C40096D17E /* TodayCountDetailViewController.m in Sources */,
 				E7FB7FA61DD19E640023148C /* MJRefreshFooterView.m in Sources */,
 				E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
@@ -865,6 +888,7 @@
 				E7CCD2F31DEEB17000B24256 /* TimeOutView.m in Sources */,
 				E71593311DE690BE00EAAC68 /* FoodListView.m in Sources */,
 				E7E856971DAF67080057D66F /* HomePageViewController.m in Sources */,
+				E727C1801E0BD77F0096D17E /* TodayCountModel.m in Sources */,
 				E7FB2BE51DB755880045E871 /* SettingView.m in Sources */,
 				E7729E4A1DDB069500BF5B69 /* OrderInfoModel.m in Sources */,
 				E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */,

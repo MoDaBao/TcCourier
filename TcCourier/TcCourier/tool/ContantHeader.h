@@ -24,8 +24,8 @@
 #define kScaleForWidth [UIScreen mainScreen].bounds.size.width / 375.0 //以iPhone6的尺寸为基准的宽比
 #define kScaleForHeight [UIScreen mainScreen].bounds.size.height / 667.0 //以iPhone6的尺寸为基准的高比
 
-#define kHeartWidth 24// 星星图片的宽度
-#define kHeartHeight 18// 星星图片的高度
+#define kHeartWidth 24// 爱心图片的宽度
+#define kHeartHeight 18// 爱心图片的高度
 
 #define REQUEST_URL @"https://waimai.tzouyi.com/" //接口地址
 

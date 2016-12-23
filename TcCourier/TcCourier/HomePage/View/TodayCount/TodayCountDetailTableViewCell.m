@@ -54,8 +54,15 @@
 - (void)setDataWithModel:(TodayCountModel *)model title:(NSString *)title {
     _orderNumberL.text = [NSString stringWithFormat:@"订单号:%@",model.orderno];
     _orderTimeL.text = [NSString stringWithFormat:@"下单时间:%@",model.ctime];
-    if (![title isEqualToString:@"今日有效单"]) {
-        _priceL.text = [NSString stringWithFormat:@"%@  %@",title, model.price];
+    if ([title isEqualToString:@"今日提成"]) {
+        _priceL.text = [NSString stringWithFormat:@"%@  %@",@"提成", model.price];
+    } else if ([title isEqualToString:@"跑腿费(在线支付)"] || [title isEqualToString:@"跑腿费(货到付款)"]) {
+        _priceL.text = [NSString stringWithFormat:@"%@  %@",@"跑腿费", model.price];
+    } else if ([title isEqualToString:@"餐品费(在线支付)"] || [title isEqualToString:@"餐品费(货到付款)"]) {
+        _priceL.text = [NSString stringWithFormat:@"%@  %@",@"餐品费", model.price];
+    } else if ([title isEqualToString:@"代购费(在线支付)"] || [title isEqualToString:@"代购费(货到付款)"]) {
+        _priceL.text = [NSString stringWithFormat:@"%@  %@",@"代购费", model.price];
+
     }
 }
 

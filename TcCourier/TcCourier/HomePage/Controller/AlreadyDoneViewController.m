@@ -39,6 +39,8 @@
 
 - (void)requestData {
     
+//    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], @"1", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+//    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":@"1"};
     NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
     NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount]};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};

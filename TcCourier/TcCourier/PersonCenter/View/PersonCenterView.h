@@ -15,6 +15,9 @@ typedef void(^ContactBlock)(void);
 
 @property (nonatomic, copy) ModifyPasswordBlock modifyBlock;
 @property (nonatomic, copy) ContactBlock contactBlock;
+@property (nonatomic, strong) UILabel *effectiveOrderL;// 有效单数
+@property (nonatomic, strong) UILabel *timeoutCountL;// 超时赔付单数
+@property (nonatomic, strong) UILabel *timeoutPercentageL;// 超时赔付百分比
 
 - (instancetype)initWithOrderCount:(NSString *)orderCount ordertimeout:(NSString *)ordertimeout timeout:(NSString *)timeout;
 

@@ -8,14 +8,6 @@
 
 #import "PersonCenterView.h"
 
-@interface PersonCenterView ()
-
-@property (nonatomic, strong) UILabel *effectiveOrderL;// 有效单数
-@property (nonatomic, strong) UILabel *timeoutCountL;// 超时赔付单数
-@property (nonatomic, strong) UILabel *timeoutPercentageL;// 超时赔付百分比
-
-
-@end
 
 @implementation PersonCenterView
 

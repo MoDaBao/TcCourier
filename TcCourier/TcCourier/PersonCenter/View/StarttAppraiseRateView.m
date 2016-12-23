@@ -55,4 +55,9 @@
     return self;
 }
 
+- (void)updateGoodRateWith:(CGFloat)goodRate {
+    self.goodRate = goodRate;
+    [self setNeedsDisplay];
+}
+
 @end

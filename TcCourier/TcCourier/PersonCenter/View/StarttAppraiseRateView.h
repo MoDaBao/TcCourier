@@ -11,5 +11,5 @@
 @interface StarttAppraiseRateView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame goodRate:(CGFloat)goodRate;
-
+- (void)updateGoodRateWith:(CGFloat)goodRate;
 @end

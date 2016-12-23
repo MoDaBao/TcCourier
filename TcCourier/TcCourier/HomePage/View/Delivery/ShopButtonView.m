@@ -183,15 +183,15 @@
     } else if ([storeInfoModel.orderStatus isEqualToString:@"已关闭"]) {
         [btn setTitle:@"商户已取消订单" forState:UIControlStateNormal];
     } else if ([storeInfoModel.orderStatus isEqualToString:@"等待店铺接单"]) {
-        [btn setTitle:@"等待商户接单" forState:UIControlStateNormal];
+        [btn setTitle:@"确认取餐" forState:UIControlStateNormal];
     }
 }
 
 // 设置按钮的背景色
 - (void)setBtnBGColorWithSotreInfoModel:(StoreInfoModel *)storeInfoModel btn:(UIButton *)btn {
-    if ([storeInfoModel.orderStatus isEqualToString:@"等待跑腿取餐"] || [storeInfoModel.orderStatus isEqualToString:@"跑腿正在配送"]) {
+    if ([storeInfoModel.orderStatus isEqualToString:@"等待跑腿取餐"] || [storeInfoModel.orderStatus isEqualToString:@"跑腿正在配送"] || [storeInfoModel.orderStatus isEqualToString:@"等待店铺接单"]) {
         [btn setBackgroundColor:kDeliveryBtnBGRed];
-    } else if ([storeInfoModel.orderStatus isEqualToString:@"已关闭"] || [storeInfoModel.orderStatus isEqualToString:@"等待店铺接单"]) {
+    } else if ([storeInfoModel.orderStatus isEqualToString:@"已关闭"]) {
         [btn setBackgroundColor:kDeliveryBtnBGGray];
     }
 }
@@ -217,7 +217,7 @@
 // 配送按钮方法
 - (void)statusBtn:(UIButton *)btn {
     _store = _storeInfoArray[btn.tag - 1000];
-    if ([_store.orderStatus isEqualToString:@"等待跑腿取餐"]) {// 取餐中
+    if ([_store.orderStatus isEqualToString:@"等待跑腿取餐"] || [_store.orderStatus isEqualToString:@"等待店铺接单"]) {// 取餐中
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认已取餐？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 3001;
         [alert show];

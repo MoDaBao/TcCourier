@@ -20,6 +20,9 @@
 @property (nonatomic, copy) NSString *ordercount;
 @property (nonatomic, copy) NSString *ordertimeout;
 @property (nonatomic, strong) NSString *timeout;
+@property (nonatomic, strong) PersonCenterView *personView;
+@property (nonatomic, strong) UILabel *totalRateLabel;
+@property (nonatomic, strong) StarttAppraiseRateView *startRateView;
            
 @end
 
@@ -38,7 +41,7 @@
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (0 == [dict[@"status"] floatValue]) {
             NSDictionary *dataDic = dict[@"data"][@"pda"];
             _score = dataDic[@"score"];
@@ -46,7 +49,7 @@
             _ordertimeout = dataDic[@"ordertimeout"];
             _timeout = dataDic[@"timeout"];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self createView];
+                [self updateView];
             });
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -57,13 +60,16 @@
 
 #pragma mark -----视图方法-----
 
+- (void)updateView {
+    _personView.effectiveOrderL.text = [NSString stringWithFormat:@"%@单",_ordercount];
+    _personView.timeoutCountL.text = [NSString stringWithFormat:@"%@单",_ordertimeout];
+    _personView.timeoutPercentageL.text = [NSString stringWithFormat:@"%.2f%%",_timeout.floatValue * 100];
+    _totalRateLabel.text = [NSString stringWithFormat:@"总好评率%%%02.0f",[[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0 * 100];
+    [_startRateView updateGoodRateWith:[[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0];
+    
+}
+
 - (void)createView {
-    
-    
-    for (UIView *v in self.view.subviews) {
-        [v removeFromSuperview];
-    }
-    
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - KTabBarHeight)];
     scrollView.contentSize = CGSizeMake(scrollView.width, scrollView.height);
@@ -92,19 +98,20 @@
     [scrollView addSubview:usernameLabel];
     
     // 总好评率
-    CGFloat totalRate = _score.floatValue / 5.0;// 好评率
+    CGFloat totalRate = [[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0;// 好评率
     NSString *totalRateStr = [NSString stringWithFormat:@"总好评率%%%02.0f",totalRate * 100];
     UIFont *totalRateFont = [UIFont systemFontOfSize:13];
-    CGFloat totalRateW = [UILabel getWidthWithTitle:totalRateStr font:totalRateFont];
+//    CGFloat totalRateW = [UILabel getWidthWithTitle:totalRateStr font:totalRateFont];
     CGFloat totalRateH = [UILabel getHeightWithTitle:totalRateStr font:totalRateFont];
-    UILabel *totalRateLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.width - totalRateW) * .5, usernameLabel.y + usernameH + 5, totalRateW, totalRateH)];
-    totalRateLabel.text = totalRateStr;
-    totalRateLabel.font = totalRateFont;
-    [scrollView addSubview:totalRateLabel];
+    _totalRateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, usernameLabel.y + usernameH + 5, kScreenWidth, totalRateH)];
+    _totalRateLabel.textAlignment = NSTextAlignmentCenter;
+    _totalRateLabel.text = totalRateStr;
+    _totalRateLabel.font = totalRateFont;
+    [scrollView addSubview:_totalRateLabel];
     
     // 总好评率视图
-    StarttAppraiseRateView *startRateView = [[StarttAppraiseRateView alloc] initWithFrame:CGRectMake((kScreenWidth - kHeartWidth * 5) * .5, totalRateLabel.y + totalRateH + 5, kHeartWidth * 5, kHeartHeight) goodRate:totalRate];
-    [scrollView addSubview:startRateView];
+    _startRateView = [[StarttAppraiseRateView alloc] initWithFrame:CGRectMake((kScreenWidth - kHeartWidth * 5) * .5, _totalRateLabel.y + totalRateH + 5, kHeartWidth * 5, kHeartHeight) goodRate:totalRate];
+    [scrollView addSubview:_startRateView];
     
 //    // 设置视图
 //    SettingView *settingView = [[SettingView alloc] initWithFrame:CGRectMake(0, startRateView.y + startRateView.height + 30, kScreenWidth, 100)];
@@ -120,19 +127,20 @@
 //        [alertView show];
 //    };
     
-    PersonCenterView *personView = [[PersonCenterView alloc] initWithOrderCount:_ordercount ordertimeout:_ordertimeout timeout:_timeout];
-    [self.view addSubview:personView];
-    [personView mas_makeConstraints:^(MASConstraintMaker *make) {
+    _personView = [[PersonCenterView alloc] initWithOrderCount:@"123" ordertimeout:@"123" timeout:@"0.5"];
+    [self.view addSubview:_personView];
+    [_personView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.and.left.equalTo(self.view);
-        make.top.equalTo(startRateView.mas_bottom).offset(5);
+        make.top.equalTo(_startRateView.mas_bottom).offset(5);
         make.height.equalTo(@235);
     }];
-    personView.modifyBlock = ^(void) {
+    PersonCenterViewController *personVC = self;
+    _personView.modifyBlock = ^(void) {
         ModifyPasswordViewController *modifyVC = [[ModifyPasswordViewController alloc] init];
-        [self.navigationController pushViewController:modifyVC animated:YES];
+        [personVC.navigationController pushViewController:modifyVC animated:YES];
     };
-    personView.contactBlock = ^ (void) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"商服电话:81691580\n工作时间：9:00-19:00" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
+    _personView.contactBlock = ^ (void) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"商服电话:81691580\n工作时间：9:00-19:00" delegate:personVC cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
         alertView.tag = 2333;
         [alertView show];
     };
@@ -163,9 +171,6 @@
     self.navigationController.navigationBar.hidden = YES;
     self.tabBarController.tabBar.hidden = NO;
     
-    for (UIView *view in self.view.subviews) {
-        [view removeFromSuperview];
-    }
     [self requestData];
     
 }
@@ -176,6 +181,8 @@
     self.view.backgroundColor = kBGGary;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+    [self createView];
     
 }
 

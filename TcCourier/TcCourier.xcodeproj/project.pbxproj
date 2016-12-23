@@ -31,6 +31,19 @@
 		E727C17A1E0BA2C40096D17E /* TodayCountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C1791E0BA2C40096D17E /* TodayCountDetailViewController.m */; };
 		E727C17D1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C17C1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m */; };
 		E727C1801E0BD77F0096D17E /* TodayCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E727C17F1E0BD77F0096D17E /* TodayCountModel.m */; };
+		E727C1851E0CFFE90096D17E /* jcore-ios-1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1821E0CFFE90096D17E /* jcore-ios-1.0.0.a */; };
+		E727C1861E0CFFE90096D17E /* jpush-ios-3.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1831E0CFFE90096D17E /* jpush-ios-3.0.0.a */; };
+		E727C1881E0D00130096D17E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1871E0D00130096D17E /* CFNetwork.framework */; };
+		E727C18A1E0D001E0096D17E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1891E0D001E0096D17E /* CoreFoundation.framework */; };
+		E727C18C1E0D00270096D17E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C18B1E0D00270096D17E /* CoreTelephony.framework */; };
+		E727C18E1E0D002F0096D17E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C18D1E0D002F0096D17E /* SystemConfiguration.framework */; };
+		E727C1901E0D00380096D17E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C18F1E0D00380096D17E /* CoreGraphics.framework */; };
+		E727C1921E0D00420096D17E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1911E0D00420096D17E /* Foundation.framework */; };
+		E727C1941E0D004A0096D17E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1931E0D004A0096D17E /* UIKit.framework */; };
+		E727C1961E0D00540096D17E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1951E0D00540096D17E /* Security.framework */; };
+		E727C1981E0D00600096D17E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1971E0D00600096D17E /* libz.tbd */; };
+		E727C19A1E0D006F0096D17E /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C1991E0D006F0096D17E /* UserNotifications.framework */; };
+		E727C19C1E0D007B0096D17E /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C19B1E0D007B0096D17E /* libresolv.tbd */; };
 		E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */; };
 		E740D8D81DC9DC1F00484F53 /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */; };
 		E75A77A71DE2C70800E344EE /* FoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A77A61DE2C70800E344EE /* FoodModel.m */; };
@@ -149,6 +162,21 @@
 		E727C17C1E0BD55B0096D17E /* TodayCountDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayCountDetailTableViewCell.m; sourceTree = "<group>"; };
 		E727C17E1E0BD77F0096D17E /* TodayCountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayCountModel.h; sourceTree = "<group>"; };
 		E727C17F1E0BD77F0096D17E /* TodayCountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayCountModel.m; sourceTree = "<group>"; };
+		E727C1821E0CFFE90096D17E /* jcore-ios-1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.0.0.a"; sourceTree = "<group>"; };
+		E727C1831E0CFFE90096D17E /* jpush-ios-3.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.0.a"; sourceTree = "<group>"; };
+		E727C1841E0CFFE90096D17E /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		E727C1871E0D00130096D17E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E727C1891E0D001E0096D17E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		E727C18B1E0D00270096D17E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		E727C18D1E0D002F0096D17E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E727C18F1E0D00380096D17E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E727C1911E0D00420096D17E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E727C1931E0D004A0096D17E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E727C1951E0D00540096D17E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E727C1971E0D00600096D17E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		E727C1991E0D006F0096D17E /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		E727C19B1E0D007B0096D17E /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		E727C19D1E0D00C50096D17E /* TcCourier.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TcCourier.entitlements; sourceTree = "<group>"; };
 		E732C8AF1DBDD9A000B18AA0 /* WaitReceiveOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderViewController.h; sourceTree = "<group>"; };
 		E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderViewController.m; sourceTree = "<group>"; };
 		E740D8D61DC9DC1F00484F53 /* DeliveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
@@ -259,7 +287,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E727C19C1E0D007B0096D17E /* libresolv.tbd in Frameworks */,
+				E727C19A1E0D006F0096D17E /* UserNotifications.framework in Frameworks */,
+				E727C1981E0D00600096D17E /* libz.tbd in Frameworks */,
+				E727C1961E0D00540096D17E /* Security.framework in Frameworks */,
+				E727C1941E0D004A0096D17E /* UIKit.framework in Frameworks */,
+				E727C1921E0D00420096D17E /* Foundation.framework in Frameworks */,
+				E727C1901E0D00380096D17E /* CoreGraphics.framework in Frameworks */,
+				E727C18E1E0D002F0096D17E /* SystemConfiguration.framework in Frameworks */,
+				E727C18C1E0D00270096D17E /* CoreTelephony.framework in Frameworks */,
+				E727C18A1E0D001E0096D17E /* CoreFoundation.framework in Frameworks */,
+				E727C1881E0D00130096D17E /* CFNetwork.framework in Frameworks */,
+				E727C1861E0CFFE90096D17E /* jpush-ios-3.0.0.a in Frameworks */,
 				309AACB6B023A947EFAF4EB7 /* libPods.a in Frameworks */,
+				E727C1851E0CFFE90096D17E /* jcore-ios-1.0.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +324,17 @@
 		37DAA384705F9ED67761B111 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E727C19B1E0D007B0096D17E /* libresolv.tbd */,
+				E727C1991E0D006F0096D17E /* UserNotifications.framework */,
+				E727C1971E0D00600096D17E /* libz.tbd */,
+				E727C1951E0D00540096D17E /* Security.framework */,
+				E727C1931E0D004A0096D17E /* UIKit.framework */,
+				E727C1911E0D00420096D17E /* Foundation.framework */,
+				E727C18F1E0D00380096D17E /* CoreGraphics.framework */,
+				E727C18D1E0D002F0096D17E /* SystemConfiguration.framework */,
+				E727C18B1E0D00270096D17E /* CoreTelephony.framework */,
+				E727C1891E0D001E0096D17E /* CoreFoundation.framework */,
+				E727C1871E0D00130096D17E /* CFNetwork.framework */,
 				0CFFFD85C6B4E072D4F00A8F /* libPods.a */,
 			);
 			name = Frameworks;
@@ -374,6 +426,16 @@
 			path = WaitReceiving;
 			sourceTree = "<group>";
 		};
+		E727C1811E0CFFE90096D17E /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				E727C1821E0CFFE90096D17E /* jcore-ios-1.0.0.a */,
+				E727C1831E0CFFE90096D17E /* jpush-ios-3.0.0.a */,
+				E727C1841E0CFFE90096D17E /* JPUSHService.h */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		E7CCD2E41DED553500B24256 /* Delivery */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +460,7 @@
 		E7E8562A1DAF566F0057D66F = {
 			isa = PBXGroup;
 			children = (
+				E727C1811E0CFFE90096D17E /* Lib */,
 				E7E856351DAF56700057D66F /* TcCourier */,
 				E7E8564F1DAF56700057D66F /* TcCourierTests */,
 				E7E8565A1DAF56700057D66F /* TcCourierUITests */,
@@ -420,6 +483,7 @@
 		E7E856351DAF56700057D66F /* TcCourier */ = {
 			isa = PBXGroup;
 			children = (
+				E727C19D1E0D00C50096D17E /* TcCourier.entitlements */,
 				E7E856391DAF56700057D66F /* AppDelegate.h */,
 				E7E8563A1DAF56700057D66F /* AppDelegate.m */,
 				E7E856751DAF62B70057D66F /* MainNavigationController.h */,
@@ -735,6 +799,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1060,12 +1127,19 @@
 			baseConfigurationReference = 4A1557639B3B2BA14FC8115B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TcCourier/TcCourier.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: wlouyi@126.com (3H256TET8W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H33K3H36N8;
 				GCC_PREFIX_HEADER = TcCourier/tool/PrefixHeader.pch;
 				INFOPLIST_FILE = TcCourier/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wenlingouyi.TcCourier;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wlouyi.TcCourier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1075,12 +1149,19 @@
 			baseConfigurationReference = 256953AE303E24856A03C646 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TcCourier/TcCourier.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: wlouyi@126.com (3H256TET8W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H33K3H36N8;
 				GCC_PREFIX_HEADER = TcCourier/tool/PrefixHeader.pch;
 				INFOPLIST_FILE = TcCourier/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wenlingouyi.TcCourier;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wlouyi.TcCourier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

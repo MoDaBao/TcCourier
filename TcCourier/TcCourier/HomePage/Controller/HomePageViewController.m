@@ -38,6 +38,7 @@
         [_workBtn setBackgroundImage:[UIImage imageNamed:@"work"] forState:UIControlStateNormal];
     } else {
         [_workBtn setBackgroundImage:[UIImage imageNamed:@"workout"] forState:UIControlStateNormal];
+        _courierAddress.text = @"下班了";
     }
 }
 
@@ -61,7 +62,7 @@
     CGFloat addressH = 20;
     self.courierAddress = [[UILabel alloc] initWithFrame:CGRectMake(workMargin, _workBtn.y + _workBtn.height * .5 - addressH * .5, addressW, addressH)];
     self.courierAddress.font = [UIFont systemFontOfSize:14 * kScaleForWidth];
-    self.courierAddress.text = @"上班中";
+    self.courierAddress.text = @"下班了";
     [self.view addSubview:self.courierAddress];
     
     

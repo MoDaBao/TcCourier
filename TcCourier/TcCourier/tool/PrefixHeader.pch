@@ -20,13 +20,9 @@
 #import "UIViewController+GetCurrentViewController.h"
 
 #import "Masonry.h"
-
-
 #import <AFNetworking/AFNetworking.h>
 #import "MJRefresh/MJRefresh.h"
-#import "MyMD5.h"
 
-#import "TcCourierInfoManager.h"
 
 // 高德SDK
 #import <AMapFoundationKit/AMapFoundationKit.h>
@@ -35,5 +31,7 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 
+#import "MyMD5.h"
+#import "TcCourierInfoManager.h"
 
 #endif /* PrefixHeader_pch */

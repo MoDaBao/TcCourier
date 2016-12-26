@@ -117,7 +117,7 @@
         _runFeeAndTiFeeView = [RunFeeAndTiFeeView new];
         [self.contentV addSubview:_runFeeAndTiFeeView];
         [_runFeeAndTiFeeView mas_makeConstraints:^(MASConstraintMaker *make) {
-             make.left.and.right.equalTo(self.contentV);
+            make.left.and.right.equalTo(self.contentV);
             make.top.equalTo(line3.mas_bottom);
             make.height.equalTo(@40);
         }];

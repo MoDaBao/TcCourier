@@ -17,7 +17,7 @@
 //4c84c1932d79c4740d3b9d78 配送端key
 static NSString *appKey = @"c1c6d53368706279976bb587";
 static NSString *channel = @"App Store";
-static BOOL isProduction = FALSE;
+static BOOL isProduction = TRUE;// 生产环境
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

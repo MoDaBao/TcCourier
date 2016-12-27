@@ -86,4 +86,7 @@
 - (void)saveLongitude:(NSString *)longitude;
 - (NSString *)getLongitude;
 
+- (void)saveCourierAddress:(NSString*)courierAddress;
+- (NSString *)getCourierAddress;
+
 @end

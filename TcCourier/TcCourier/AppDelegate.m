@@ -49,7 +49,7 @@
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error {
     //定位错误
-    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+    NSLog(@"定位错误 %s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
 }
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location {
@@ -78,7 +78,9 @@
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
     if (response.regeocode) {
         if ([self.addressDelegate respondsToSelector:@selector(setAddress:)]) {
-            [self.addressDelegate setAddress:[NSString stringWithFormat:@"%@%@%@%@%@%@",response.regeocode.addressComponent.district, response.regeocode.addressComponent.township, response.regeocode.addressComponent.neighborhood, response.regeocode.addressComponent.building, response.regeocode.addressComponent.streetNumber.street, response.regeocode.addressComponent.streetNumber.number]];
+            NSString *address = [NSString stringWithFormat:@"%@%@%@%@%@%@",response.regeocode.addressComponent.district, response.regeocode.addressComponent.township, response.regeocode.addressComponent.neighborhood, response.regeocode.addressComponent.building, response.regeocode.addressComponent.streetNumber.street, response.regeocode.addressComponent.streetNumber.number];
+            [[TcCourierInfoManager shareInstance] saveCourierAddress:address];
+            [self.addressDelegate setAddress:address];
         }
     }
     
@@ -184,6 +186,9 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    [application setApplicationIconBadgeNumber:0];
+    [application cancelAllLocalNotifications];
 }
 
 

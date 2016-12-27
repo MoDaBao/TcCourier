@@ -36,6 +36,8 @@
     _isWork = [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] boolValue];
     if (_isWork) {// 如果为1 在线
         [_workBtn setBackgroundImage:[UIImage imageNamed:@"work"] forState:UIControlStateNormal];
+        _courierAddress.text = [[[TcCourierInfoManager shareInstance] getCourierAddress] isEqualToString:@" "] ? @"上班中，正在定位" : [[TcCourierInfoManager shareInstance] getCourierAddress];
+        
     } else {
         [_workBtn setBackgroundImage:[UIImage imageNamed:@"workout"] forState:UIControlStateNormal];
         _courierAddress.text = @"下班了";

@@ -201,4 +201,16 @@
     return longitude;
 }
 
+- (void)saveCourierAddress:(NSString *)courierAddress {
+    [[NSUserDefaults standardUserDefaults] setObject:courierAddress forKey:@"courierAddress"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (NSString *)getCourierAddress {
+    NSString *courierAddress = [[NSUserDefaults standardUserDefaults] objectForKey:@"courierAddress"];
+    if (!courierAddress) {
+        return @" ";
+    }
+    return courierAddress;
+}
+
 @end

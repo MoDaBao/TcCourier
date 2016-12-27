@@ -34,8 +34,8 @@
 
 - (void)requestData {
     
-    NSString *str = [NSString stringWithFormat:@"ad=%@&api=%@&core=%@",@"pdawaitingorder",@"1", @"pda"];
-    NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda", @"ad":@"1"};
+    NSString *str = [NSString stringWithFormat:@"ad=%@&api=%@&core=%@",[[TcCourierInfoManager shareInstance] getAddressID], @"pdawaitingorder", @"pda"];
+    NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda", @"ad":[[TcCourierInfoManager shareInstance] getAddressID]};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
     
@@ -67,7 +67,10 @@
             // 刷新UI
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
+                [self.tableView headerEndRefreshing];
             });
+        } else {
+            NSLog(@"msg = %@",dict[@"msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error is %@",error);
@@ -89,6 +92,10 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.bottom.and.right.equalTo(self.view);
         make.top.equalTo(self.view).offset(kNavigationBarHeight);
+    }];
+    WaitReceiveOrderViewController *waitVC = self;
+    [self.tableView addHeaderWithCallback:^{
+        [waitVC requestData];
     }];
 }
 

@@ -23,6 +23,7 @@
 @property (nonatomic, strong) PersonCenterView *personView;
 @property (nonatomic, strong) UILabel *totalRateLabel;
 @property (nonatomic, strong) StarttAppraiseRateView *startRateView;
+@property (nonatomic, strong) UILabel *userNameL;
            
 @end
 
@@ -66,6 +67,7 @@
     _personView.timeoutPercentageL.text = [NSString stringWithFormat:@"%.2f%%",_timeout.floatValue * 100];
     _totalRateLabel.text = [NSString stringWithFormat:@"总好评率%%%02.0f",[[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0 * 100];
     [_startRateView updateGoodRateWith:[[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0];
+    _userNameL.text = [NSString stringWithFormat:@"%@",[[TcCourierInfoManager shareInstance] getTcCourierUserName]];
     
 }
 
@@ -91,11 +93,11 @@
     CGFloat usernameW = [UILabel getWidthWithTitle:userName
                                               font:usernameFont];
     CGFloat usernameH = [UILabel getHeightWithTitle:userName font:usernameFont];
-    UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.width - usernameW) * .5, logoImageView.y + logoHeight + 5, usernameW, usernameH)];
-    usernameLabel.text = userName;
-    usernameLabel.textAlignment = NSTextAlignmentCenter;
-    usernameLabel.font = usernameFont;
-    [scrollView addSubview:usernameLabel];
+    _userNameL = [[UILabel alloc] initWithFrame:CGRectMake((self.view.width - usernameW) * .5, logoImageView.y + logoHeight + 5, usernameW, usernameH)];
+    _userNameL.text = userName;
+    _userNameL.textAlignment = NSTextAlignmentCenter;
+    _userNameL.font = usernameFont;
+    [scrollView addSubview:_userNameL];
     
     // 总好评率
     CGFloat totalRate = [[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0;// 好评率
@@ -103,7 +105,7 @@
     UIFont *totalRateFont = [UIFont systemFontOfSize:13];
 //    CGFloat totalRateW = [UILabel getWidthWithTitle:totalRateStr font:totalRateFont];
     CGFloat totalRateH = [UILabel getHeightWithTitle:totalRateStr font:totalRateFont];
-    _totalRateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, usernameLabel.y + usernameH + 5, kScreenWidth, totalRateH)];
+    _totalRateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _userNameL.y + usernameH + 5, kScreenWidth, totalRateH)];
     _totalRateLabel.textAlignment = NSTextAlignmentCenter;
     _totalRateLabel.text = totalRateStr;
     _totalRateLabel.font = totalRateFont;

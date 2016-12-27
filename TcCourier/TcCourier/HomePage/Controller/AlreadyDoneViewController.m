@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) NSInteger dayCount;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
@@ -38,11 +38,11 @@
 #pragma mark -----网络请求-----
 
 - (void)requestData {
-    
-//    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], @"1", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-//    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":@"1"};
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount]};
+    _page = 0;
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [NSString stringWithFormat:@"%ld",_page], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":[NSString stringWithFormat:@"%ld",_page]};
+//    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+//    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount]};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
@@ -74,6 +74,7 @@
             // 刷新UI
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
+                [self.tableView headerEndRefreshing];
             });
             
         } else {
@@ -84,6 +85,61 @@
         
     }];
 }
+
+- (void)requestMoreData {
+    ++_page;
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [NSString stringWithFormat:@"%ld",_page], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":[NSString stringWithFormat:@"%ld",_page]};
+    //    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    //    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSArray *dataArray = dict[@"data"][@"order"];
+        if (0 == [dict[@"status"] floatValue]) {
+            
+            //            NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            
+//            [self.dataArray removeAllObjects];
+            
+            for (NSDictionary *orderDic in dataArray) {
+                OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                [orderModel setValuesForKeysWithDictionary:orderDic];
+                NSArray *arr = orderDic[@"store"];
+                for (NSDictionary *storedic in arr) {
+                    StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                    [storemodel setValuesForKeysWithDictionary:storedic];
+                    [orderModel.storeInfoArray addObject:storemodel];
+                }
+                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                [self.dataArray addObject:orderModel];
+            }
+            
+            if (0 == dataArray.count) {
+                --_page;// 如果当前请求数据为空将页数重置为前一页
+            }
+            
+            // 刷新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+                [self.tableView footerEndRefreshing];
+            });
+            
+        } else {
+            NSLog(@"msg = %@",dict[@"msg"]);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+
+
 
 
 #pragma mark -----视图方法-----
@@ -117,6 +173,15 @@
         make.height.equalTo(_chooseView);
         make.width.equalTo(@(kScreenWidth - chooseW));
     }];
+    AlreadyDoneViewController *alreadyVC = self;
+    [self.tableView addHeaderWithCallback:^{
+        [alreadyVC requestData];
+    }];
+    [self.tableView headerBeginRefreshing];
+    // Enter the refresh status immediately
+    [self.tableView addFooterWithCallback:^{
+        [alreadyVC requestMoreData];
+    }];
     
     
 }
@@ -139,6 +204,7 @@
     self.navigationItem.leftBarButtonItem = backItem;
     
     _dayCount = 1;// 默认显示今天的单子
+    _page = 0;
     [self requestData];
     
     [self createView];
@@ -164,7 +230,7 @@
             }
         }
     }
-    
+    _page = 0;
     if (btn.tag == 1000) {// 今日
 //        printf("今日");
         _dayCount = 1;

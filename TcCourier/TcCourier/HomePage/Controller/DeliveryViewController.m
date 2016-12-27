@@ -70,6 +70,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
+                [self.tableView headerEndRefreshing];
                 if (_hourGlass) {
                     [_hourGlass removeFromSuperview];
                     _hourGlass = nil;
@@ -99,6 +100,10 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.bottom.and.right.equalTo(self.view);
         make.top.equalTo(self.view).offset(kNavigationBarHeight);
+    }];
+    DeliveryViewController *deliveryVC = self;
+    [self.tableView addHeaderWithCallback:^{
+        [deliveryVC requestData];
     }];
 }
 

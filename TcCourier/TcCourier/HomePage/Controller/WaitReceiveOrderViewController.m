@@ -20,7 +20,7 @@
 @implementation WaitReceiveOrderViewController
 
 
-#pragma mark -----lazyLoading-----
+#pragma mark- lazyLoading
 
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
@@ -30,7 +30,7 @@
 }
 
 
-#pragma mark -----网络请求-----
+#pragma mark- 网络请求
 
 - (void)requestData {
     
@@ -77,7 +77,7 @@
     }];
 }
 
-#pragma mark -----视图方法-----
+#pragma mark- 视图方法
 
 - (void)createView {
     
@@ -129,7 +129,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark -----tableView代理方法-----
+#pragma mark- tableView代理方法
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -157,7 +157,7 @@
     }
     
     
-    return 150 + height;
+    return 217 + height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -177,7 +177,7 @@
 }
 
 
-#pragma mark -----WaitReceiverCellDelegate-----
+#pragma mark- WaitReceiverCellDelegate
 
 - (void)waitReceiverCellShowTipMessageWithTip:(NSString *)tip {
     // 提示框

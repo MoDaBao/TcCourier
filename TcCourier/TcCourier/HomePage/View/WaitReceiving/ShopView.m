@@ -8,6 +8,14 @@
 
 #import "ShopView.h"
 #import "StoreInfoModel.h"
+#import "ShopAddressViewController.h"
+#import "WaitReceiveOrderViewController.h"
+
+@interface ShopView ()
+
+@property (nonatomic, strong) NSMutableArray *storeInfoArray;
+
+@end
 
 @implementation ShopView
 
@@ -23,9 +31,12 @@
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
+    
+    _storeInfoArray = storeInfoArray;
     CGFloat height = 0;
     CGFloat margin = 5;
     UIView *temp = nil;
+    NSInteger btntag = 5000;
     for (StoreInfoModel *storeInfoModel in storeInfoArray) {
         UIImageView *icon = [UIImageView new];
         [self addSubview:icon];
@@ -102,13 +113,14 @@
         }];
         jiantou.image = [UIImage imageNamed:@"youbianjian"];
         
+        // 地址跳转按钮
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
         [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
-        
+        btn.tag = btntag++;
         
     }
     
@@ -118,7 +130,15 @@
 }
 
 - (void)click:(UIButton *)btn {
+    //    StoreInfoModel *store = _storeInfoArray[btn.tag - 2000];
+    NSLog(@"跳转至地图页面显示商家地址");
     
+    ShopAddressViewController *shopAddressVC = [[ShopAddressViewController alloc] init];
+    shopAddressVC.storeInfoModel = self.storeInfoArray[btn.tag - 5000];
+    
+    
+    WaitReceiveOrderViewController *waitVC = (WaitReceiveOrderViewController *)[UIViewController getCurrentViewController];
+    [waitVC.navigationController pushViewController:shopAddressVC animated:YES];
 }
 
 @end

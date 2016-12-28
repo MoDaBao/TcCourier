@@ -18,7 +18,7 @@
 @implementation TodayCountDetailViewController
 
 
-#pragma mark -----试图方法-----
+#pragma mark- 试图方法
 
 - (void)createView {
     // 加载tableView
@@ -56,14 +56,14 @@
 }
 
 
-#pragma mark-----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 
-#pragma mark-----tableView代理方法-----
+#pragma mark- tableView代理方法
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;

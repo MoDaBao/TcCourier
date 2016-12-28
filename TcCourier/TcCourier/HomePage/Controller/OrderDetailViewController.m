@@ -19,7 +19,7 @@
 @implementation OrderDetailViewController
 
 
-#pragma mark -----LazyLoading-----
+#pragma mark- LazyLoading
 
 - (OrderInfoModel *)dataSourceModel {
     if (!_dataSourceModel) {
@@ -30,7 +30,7 @@
 
 
 
-#pragma mark -----网络请求-----
+#pragma mark- 网络请求
 
 - (void)requestData {
     //147859731967
@@ -81,7 +81,7 @@
     }];
 }
 
-#pragma mark -----视图方法-----
+#pragma mark- 视图方法
 
 
 - (void)createView {
@@ -119,7 +119,7 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
@@ -131,7 +131,7 @@
 }
 
 
-#pragma mark -----tableView代理方法-----
+#pragma mark- tableView代理方法
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;

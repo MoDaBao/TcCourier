@@ -30,7 +30,7 @@
 @implementation ReceiverAddressViewController
 
 
-#pragma mark -----lazyloading-----
+#pragma mark- lazyloading
 
 - (NSMutableArray *)routeIndicatorInfoArray {
     if (!_routeIndicatorInfoArray) {
@@ -40,7 +40,7 @@
 }
 
 
-#pragma mark -----网络请求-----
+#pragma mark- 网络请求
 
 - (void)requestData {
 //    //147859731967
@@ -91,7 +91,7 @@
 }
 
 
-#pragma mark -----视图方法-----
+#pragma mark- 视图方法
 
 - (void)createView {
     _receiverInfoView = [[ReceiverAddressInfoView alloc] initWithReceiverName:_addressInfoModel.name tel:_addressInfoModel.mobile distance:@"-" address:[NSString stringWithFormat:@"%@%@",_addressInfoModel.address, _addressInfoModel.detail_addr] latitude:_addressInfoModel.latitudeG longitude:_addressInfoModel.longitudeG];
@@ -145,7 +145,7 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
@@ -169,7 +169,7 @@
     NSLog(@"路径规划失败");
 }
 
-#pragma mark -----显示路径规划路径-----
+#pragma mark- 显示路径规划路径
 
 // 添加大头针
 - (void)addAnnotationWithStartPoint:(AMapNaviPoint *)start endPoint:(AMapNaviPoint *)end {

@@ -30,7 +30,7 @@
 @implementation PersonCenterViewController
 
 
-#pragma mark-----网络请求-----
+#pragma mark- 网络请求
 
 - (void)requestData {
     NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@",@"pdainfo", @"pda", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
@@ -59,7 +59,7 @@
 }
 
 
-#pragma mark -----视图方法-----
+#pragma mark- 视图方法
 
 - (void)updateView {
     _personView.effectiveOrderL.text = [NSString stringWithFormat:@"%@单",_ordercount];
@@ -188,7 +188,7 @@
     
 }
 
-#pragma mark -----代理方法-----
+#pragma mark- 代理方法
 
 
 /**
@@ -204,7 +204,7 @@
         if (1 == buttonIndex) {// 点击确定
             // 删除用户的登录信息
             [[TcCourierInfoManager shareInstance] removeAllTcCourierInfo];
-            
+            [JPUSHService setAlias:@" " callbackSelector:nil object:nil];
             // 弹出登录页面
             LoginViewController *loginVC = [[LoginViewController alloc] init];
             [self presentViewController:loginVC animated:YES completion:nil];
@@ -225,7 +225,7 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 
 /**

@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "DeliveryViewController.h"
-
+#import "WaitReceiveOrderViewController.h"
 @interface ReceiverAddressView ()
 
 @property (nonatomic, strong) AddressInfoModel *addressInfoModel;
@@ -83,14 +83,16 @@
 //    receiverVC.orderNumber = _orderNumber;
     receiverVC.addressInfoModel = _addressInfoModel;
     
-    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;
-    if (tabVC.selectedIndex == 0) {
-        if ([tabVC.homeVc.navigationController.viewControllers.lastObject isKindOfClass:[DeliveryViewController class]]) {
-            DeliveryViewController *deliveryVC = (DeliveryViewController *)tabVC.homeVc.navigationController.viewControllers.lastObject;
-            [deliveryVC.navigationController pushViewController:receiverVC animated:YES];
-        }
+    
+    UIViewController *vc = [UIViewController getCurrentViewController];
+    if ([vc isKindOfClass:[DeliveryViewController classForKeyedUnarchiver]]) {
+        DeliveryViewController *deliveryVC = (DeliveryViewController *)vc;
+        [deliveryVC.navigationController pushViewController:receiverVC animated:YES];
+    } else if ([vc isKindOfClass:[WaitReceiveOrderViewController class]]) {
+        WaitReceiveOrderViewController *waitVC = (WaitReceiveOrderViewController *)vc;
+        [waitVC.navigationController pushViewController:receiverVC animated:YES];
     }
+    
 }
 
 @end

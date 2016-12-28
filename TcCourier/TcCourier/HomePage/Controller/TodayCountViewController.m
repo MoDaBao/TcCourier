@@ -23,7 +23,7 @@
 }
 
 
-#pragma mark -----网络请求-----
+#pragma mark- 网络请求
 
 - (void)requestData {
     
@@ -60,7 +60,7 @@
 }
 
 
-#pragma mark -----视图方法——----
+#pragma mark- 视图方法
 
 - (void)createView {
     

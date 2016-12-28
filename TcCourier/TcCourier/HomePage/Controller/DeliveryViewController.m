@@ -24,7 +24,7 @@
 @implementation DeliveryViewController
 
 
-#pragma mark -----lazyLoading-----
+#pragma mark- lazyLoading
 
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
@@ -34,7 +34,7 @@
 }
 
 
-#pragma mark -----网络请求-----
+#pragma mark- 网络请求
 
 - (void)requestData {
     
@@ -86,7 +86,7 @@
     }];
 }
 
-#pragma mark -----视图方法-----
+#pragma mark- 视图方法
 
 - (void)createView {
     // 加载tableView
@@ -130,14 +130,14 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 
-#pragma mark -----tableView代理方法-----
+#pragma mark- tableView代理方法
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -206,7 +206,7 @@
 }
 
 
-#pragma mark-----ShopButtonViewDelegate-----
+#pragma mark- ShopButtonViewDelegate
 
 - (void)refreshDeliveryCell {
     

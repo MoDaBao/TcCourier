@@ -11,10 +11,7 @@
 #import "HomePageViewController.h"
 #import "PersonCenterViewController.h"
 #import "MainTabBarController.h"
-// 引入JPush功能所需头文件
-#import "JPUSHService.h"
-// iOS10注册APNs所需头文件
-#import <UserNotifications/UserNotifications.h>
+
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>
 
@@ -26,101 +23,8 @@
 
 @implementation AppDelegate
 
-#pragma mark -----高德-----
 
-- (void)setLocationManager {
-    
-    // 定位
-    self.locationManager = [[AMapLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    
-    //设置允许后台定位参数，保持不会被系统挂起
-    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
-    [self.locationManager setAllowsBackgroundLocationUpdates:YES];//iOS9(含)以上系统需设置
-    [self.locationManager startUpdatingLocation];// 开启持续定位
-    
-    // 带逆地理信息的一次定位（返回坐标和地址信息）
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
-    
-    _search = [[AMapSearchAPI alloc] init];
-    _search.delegate = self;
-    
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error {
-    //定位错误
-    NSLog(@"定位错误 %s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location {
-    //定位结果
-//    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
-    
-    [[TcCourierInfoManager shareInstance] saveLatitude:[NSString stringWithFormat:@"%f",location.coordinate.latitude]];
-    [[TcCourierInfoManager shareInstance] saveLongitude:[NSString stringWithFormat:@"%f",location.coordinate.longitude]];
-    
-    if (!_timer) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendCourierAddress) userInfo:nil repeats:YES];
-        
-    }
-    
-    AMapReGeocodeSearchRequest *reGeo = [[AMapReGeocodeSearchRequest alloc] init];
-    reGeo.location = [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-    reGeo.radius = 200;
-    reGeo.requireExtension = YES;
-    //发起逆向地理编码
-    [_search AMapReGoecodeSearch:reGeo];
-    
-    
-}
-
-/* 逆地理编码回调. */ //在定位SDK版本更新到2.2以上之前  暂时先用search对象发起逆地理编码
-- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
-    if (response.regeocode) {
-        if ([self.addressDelegate respondsToSelector:@selector(setAddress:)]) {
-            NSString *address = [NSString stringWithFormat:@"%@%@%@%@%@%@",response.regeocode.addressComponent.district, response.regeocode.addressComponent.township, response.regeocode.addressComponent.neighborhood, response.regeocode.addressComponent.building, response.regeocode.addressComponent.streetNumber.street, response.regeocode.addressComponent.streetNumber.number];
-            [[TcCourierInfoManager shareInstance] saveCourierAddress:address];
-            [self.addressDelegate setAddress:address];
-        }
-    }
-    
-}
-
-//高德定位SDK2.2 以上的版本直接用这个代理方法进行反地理编码
-//- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode {
-//    
-//    [[TcCourierInfoManager shareInstance] saveLatitude:[NSString stringWithFormat:@"%f",location.coordinate.latitude]];
-//    [[TcCourierInfoManager shareInstance] saveLongitude:[NSString stringWithFormat:@"%f",location.coordinate.longitude]];
-////    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
-//    if (reGeocode) {
-//        NSLog(@"reGeocode:%@", reGeocode);
-//    }
-//}
-
-
-#pragma mark -----定时器方法-----
-
-- (void)sendCourierAddress {
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&lati=%@&longt=%@&pid=%@",@"pdacoordinates", @"pda", [[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    NSDictionary *dic = @{@"api":@"pdacoordinates", @"core":@"pda", @"lati":[[TcCourierInfoManager shareInstance] getLatitude], @"longt":[[TcCourierInfoManager shareInstance] getLongitude], @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
-    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
-    
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFHTTPRequestSerializer serializer];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        if (0 == [dict[@"status"] floatValue]) {
-//            NSLog(@"")
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error is %@",error);
-    }];
-}
-
-#pragma mark -----AppDelegate方法-----
+#pragma mark- AppDelegate方法
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -155,6 +59,11 @@
                           channel:channel
                  apsForProduction:isProduction
             advertisingIdentifier:nil];
+    
+    
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];// 收到自定义消息时调用networkDidReceiveMessage:方法ßßß
+    [defaultCenter addObserver:self selector:@selector(networkDidLoginSuccess:) name:kJPFNetworkDidLoginNotification object:nil];// 登录成功时调用networkDidLoginSuccess: 方法
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -201,6 +110,111 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+#pragma mark- 高德
+
+- (void)setLocationManager {
+    
+    // 定位
+    self.locationManager = [[AMapLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
+    //设置允许后台定位参数，保持不会被系统挂起
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    [self.locationManager setAllowsBackgroundLocationUpdates:YES];//iOS9(含)以上系统需设置
+    [self.locationManager startUpdatingLocation];// 开启持续定位
+    
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    
+    _search = [[AMapSearchAPI alloc] init];
+    _search.delegate = self;
+    
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error {
+    //定位错误
+    NSLog(@"定位错误 %s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location {
+    //定位结果
+    //    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    
+    [[TcCourierInfoManager shareInstance] saveLatitude:[NSString stringWithFormat:@"%f",location.coordinate.latitude]];
+    [[TcCourierInfoManager shareInstance] saveLongitude:[NSString stringWithFormat:@"%f",location.coordinate.longitude]];
+    
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendCourierAddress) userInfo:nil repeats:YES];
+        
+    }
+    
+    AMapReGeocodeSearchRequest *reGeo = [[AMapReGeocodeSearchRequest alloc] init];
+    reGeo.location = [AMapGeoPoint locationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+    reGeo.radius = 200;
+    reGeo.requireExtension = YES;
+    //发起逆向地理编码
+    [_search AMapReGoecodeSearch:reGeo];
+    
+    
+}
+
+/* 逆地理编码回调. */ //在定位SDK版本更新到2.2以上之前  暂时先用search对象发起逆地理编码
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
+    if (response.regeocode) {
+        if ([self.addressDelegate respondsToSelector:@selector(setAddress:)]) {
+            NSString *address = [NSString stringWithFormat:@"%@%@%@%@%@%@",response.regeocode.addressComponent.district, response.regeocode.addressComponent.township, response.regeocode.addressComponent.neighborhood, response.regeocode.addressComponent.building, response.regeocode.addressComponent.streetNumber.street, response.regeocode.addressComponent.streetNumber.number];
+            [[TcCourierInfoManager shareInstance] saveCourierAddress:address];
+            [self.addressDelegate setAddress:address];
+        }
+    }
+    
+}
+
+//高德定位SDK2.2 以上的版本直接用这个代理方法进行反地理编码
+//- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode {
+//
+//    [[TcCourierInfoManager shareInstance] saveLatitude:[NSString stringWithFormat:@"%f",location.coordinate.latitude]];
+//    [[TcCourierInfoManager shareInstance] saveLongitude:[NSString stringWithFormat:@"%f",location.coordinate.longitude]];
+////    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+//    if (reGeocode) {
+//        NSLog(@"reGeocode:%@", reGeocode);
+//    }
+//}
+
+
+#pragma mark- 定时器方法
+
+
+/**
+ 上传跑腿当前位置
+ */
+- (void)sendCourierAddress {
+    
+    if (![[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "]) {
+        NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&lati=%@&longt=%@&pid=%@",@"pdacoordinates", @"pda", [[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+        NSDictionary *dic = @{@"api":@"pdacoordinates", @"core":@"pda", @"lati":[[TcCourierInfoManager shareInstance] getLatitude], @"longt":[[TcCourierInfoManager shareInstance] getLongitude], @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+        NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+        
+        AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+        session.requestSerializer = [AFHTTPRequestSerializer serializer];
+        session.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+        [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            if (0 == [dict[@"status"] floatValue]) {
+                NSLog(@"上传位置成功");
+            } else {
+                NSLog(@"上传位置失败");
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error is %@",error);
+        }];
+    }
+
+}
+
 #pragma mark- JPUSHRegisterDelegate
 
 // iOS 10 Support
@@ -236,5 +250,21 @@
     [JPUSHService handleRemoteNotification:userInfo];
 }
 
+// 收到自定义消息时  在此方法中处理消息
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+//    NSDictionary * userInfo = [notification userInfo];
+//    NSString *content = [userInfo valueForKey:@"msg_content"];
+    
+    
+}
+// 极光登录成功时
+- (void)networkDidLoginSuccess:(NSNotification *)notification {
+    NSString *alias = [NSString stringWithFormat:@"tcjpda%@",[[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    [JPUSHService setAlias:alias callbackSelector:nil object:nil];
+}
+
 
 @end
+
+
+

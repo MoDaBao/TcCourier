@@ -31,7 +31,7 @@
 
 
 
-#pragma mark -----自定义tabBarController方法-----
+#pragma mark- 自定义tabBarController方法-----
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 

@@ -51,8 +51,8 @@
     CGFloat height = 0;
     CGFloat margin = 5;
     UIView *temp = nil;
-    NSInteger btntag = 1000;
-    NSInteger buttontag = 2000;
+    NSInteger btntag = 1000;// 配送按钮tag值
+    NSInteger buttontag = 2000;// 跳转地址按钮tag值
     for (StoreInfoModel *storeInfoModel in storeInfoArray) {
         UIImageView *icon = [UIImageView new];
         [self addSubview:icon];
@@ -153,6 +153,7 @@
         
         height += margin;
         
+        // 地址跳转按钮
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -172,7 +173,7 @@
 }
 
 
-#pragma mark-----设置按钮的文字和背景颜色-----
+#pragma mark- 设置按钮的文字和背景颜色
 
 // 设置按钮的标题
 - (void)setBtnTitleWithStoreInfoModel:(StoreInfoModel *)storeInfoModel btn:(UIButton *)btn {
@@ -197,7 +198,7 @@
 }
 
 
-#pragma mark -----alertView代理方法-----
+#pragma mark- alertView代理方法
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 3001) {// 取餐中
@@ -212,7 +213,7 @@
 }
 
 
-#pragma mark-----按钮方法-----
+#pragma mark- 按钮方法
 
 // 配送按钮方法
 - (void)statusBtn:(UIButton *)btn {
@@ -253,7 +254,7 @@
 }
 
 
-#pragma mark -----网络请求-----
+#pragma mark- 网络请求
 
 // 取餐
 - (void)requestForTakeMealsWithStoreInfoModel:(StoreInfoModel *)storeInfoModel {

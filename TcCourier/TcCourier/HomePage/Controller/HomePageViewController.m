@@ -29,7 +29,7 @@
 @implementation HomePageViewController
 
 
-#pragma mark -----视图方法-----
+#pragma mark- 视图方法
 
 /** 修改上下班按钮图片 **/
 - (void)changeWorkBtnImg {
@@ -95,6 +95,8 @@
     }
     
     [self changeWorkBtnImg];
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -120,7 +122,7 @@
 }
 
 
-#pragma mark -----Appdelegate代理方法----
+#pragma mark- Appdelegate代理方法
 
 - (void)setAddress:(NSString *)address {
     if (self.isWork == YES) {
@@ -130,7 +132,7 @@
 }
 
 
-#pragma mark -----代理方法-----
+#pragma mark- 代理方法
 
 /**
  右滑返回手势代理方法
@@ -144,7 +146,7 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)work {
     

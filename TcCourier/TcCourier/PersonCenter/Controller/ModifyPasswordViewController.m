@@ -21,7 +21,7 @@
 
 @implementation ModifyPasswordViewController
 
-#pragma mark ----视图方法----
+#pragma mark- 视图方法
 
 - (void)createView {
     
@@ -81,7 +81,7 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)modifyPwd {
     
@@ -156,7 +156,7 @@
 }
 
 
-#pragma mark-----手势方法-----
+#pragma mark- 手势方法
 
 /**
  键盘回收
@@ -165,7 +165,7 @@
     [self.view endEditing:YES];
 }
 
-#pragma mark -----代理方法-----
+#pragma mark- 代理方法
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == _originalTF.tf) {
@@ -177,7 +177,7 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];

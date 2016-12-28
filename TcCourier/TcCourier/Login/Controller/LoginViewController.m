@@ -23,7 +23,7 @@
 @implementation LoginViewController
 
 
-#pragma mark -----视图方法-----
+#pragma mark- 视图方法
 
 /**
  创建视图
@@ -84,7 +84,7 @@
 }
 
 
-#pragma mark -----按钮方法-----
+#pragma mark- 按钮方法
 
 - (void)login {
     
@@ -111,6 +111,9 @@
                     
                     // 存储登录跑腿信息
                     [[TcCourierInfoManager shareInstance] setTcCourierInfoWithDic:dataDic];
+                    // 使用别名标识设备
+                    NSString *alias = [NSString stringWithFormat:@"tcjpda%@",[[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+                    [JPUSHService setAlias:alias callbackSelector:nil object:nil];
                     
                     // 刷新UI
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -160,14 +163,14 @@
 }
 
 
-#pragma mark ----键盘回收手势方法-----
+#pragma mark- 键盘回收手势方法
 
 - (void)returnKeyBoard {
     [self.view endEditing:YES];
 }
 
 
-#pragma mark -----代理方法-----
+#pragma mark- 代理方法
 
 // 限制输入位数11位
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

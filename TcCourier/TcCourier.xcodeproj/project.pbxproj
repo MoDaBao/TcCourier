@@ -50,6 +50,8 @@
 		E7729E4A1DDB069500BF5B69 /* OrderInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E491DDB069500BF5B69 /* OrderInfoModel.m */; };
 		E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E4C1DDC040900BF5B69 /* StoreInfoModel.m */; };
 		E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E4F1DDC041900BF5B69 /* AddressInfoModel.m */; };
+		E774B7081E14B2AD00B5E389 /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E774B7071E14B2AD00B5E389 /* UIColor+RandomColor.m */; };
+		E774B70B1E1502D600B5E389 /* WaitReceiveOrderTimeOutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E774B70A1E1502D600B5E389 /* WaitReceiveOrderTimeOutTableViewCell.m */; };
 		E790342C1DC09336004C1C8E /* AlreadyDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */; };
 		E79034371DC71593004C1C8E /* ShopAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79034361DC71593004C1C8E /* ShopAddressViewController.m */; };
 		E7ABA57F1DF1619E007F0638 /* ReceiverAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABA57E1DF1619E007F0638 /* ReceiverAddressViewController.m */; };
@@ -189,6 +191,10 @@
 		E7729E4C1DDC040900BF5B69 /* StoreInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInfoModel.m; sourceTree = "<group>"; };
 		E7729E4E1DDC041900BF5B69 /* AddressInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoModel.h; sourceTree = "<group>"; };
 		E7729E4F1DDC041900BF5B69 /* AddressInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoModel.m; sourceTree = "<group>"; };
+		E774B7061E14B2AD00B5E389 /* UIColor+RandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
+		E774B7071E14B2AD00B5E389 /* UIColor+RandomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
+		E774B7091E1502D600B5E389 /* WaitReceiveOrderTimeOutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitReceiveOrderTimeOutTableViewCell.h; sourceTree = "<group>"; };
+		E774B70A1E1502D600B5E389 /* WaitReceiveOrderTimeOutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderTimeOutTableViewCell.m; sourceTree = "<group>"; };
 		E790342A1DC09335004C1C8E /* AlreadyDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyDoneViewController.h; sourceTree = "<group>"; };
 		E790342B1DC09336004C1C8E /* AlreadyDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyDoneViewController.m; sourceTree = "<group>"; };
 		E79034351DC71592004C1C8E /* ShopAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopAddressViewController.h; sourceTree = "<group>"; };
@@ -420,6 +426,8 @@
 			children = (
 				E71593291DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.h */,
 				E715932A1DE690BE00EAAC68 /* WaitReceiveOrderTableViewCell.m */,
+				E774B7091E1502D600B5E389 /* WaitReceiveOrderTimeOutTableViewCell.h */,
+				E774B70A1E1502D600B5E389 /* WaitReceiveOrderTimeOutTableViewCell.m */,
 				E7ABA5861DF6AA27007F0638 /* ShopView.h */,
 				E7ABA5871DF6AA27007F0638 /* ShopView.m */,
 			);
@@ -549,6 +557,8 @@
 				E7FAAA701DB481F500B20084 /* UILabel+LabelHeightAndWidth.m */,
 				E727C1751E0B85B60096D17E /* UIViewController+GetCurrentViewController.h */,
 				E727C1761E0B85B60096D17E /* UIViewController+GetCurrentViewController.m */,
+				E774B7061E14B2AD00B5E389 /* UIColor+RandomColor.h */,
+				E774B7071E14B2AD00B5E389 /* UIColor+RandomColor.m */,
 				E7FB7FAB1DD19E7B0023148C /* MyMD5.h */,
 				E7FB7FAC1DD19E7B0023148C /* MyMD5.m */,
 			);
@@ -930,6 +940,7 @@
 				E7E856981DAF67080057D66F /* LoginViewController.m in Sources */,
 				E7E8567E1DAF62B70057D66F /* MainTabBar.m in Sources */,
 				E7ABA5851DF667B8007F0638 /* UIColor+flat.m in Sources */,
+				E774B70B1E1502D600B5E389 /* WaitReceiveOrderTimeOutTableViewCell.m in Sources */,
 				E7BA1E191DCC777D001B0081 /* OrderDetailViewController.m in Sources */,
 				E71593321DE690BE00EAAC68 /* OrderDetailTableViewCell.m in Sources */,
 				E7729E501DDC041900BF5B69 /* AddressInfoModel.m in Sources */,
@@ -949,6 +960,7 @@
 				E727C17A1E0BA2C40096D17E /* TodayCountDetailViewController.m in Sources */,
 				E7FB7FA61DD19E640023148C /* MJRefreshFooterView.m in Sources */,
 				E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */,
+				E774B7081E14B2AD00B5E389 /* UIColor+RandomColor.m in Sources */,
 				E7E8563B1DAF56700057D66F /* AppDelegate.m in Sources */,
 				E7FB2BD01DB5F9160045E871 /* TodayCountViewController.m in Sources */,
 				E715932E1DE690BE00EAAC68 /* HomePageItemView.m in Sources */,

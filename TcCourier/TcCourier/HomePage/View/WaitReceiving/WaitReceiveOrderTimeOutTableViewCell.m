@@ -1,42 +1,42 @@
 //
-//  DeliveryTableViewCell.m
+//  WaitReceiveOrderTimeOutTableViewCell.m
 //  TcCourier
 //
-//  Created by 莫大宝 on 2016/11/29.
+//  Created by 莫大宝 on 2016/12/29.
 //  Copyright © 2016年 dabao. All rights reserved.
 //
 
-#import "DeliveryTableViewCell.h"
+#import "WaitReceiveOrderTimeOutTableViewCell.h"
 #import "TotalAmountAndPaymentView.h"
 #import "ReceiverAddressView.h"
 #import "RunFeeAndTiFeeView.h"
 #import "TimeOutView.h"
-#import "DeliveryViewController.h"
+#import "ShopView.h"
 
-@interface DeliveryTableViewCell ()
+@interface WaitReceiveOrderTimeOutTableViewCell ()
+
 @property (nonatomic, assign) CGFloat margin;
-@property (nonatomic, strong) UIView *contentV;
+@property (nonatomic, strong) UIView *contentV;// 内容视图
 @property (nonatomic, strong) UILabel *orderNumberL;// 订单编号
-@property (nonatomic, strong) UILabel *orderTimeL;// 下单时间
+@property (nonatomic, strong) UILabel *orderTimeL;// 订单时间
 @property (nonatomic, strong) TotalAmountAndPaymentView *totalAndPaymentView;// 订单总额和支付方式
 @property (nonatomic, strong) ReceiverAddressView *receiverAddressView;// 收货人地址
 @property (nonatomic, strong) RunFeeAndTiFeeView *runFeeAndTiFeeView;// 跑腿费和跑腿提成
 
-@property (nonatomic, strong) ShopButtonView *shopBtnView;// 店铺信息
+@property (nonatomic, strong) TimeOutView *timeOutView;// 超时赔付
+@property (nonatomic, strong) ShopView *shopView;// 店铺视图
 
-
-
-
+@property (nonatomic, copy) NSString *order_no;
 
 @end
 
-@implementation DeliveryTableViewCell
+@implementation WaitReceiveOrderTimeOutTableViewCell
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         _margin = 5;
-        
         // 内容视图
         self.contentV = [[UIView alloc] init];
         self.contentV.layer.borderWidth = 1;
@@ -132,18 +132,41 @@
             make.top.equalTo(_runFeeAndTiFeeView.mas_bottom);
             make.height.equalTo(@(sortaPixel));
         }];
-
         
-        // 店铺信息
-        _shopBtnView = [ShopButtonView new];
-        [self.contentV addSubview:_shopBtnView];
-        [_shopBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        // 超时赔付
+        _timeOutView = [TimeOutView new];
+        [self.contentV addSubview:_timeOutView];
+        [_timeOutView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(self.contentV);
             make.top.equalTo(line4.mas_bottom);
             make.height.equalTo(@40);
         }];
-        _shopBtnView.delegate = [UIViewController getCurrentViewController];
-//        _shopBtnView.backgroundColor = [
+        
+        // 店铺视图
+        _shopView = [ShopView new];
+        [self.contentV addSubview:_shopView];
+        [_shopView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.equalTo(_contentV);
+            make.top.equalTo(_timeOutView.mas_bottom);
+            make.height.equalTo(@40);// 临时高度
+        }];
+        
+        // 拒绝订单
+        UIButton *acceptBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.contentV addSubview:acceptBtn];
+        [acceptBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_shopView.mas_bottom).offset(15);
+            make.centerX.equalTo(self.mas_centerX);
+            make.width.equalTo(@150);
+            make.height.equalTo(@35);
+        }];
+        [acceptBtn setTitle:@"接受订单" forState:UIControlStateNormal];
+        [acceptBtn setBackgroundColor:[UIColor colorWithRed:0.93 green:0.33 blue:0.31 alpha:1.00]];
+        [acceptBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [acceptBtn addTarget:self action:@selector(acceptBtn:) forControlEvents:UIControlEventTouchUpInside];
+        acceptBtn.layer.cornerRadius = 5;
+        acceptBtn.titleLabel.font = kFont14;
+        
         
         
     }
@@ -151,6 +174,9 @@
 }
 
 - (void)setDataWithModel:(OrderInfoModel *)orderModel {
+    
+    _order_no = orderModel.order_number;
+    
     _orderNumberL.text = [NSString stringWithFormat:@"订单编号:%@",orderModel.order_number];// 加载订单编号
     _orderTimeL.text = [NSString stringWithFormat:@"下单时间:%@",orderModel.ctime];// 加载下单时间
     // 加载订单总额和支付方式
@@ -160,10 +186,37 @@
     // 加载跑腿费和跑腿提成
     [_runFeeAndTiFeeView loadRunFee:orderModel.order_run_fee tiFee:orderModel.ti_run_fee];
     
+    // 超时赔付
+    [_timeOutView loadTimeOut:orderModel.timeout];
     
-    // 店铺信息+配送按钮
-    [_shopBtnView loadViewWithStoreInfoArray:orderModel.storeInfoArray orderNumber:orderModel.order_number];
+    // 店铺视图
+    [_shopView loadViewWithStoreInfoArray:orderModel.storeInfoArray];
+}
+
+// 接单按钮
+- (void)acceptBtn:(UIButton *)btn {
     
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_no=%@&pid=%@",@"pdagetorder", @"pda", _order_no, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdagetorder", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"order_no":_order_no};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        if (0 == [dict[@"status"] floatValue]) {// 接单成功
+            if ([self.delegate respondsToSelector:@selector(refreshWaitReceiveTimeOut)]) {
+                [self.delegate refreshWaitReceiveTimeOut];// 刷新待接单列表
+            }
+        } else {// 接单失败
+            if ([self.delegate respondsToSelector:@selector(waitReceiverTimeOutCellShowTipMessageWithTip:)]) {
+                [self.delegate waitReceiverTimeOutCellShowTipMessageWithTip:dict[@"msg"]];// 接单失败显示失败原因
+            }
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
     
 }
 

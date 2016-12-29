@@ -10,9 +10,7 @@
 #import "TotalAmountAndPaymentView.h"
 #import "ReceiverAddressView.h"
 #import "RunFeeAndTiFeeView.h"
-#import "TimeOutView.h"
 #import "ShopView.h"
-#import "TipMessageView.h"
 
 @interface WaitReceiveOrderTableViewCell ()
 
@@ -23,9 +21,6 @@
 @property (nonatomic, strong) TotalAmountAndPaymentView *totalAndPaymentView;// 订单总额和支付方式
 @property (nonatomic, strong) ReceiverAddressView *receiverAddressView;// 收货人地址
 @property (nonatomic, strong) RunFeeAndTiFeeView *runFeeAndTiFeeView;// 跑腿费和跑腿提成
-
-@property (nonatomic, strong) UIView *line4;// 分割线4
-@property (nonatomic, strong) TimeOutView *timeOutView;// 超时赔付
 @property (nonatomic, strong) ShopView *shopView;// 店铺视图
 
 @property (nonatomic, copy) NSString *order_no;
@@ -127,30 +122,22 @@
         }];
         
         // 分割线
-        _line4 = [[UIView alloc] init];
-        _line4.backgroundColor = [UIColor blackColor];
-        [self.contentV addSubview:_line4];//线是否加
-        [_line4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIView *line4 = [[UIView alloc] init];
+        line4.backgroundColor = [UIColor blackColor];
+        [self.contentV addSubview:line4];//线是否加
+        [line4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(_contentV);
             make.top.equalTo(_runFeeAndTiFeeView.mas_bottom);
             make.height.equalTo(@(sortaPixel));
         }];
         
-        // 超时赔付
-        _timeOutView = [TimeOutView new];
-        [self.contentV addSubview:_timeOutView];
-        [_timeOutView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.and.right.equalTo(self.contentV);
-            make.top.equalTo(_line4.mas_bottom);
-            make.height.equalTo(@40);
-        }];
         
         // 店铺视图
         _shopView = [ShopView new];
         [self.contentV addSubview:_shopView];
         [_shopView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(_contentV);
-            make.top.equalTo(_timeOutView.mas_bottom);
+            make.top.equalTo(line4.mas_bottom);
             make.height.equalTo(@40);// 临时高度
         }];
         
@@ -189,16 +176,6 @@
     // 加载跑腿费和跑腿提成
     [_runFeeAndTiFeeView loadRunFee:orderModel.order_run_fee tiFee:orderModel.ti_run_fee];
     
-    // 超时赔付
-    if ([orderModel.is_timeout isEqualToString:@"0"]) {// 没有超时赔付
-        [_shopView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_line4.mas_bottom);
-        }];
-        _timeOutView = nil;
-    } else {// 有超时赔付
-        [_timeOutView loadTimeOut:orderModel.timeout];
-    }
-    
     // 店铺视图
     [_shopView loadViewWithStoreInfoArray:orderModel.storeInfoArray];
 }
@@ -216,12 +193,12 @@
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if (0 == [dict[@"status"] floatValue]) {// 接单成功
-            if ([self.delegate respondsToSelector:@selector(waitReceiverCellShowTipMessageWithTip:)]) {
-                [self.delegate waitReceiverCellShowTipMessageWithTip:@"接单成功"];
+            if ([self.delegate respondsToSelector:@selector(refreshWaitReceive)]) {
+                [self.delegate refreshWaitReceive];// 刷新待接单列表
             }
         } else {// 接单失败
             if ([self.delegate respondsToSelector:@selector(waitReceiverCellShowTipMessageWithTip:)]) {
-                [self.delegate waitReceiverCellShowTipMessageWithTip:dict[@"msg"]];
+                [self.delegate waitReceiverCellShowTipMessageWithTip:dict[@"msg"]];// 接单失败显示失败原因
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

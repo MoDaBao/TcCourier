@@ -26,19 +26,7 @@
 
 @implementation ShopButtonView
 
-- (instancetype)init {
-    if (self = [super init]) {
-        AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;
-        if (tabVC.selectedIndex == 0) {
-            if ([tabVC.homeVc.navigationController.viewControllers.lastObject isKindOfClass:[DeliveryViewController class]]) {
-                DeliveryViewController *deliveryVC = (DeliveryViewController *)tabVC.homeVc.navigationController.viewControllers.lastObject;
-                self.delegate = deliveryVC;
-            }
-        }
-    }
-    return self;
-}
+
 
 - (void)loadViewWithStoreInfoArray:(NSArray *)storeInfoArray orderNumber:(NSString *)orderNumber {
     
@@ -53,6 +41,7 @@
     UIView *temp = nil;
     NSInteger btntag = 1000;// 配送按钮tag值
     NSInteger buttontag = 2000;// 跳转地址按钮tag值
+    CGFloat jiantouW = 8;
     for (StoreInfoModel *storeInfoModel in storeInfoArray) {
         UIImageView *icon = [UIImageView new];
         [self addSubview:icon];
@@ -84,7 +73,7 @@
         [addressL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(icon);
             make.top.equalTo(icon.mas_bottom).offset(margin);
-            make.right.equalTo(@(margin));
+            make.right.equalTo(self).offset(-(margin + jiantouW));
         }];
         addressL.font = [UIFont systemFontOfSize:12];
         addressL.text = [NSString stringWithFormat:@"地址:%@",storeInfoModel.address];
@@ -92,7 +81,7 @@
         
         UIImageView *jiantou = [UIImageView new];
         [self addSubview:jiantou];
-        CGFloat jiantouW = 8;
+        
         [jiantou mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(@(-margin));
             // 17 X 29
@@ -108,7 +97,7 @@
         [remarkL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(icon);
             make.top.equalTo(addressL.mas_bottom).offset(margin);
-            make.right.equalTo(@(margin));
+            make.right.equalTo(jiantou.mas_right);
         }];
         remarkL.font = kFont14;
         remarkL.numberOfLines = 0;
@@ -151,7 +140,7 @@
             temp = line;
         }
         
-        height += margin;
+        height += margin + 1;
         
         // 地址跳转按钮
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -163,13 +152,20 @@
         }];
         [button addTarget:self action:@selector(addressBtn:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = buttontag++;
+        
+//        shopNameL.backgroundColor = [UIColor randomColor];
+//        addressL.backgroundColor = [UIColor randomColor];
+//        remarkL.backgroundColor = [UIColor randomColor];
     }
+    
+    height += 1;
     
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(height));
     }];
     
-//    self.backgroundColor = [UIColor orangeColor];
+//    self.backgroundColor = [UIColor randomColor];
+    
 }
 
 
@@ -242,14 +238,8 @@
 //    shopAddressVC.index = btn.tag - 2000;
     shopAddressVC.storeInfoModel = self.storeInfoArray[btn.tag - 2000];
     
-    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    MainTabBarController *tabVC = (MainTabBarController *)appdelegate.window.rootViewController;
-    if (tabVC.selectedIndex == 0) {
-        if ([tabVC.homeVc.navigationController.viewControllers.lastObject isKindOfClass:[DeliveryViewController class]]) {
-            DeliveryViewController *deliveryVC = (DeliveryViewController *)tabVC.homeVc.navigationController.viewControllers.lastObject;
-            [deliveryVC.navigationController pushViewController:shopAddressVC animated:YES];
-        }
-    }
+    UIViewController *vc = [UIViewController getCurrentViewController];
+    [vc.navigationController pushViewController:shopAddressVC animated:YES];
     
 }
 

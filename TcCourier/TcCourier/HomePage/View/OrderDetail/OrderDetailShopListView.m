@@ -75,7 +75,11 @@
         [self addSubview:line1];
         [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(10);
-            make.top.equalTo(foodListView.mas_bottom).offset(_margin);
+            if (shopNameLHeight > foodListViewHeight) {
+                make.top.equalTo(shopNameL.mas_bottom).offset(_margin);
+            } else {
+                make.top.equalTo(foodListView.mas_bottom).offset(_margin);
+            }
             make.height.equalTo(@(sortaPixel));
             make.right.equalTo(self).offset(-10);
         }];

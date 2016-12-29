@@ -252,8 +252,14 @@
 
 // 收到自定义消息时  在此方法中处理消息
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
-//    NSDictionary * userInfo = [notification userInfo];
+    NSDictionary * userInfo = [notification userInfo];
 //    NSString *content = [userInfo valueForKey:@"msg_content"];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:userInfo options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    UIViewController *vc = [UIViewController getCurrentViewController];
+    UILabel *testL = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 100, 30)];
+    testL.text = jsonStr;
+    [vc.view addSubview:testL];
     
     
 }

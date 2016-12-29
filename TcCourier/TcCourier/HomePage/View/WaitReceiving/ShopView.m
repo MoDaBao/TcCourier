@@ -37,6 +37,7 @@
     CGFloat margin = 5;
     UIView *temp = nil;
     NSInteger btntag = 5000;
+    CGFloat jiantouW = 8;
     for (StoreInfoModel *storeInfoModel in storeInfoArray) {
         UIImageView *icon = [UIImageView new];
         [self addSubview:icon];
@@ -68,11 +69,24 @@
         [addressL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(icon);
             make.top.equalTo(icon.mas_bottom).offset(margin);
-            make.right.equalTo(@(margin));
+            make.right.equalTo(self).offset(-(margin + jiantouW));
         }];
         addressL.font = [UIFont systemFontOfSize:12];
         addressL.text = [NSString stringWithFormat:@"地址:%@",storeInfoModel.address];
-        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:addressL.text font:addressL.font];
+        addressL.numberOfLines = 0;
+        height += margin + [UILabel getHeightByWidth:kScreenWidth - 38 title:addressL.text font:addressL.font];
+        
+        // 箭头
+        UIImageView *jiantou = [UIImageView new];
+        [self addSubview:jiantou];
+        [jiantou mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@(-margin));
+            // 17 X 29
+            make.width.equalTo(@(jiantouW));
+            make.height.equalTo(@(jiantouW * 1.0 / 17 * 29));
+            make.centerY.equalTo(addressL.mas_centerY);
+        }];
+        jiantou.image = [UIImage imageNamed:@"youbianjian"];
         
         // 备注
         UILabel *remarkL = [UILabel new];
@@ -80,13 +94,12 @@
         [remarkL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(icon);
             make.top.equalTo(addressL.mas_bottom).offset(margin);
-            make.right.equalTo(@(margin));
+            make.right.equalTo(jiantou.mas_right);
         }];
         remarkL.font = kFont14;
         remarkL.numberOfLines = 0;
         remarkL.text = [NSString stringWithFormat:@"备注:%@",storeInfoModel.remark];
         height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:remarkL.text font:remarkL.font];
-        
         
         float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
         UIView *line = [UIView new];
@@ -99,25 +112,18 @@
         }];
         temp = line;
         
-        height += margin + sortaPixel;
+//        height += margin + sortaPixel;
+        height += margin + 1;
         
-        UIImageView *jiantou = [UIImageView new];
-        [self addSubview:jiantou];
-        CGFloat jiantouW = 8;
-        [jiantou mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@(-margin));
-            // 17 X 29
-            make.width.equalTo(@(jiantouW));
-            make.height.equalTo(@(jiantouW * 1.0 / 17 * 29));
-            make.centerY.equalTo(self);
-        }];
-        jiantou.image = [UIImage imageNamed:@"youbianjian"];
         
         // 地址跳转按钮
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
+//            make.edges.equalTo(self);
+            make.top.equalTo(icon.mas_top);
+            make.left.and.right.equalTo(self);
+            make.bottom.equalTo(line.mas_bottom);
         }];
         [btn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = btntag++;
@@ -127,6 +133,7 @@
     [self mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(height));
     }];
+    
 }
 
 - (void)click:(UIButton *)btn {

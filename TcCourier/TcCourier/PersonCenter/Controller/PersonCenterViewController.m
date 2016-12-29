@@ -142,7 +142,7 @@
         [personVC.navigationController pushViewController:modifyVC animated:YES];
     };
     _personView.contactBlock = ^ (void) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"商服电话:81691580\n工作时间：9:00-19:00" delegate:personVC cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"客服电话:81691580\n工作时间：9:00-19:00" delegate:personVC cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
         alertView.tag = 2333;
         [alertView show];
     };

@@ -9,11 +9,14 @@
 #import "WaitReceiveOrderViewController.h"
 #import "WaitReceiveOrderTableViewCell.h"
 #import "TipMessageView.h"
+#import "FeHourGlass.h"
+#import "WaitReceiveOrderTimeOutTableViewCell.h"
 
 @interface WaitReceiveOrderViewController ()<UITableViewDelegate, UITableViewDataSource, WaitReceiveOrderTableViewCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) FeHourGlass *hourGlass;
 
 @end
 
@@ -68,6 +71,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
                 [self.tableView headerEndRefreshing];
+                if (_hourGlass) {
+                    [_hourGlass removeFromSuperview];
+                    _hourGlass = nil;
+                }
             });
         } else {
             NSLog(@"msg = %@",dict[@"msg"]);
@@ -146,11 +153,13 @@
     CGFloat height = 0;
     for (StoreInfoModel *storeInfoModel in orderInfoModel.storeInfoArray) {
         height += margin + 15;// icon
-        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:[NSString stringWithFormat:@"地址:%@",storeInfoModel.address] font:[UIFont systemFontOfSize:12]];// 地址
+        height += margin + [UILabel getHeightByWidth:kScreenWidth - 38 title:[NSString stringWithFormat:@"地址:%@",storeInfoModel.address] font:[UIFont systemFontOfSize:12]];// 地址
         height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:[NSString stringWithFormat:@"备注:%@",storeInfoModel.remark] font:kFont14];// 备注
-        height += margin + 35;// 配送按钮
-        height += margin;
+        height += margin + 1;
     }
+    
+    height += margin + 35;// 配送按钮
+    
     
     if ([orderInfoModel.is_timeout isEqualToString:@"1"]) {
         height += 40;
@@ -161,15 +170,31 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *reuseIdentifier = @"reuse";
-    WaitReceiveOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell) {
-        cell = [[WaitReceiveOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    OrderInfoModel *model = self.dataArray[indexPath.row];
+    if ([model.is_timeout isEqualToString:@"1"]) {
+        NSString *reuseIdentifier = @"reuse";
+        WaitReceiveOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        if (!cell) {
+            cell = [[WaitReceiveOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+        }
         cell.delegate = self;
+        [cell setDataWithModel:self.dataArray[indexPath.row]];
+        return cell;
+    } else {
+        NSString *reuse = @"reuse1";
+        WaitReceiveOrderTimeOutTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
+        if (!cell) {
+            cell = [[WaitReceiveOrderTimeOutTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        cell.delegate = self;
+        [cell setDataWithModel:self.dataArray[indexPath.row]];
+        return cell;
     }
-    [cell setDataWithModel:self.dataArray[indexPath.row]];
-    return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -181,12 +206,68 @@
 
 - (void)waitReceiverCellShowTipMessageWithTip:(NSString *)tip {
     // 提示框
-    TipMessageView *tipView = [[TipMessageView alloc] initWithTip:tip];
+    TipMessageView *tipView = [[TipMessageView alloc] initWithTip:[NSString stringWithFormat:@"接单失败,稍后重试"]];
     [self.view addSubview:tipView];
     [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.height.equalTo(@100);
         make.width.equalTo(@200);
+    }];
+    [self requestData];
+}
+
+- (void)refreshWaitReceive {
+    CGFloat height = 100;
+    CGFloat width = 100;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((kScreenWidth - width) * .5, (kScreenHeight - kNavigationBarHeight - height) * .5, width, height)];
+    if (!_hourGlass) {
+        _hourGlass = [[FeHourGlass alloc] initWithView:view];
+        _hourGlass.layer.cornerRadius = 8;
+        [self.view addSubview:_hourGlass];
+        [_hourGlass mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.and.height.equalTo(@100);
+            make.center.equalTo(self.view);
+        }];
+    }
+    [_hourGlass showWhileExecutingBlock:^{
+        sleep(1);
+    } completion:^{
+        [self requestData];
+    }];
+}
+
+
+#pragma mark- WaitReceiveTimeOutDelegate
+
+- (void)waitReceiverTimeOutCellShowTipMessageWithTip:(NSString *)tip {
+    // 提示框
+    TipMessageView *tipView = [[TipMessageView alloc] initWithTip:[NSString stringWithFormat:@"接单失败,稍后重试"]];
+    [self.view addSubview:tipView];
+    [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.height.equalTo(@100);
+        make.width.equalTo(@200);
+    }];
+    [self requestData];
+
+}
+- (void)refreshWaitReceiveTimeOut {
+    CGFloat height = 100;
+    CGFloat width = 100;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((kScreenWidth - width) * .5, (kScreenHeight - kNavigationBarHeight - height) * .5, width, height)];
+    if (!_hourGlass) {
+        _hourGlass = [[FeHourGlass alloc] initWithView:view];
+        _hourGlass.layer.cornerRadius = 8;
+        [self.view addSubview:_hourGlass];
+        [_hourGlass mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.and.height.equalTo(@100);
+            make.center.equalTo(self.view);
+        }];
+    }
+    [_hourGlass showWhileExecutingBlock:^{
+        sleep(1);
+    } completion:^{
+        [self requestData];
     }];
 }
 

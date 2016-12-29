@@ -12,6 +12,7 @@
 @protocol WaitReceiveOrderTableViewCellDelegate <NSObject>
 
 - (void)waitReceiverCellShowTipMessageWithTip:(NSString *)tip;
+- (void)refreshWaitReceive;
 
 @end
 

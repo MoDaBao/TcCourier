@@ -48,7 +48,7 @@
     [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
     [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         if (0 == [dict[@"status"] floatValue]) {
             
             [self.dataArray removeAllObjects];
@@ -153,10 +153,10 @@
     CGFloat height = 0;
     for (StoreInfoModel *storeInfoModel in orderInfoModel.storeInfoArray) {
         height += margin + 15;// icon
-        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:[NSString stringWithFormat:@"地址:%@",storeInfoModel.address] font:[UIFont systemFontOfSize:12]];// 地址
+        height += margin + [UILabel getHeightByWidth:kScreenWidth - 38 title:[NSString stringWithFormat:@"地址:%@",storeInfoModel.address] font:[UIFont systemFontOfSize:12]];// 地址
         height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:[NSString stringWithFormat:@"备注:%@",storeInfoModel.remark] font:kFont14];// 备注
         height += margin + 35;// 配送按钮
-        height += margin;
+        height += margin + 1;
     }
     
     if ([orderInfoModel.is_timeout isEqualToString:@"1"]) {
@@ -164,7 +164,7 @@
     }
     
     
-    return 193 + height;
+    return 192 + height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -10,4 +10,7 @@
 
 @interface WaitReceiveOrderViewController : UIViewController
 
+@property (nonatomic, assign) BOOL isJpush;
+@property (nonatomic, copy) NSString *orderNumber;
+
 @end

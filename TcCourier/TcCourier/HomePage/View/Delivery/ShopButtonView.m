@@ -63,6 +63,7 @@
         [shopNameL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(icon.mas_centerY);
             make.left.equalTo(icon.mas_right).offset(margin);
+            make.right.equalTo(self.mas_right).offset(-13);
         }];
         shopNameL.font = kFont14;
         shopNameL.text = storeInfoModel.store_name;

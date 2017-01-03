@@ -84,6 +84,51 @@
     }];
 }
 
+- (void)requestJpushData {
+    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_no=%@&pid=%@",@"pdaorderinfo", @"pda", _orderNumber, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+    NSDictionary *dic = @{@"api":@"pdaorderinfo", @"core":@"pda", @"order_no":_orderNumber, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    
+    
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //        NSLog(@"dict = %@",dict);
+        //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {
+            [self.dataArray removeAllObjects];
+            NSDictionary *dataDic = dict[@"data"];
+            for (NSDictionary *orderDic in dataDic[@"order"]) {
+                OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                [orderModel setValuesForKeysWithDictionary:orderDic];
+                NSArray *arr = orderDic[@"store"];
+                for (NSDictionary *storedic in arr) {
+                    StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                    [storemodel setValuesForKeysWithDictionary:storedic];
+                    [orderModel.storeInfoArray addObject:storemodel];
+                }
+                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                [self.dataArray addObject:orderModel];
+            }
+            
+            // 回到主线程刷新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+            
+            
+        }
+        //        NSLog(@"2333");
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+}
+
+
 #pragma mark- 视图方法
 
 - (void)createView {
@@ -126,9 +171,11 @@
     
     [self createView];
     
-    [self requestData];
-    
-    
+    if (_isJpush) {
+        [self requestJpushData];
+    } else {
+        [self requestData];
+    }
     
 }
 
@@ -172,7 +219,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     OrderInfoModel *model = self.dataArray[indexPath.row];
-    if ([model.is_timeout isEqualToString:@"1"]) {
+    if ([model.is_timeout isEqualToString:@"0"]) {
         NSString *reuseIdentifier = @"reuse";
         WaitReceiveOrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (!cell) {

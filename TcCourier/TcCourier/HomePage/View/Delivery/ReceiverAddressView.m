@@ -37,7 +37,7 @@
         [view removeFromSuperview];
     }
     
-    
+    // 图标
     UIImageView *icon = [UIImageView new];
     [self addSubview:icon];
     [icon mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,15 +47,7 @@
     }];
     icon.image = [UIImage imageNamed:@"shouhuodizhi"];
     
-    UILabel *addressL = [UILabel new];
-    [self addSubview:addressL];
-    [addressL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(icon.mas_centerY);
-        make.left.equalTo(icon.mas_right).offset(5);
-    }];
-    addressL.font = kFont14;
-    addressL.text = [NSString stringWithFormat:@"收货地址:%@",addressInfoModel.address];
-    
+    // 箭头
     UIImageView *jiantou = [UIImageView new];
     [self addSubview:jiantou];
     CGFloat jiantouW = 8;
@@ -68,6 +60,19 @@
     }];
     jiantou.image = [UIImage imageNamed:@"youbianjian"];
     
+    // 地址
+    UILabel *addressL = [UILabel new];
+    [self addSubview:addressL];
+    [addressL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(icon.mas_centerY);
+        make.left.equalTo(icon.mas_right).offset(5);
+        make.right.equalTo(jiantou.mas_left);
+    }];
+    addressL.font = kFont14;
+    addressL.text = [NSString stringWithFormat:@"收货地址:%@%@",addressInfoModel.address, addressInfoModel.detail_addr];
+//    addressL.backgroundColor = [UIColor randomColor];
+    
+    // 跳转至地图按钮
     UIButton *btn = [UIButton new];
     [self addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {

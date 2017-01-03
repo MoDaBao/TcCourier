@@ -11,13 +11,14 @@
 #import "HomePageViewController.h"
 #import "PersonCenterViewController.h"
 #import "MainTabBarController.h"
+#import "WaitReceiveOrderViewController.h"
 
-
-@interface AppDelegate ()<JPUSHRegisterDelegate>
+@interface AppDelegate ()<JPUSHRegisterDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, strong) AMapSearchAPI *search;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, copy) NSString *jPushOrderNumber;
 
 @end
 
@@ -253,14 +254,10 @@
 // 收到自定义消息时  在此方法中处理消息
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
-//    NSString *content = [userInfo valueForKey:@"msg_content"];
-    NSData *data = [NSJSONSerialization dataWithJSONObject:userInfo options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    UIViewController *vc = [UIViewController getCurrentViewController];
-    UILabel *testL = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 100, 30)];
-    testL.text = jsonStr;
-    [vc.view addSubview:testL];
-    
+    NSDictionary *content = [userInfo valueForKey:@"content"];
+    _jPushOrderNumber = content[@"order_number"];
+    UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有新订单，前去抢单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
+    [alertV show];
     
 }
 // 极光登录成功时
@@ -269,6 +266,16 @@
     [JPUSHService setAlias:alias callbackSelector:nil object:nil];
 }
 
+
+#pragma mark- AlertView代理方法
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    WaitReceiveOrderViewController *waitVC = [[WaitReceiveOrderViewController alloc] init];
+    waitVC.isJpush = YES;
+    waitVC.orderNumber = _jPushOrderNumber;
+    UIViewController *vc = [UIViewController getCurrentViewController];
+    [vc.navigationController pushViewController:waitVC animated:YES];
+}
 
 @end
 

@@ -98,7 +98,7 @@
         }];
         
         
-        
+        // 拨号按钮
         UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         [self addSubview:phoneBtn];
         [phoneBtn setBackgroundImage:[UIImage imageNamed:@"dianhua"] forState:UIControlStateNormal];
@@ -109,7 +109,7 @@
         }];
         [phoneBtn addTarget:self action:@selector(phone) forControlEvents:UIControlEventTouchUpInside];
         
-        
+        // 导航按钮
         UIButton *navigateBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         [self addSubview:navigateBtn];
         [navigateBtn setBackgroundImage:[UIImage imageNamed:@"daohang"] forState:UIControlStateNormal];
@@ -122,6 +122,7 @@
         }];
         [navigateBtn addTarget:self action:@selector(navigate) forControlEvents:UIControlEventTouchUpInside];
         
+        // 店铺地址
         UILabel *addressL = [UILabel new];
         [self addSubview:addressL];
         addressL.numberOfLines = 0;

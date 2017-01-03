@@ -36,6 +36,8 @@
 @property (nonatomic, strong) UIView *line2;// 收货地址 下面的分割线
 @property (nonatomic, strong) UILabel *shouhuodizhi;
 
+@property (nonatomic, copy) NSString *phone;
+
 @end
 
 @implementation OrderDetailTableViewCell
@@ -292,6 +294,16 @@
         [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.61 blue:0.58 alpha:1.00] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
         [attStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(6,orderModel.addressInfo.mobile.length)];
         _receiverPhoneL.attributedText = attStr;
+        
+        _phone = orderModel.addressInfo.mobile;
+        
+        // 拨号
+//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.contentV addSubview:btn];
+//        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(_receiverPhoneL);
+//        }];
+//        [btn addTarget:self action:@selector(bohao) forControlEvents:UIControlEventTouchUpInside];
     }
     
     
@@ -339,6 +351,17 @@
 // 计算_orderShopDetailListView的高度
 - (void)getOrderShopDetailListViewHeightWithStoreArray:(NSArray *)sotreArray {
     
+}
+
+
+/**
+ 拨号方法
+ */
+- (void)bohao {
+    if (_phone.length > 0) {
+        NSString *num = [[NSString alloc] initWithFormat:@"telprompt://%@",self.phone]; //而这个方法则打电话前先弹框  是否打电话
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]]; //拨号
+    }
 }
 
 - (void)awakeFromNib {

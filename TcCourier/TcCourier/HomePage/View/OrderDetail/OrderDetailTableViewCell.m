@@ -158,6 +158,7 @@
         [_receiverPhoneL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_receiverL);
             make.right.equalTo(self.contentV).offset(-20);
+            make.height.equalTo(@([UILabel getHeightWithTitle:@"收货人" font:kFont14]));
         }];
         
         // 店家地址标签
@@ -298,12 +299,13 @@
         _phone = orderModel.addressInfo.mobile;
         
         // 拨号
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.contentV addSubview:btn];
-//        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(_receiverPhoneL);
-//        }];
-//        [btn addTarget:self action:@selector(bohao) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.contentV addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(_receiverPhoneL);
+//            make.right.and.left.top.and.bottom.equalTo(_receiverPhoneL);
+        }];
+        [btn addTarget:self action:@selector(bohao) forControlEvents:UIControlEventTouchUpInside];
     }
     
     

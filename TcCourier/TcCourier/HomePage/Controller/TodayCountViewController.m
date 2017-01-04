@@ -27,6 +27,8 @@
 
 - (void)requestData {
     
+    
+    
     NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&pid=%@",@"pdastatistical", @"pda", [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
     NSDictionary *dic = @{@"api":@"pdastatistical", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
     NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};

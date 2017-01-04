@@ -46,6 +46,7 @@
         if (0 == [dict[@"status"] floatValue]) {
             NSDictionary *dataDic = dict[@"data"][@"pda"];
             _score = dataDic[@"score"];
+            [[TcCourierInfoManager shareInstance] saveScore:_score];// 更新socre
             _ordercount = dataDic[@"ordercount"];
             _ordertimeout = dataDic[@"ordertimeout"];
             _timeout = dataDic[@"timeout"];
@@ -62,11 +63,17 @@
 #pragma mark- 视图方法
 
 - (void)updateView {
+    // 有效单数
     _personView.effectiveOrderL.text = [NSString stringWithFormat:@"%@单",_ordercount];
+    // 超时赔付单数
     _personView.timeoutCountL.text = [NSString stringWithFormat:@"%@单",_ordertimeout];
+    // 超时赔付百分比
     _personView.timeoutPercentageL.text = [NSString stringWithFormat:@"%.2f%%",_timeout.floatValue * 100];
-    _totalRateLabel.text = [NSString stringWithFormat:@"总好评率%%%02.0f",[[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0 * 100];
-    [_startRateView updateGoodRateWith:[[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0];
+    // 总好评率
+    _totalRateLabel.text = [NSString stringWithFormat:@"总好评率%%%02.0f",_score.floatValue / 5.0 * 100];
+    // 总好评率视图
+    [_startRateView updateGoodRateWith:_score.floatValue / 5.0];
+    // 用户名
     _userNameL.text = [NSString stringWithFormat:@"%@",[[TcCourierInfoManager shareInstance] getTcCourierUserName]];
     
 }

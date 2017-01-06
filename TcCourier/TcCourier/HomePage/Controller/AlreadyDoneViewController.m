@@ -39,104 +39,131 @@
 
 - (void)requestData {
     _page = 0;
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [NSString stringWithFormat:@"%ld",_page], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":[NSString stringWithFormat:@"%ld",_page]};
-//    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-//    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount]};
-    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+//    if (1 == [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] floatValue]) {// 当前为 在线状态
+//        
+//        
+//    } else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先切换至上班状态" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+//    }
     
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFHTTPRequestSerializer serializer];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSArray *dataArray = dict[@"data"][@"order"];
-        if (0 == [dict[@"status"] floatValue]) {
-            
-//            NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            
-            [self.dataArray removeAllObjects];
-            
-            for (NSDictionary *orderDic in dataArray) {
-                OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
-                [orderModel setValuesForKeysWithDictionary:orderDic];
-                NSArray *arr = orderDic[@"store"];
-                for (NSDictionary *storedic in arr) {
-                    StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
-                    [storemodel setValuesForKeysWithDictionary:storedic];
-                    [orderModel.storeInfoArray addObject:storemodel];
+    if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)) {
+        //定位功能可用
+        NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [NSString stringWithFormat:@"%ld",_page], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+        NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":[NSString stringWithFormat:@"%ld",_page]};
+        NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+        
+        AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+        session.requestSerializer = [AFHTTPRequestSerializer serializer];
+        session.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+        [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSArray *dataArray = dict[@"data"][@"order"];
+            if (0 == [dict[@"status"] floatValue]) {
+                
+                //            NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                
+                [self.dataArray removeAllObjects];
+                
+                for (NSDictionary *orderDic in dataArray) {
+                    OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                    [orderModel setValuesForKeysWithDictionary:orderDic];
+                    NSArray *arr = orderDic[@"store"];
+                    for (NSDictionary *storedic in arr) {
+                        StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                        [storemodel setValuesForKeysWithDictionary:storedic];
+                        [orderModel.storeInfoArray addObject:storemodel];
+                    }
+                    [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                    [self.dataArray addObject:orderModel];
                 }
-                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
-                [self.dataArray addObject:orderModel];
+                
+                // 刷新UI
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                    [self.tableView headerEndRefreshing];
+                });
+                
+            } else {
+                NSLog(@"msg = %@",dict[@"msg"]);
             }
             
-            // 刷新UI
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-                [self.tableView headerEndRefreshing];
-            });
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
-        } else {
-            NSLog(@"msg = %@",dict[@"msg"]);
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
+        }];
+    } else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        //定位不能用
+        NSLog(@"定位功能不可用");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        [self.tableView headerEndRefreshing];
+    }
 }
 
 - (void)requestMoreData {
     ++_page;
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [NSString stringWithFormat:@"%ld",_page], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":[NSString stringWithFormat:@"%ld",_page]};
-    //    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    //    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount]};
-    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFHTTPRequestSerializer serializer];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSArray *dataArray = dict[@"data"][@"order"];
-        if (0 == [dict[@"status"] floatValue]) {
-            
-            //            NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            
-//            [self.dataArray removeAllObjects];
-            
-            for (NSDictionary *orderDic in dataArray) {
-                OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
-                [orderModel setValuesForKeysWithDictionary:orderDic];
-                NSArray *arr = orderDic[@"store"];
-                for (NSDictionary *storedic in arr) {
-                    StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
-                    [storemodel setValuesForKeysWithDictionary:storedic];
-                    [orderModel.storeInfoArray addObject:storemodel];
+    if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)) {
+        //定位功能可用
+        NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&page=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [NSString stringWithFormat:@"%ld",_page], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+        NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount], @"page":[NSString stringWithFormat:@"%ld",_page]};
+        //    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&day=%@&pid=%@",@"pdacomplete", @"pda", [NSString stringWithFormat:@"%ld",(long)_dayCount], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+        //    NSDictionary *dic = @{@"api":@"pdacomplete", @"core":@"pda", @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId], @"day":[NSString stringWithFormat:@"%ld",(long)_dayCount]};
+        NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+        
+        AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+        session.requestSerializer = [AFHTTPRequestSerializer serializer];
+        session.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+        [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSArray *dataArray = dict[@"data"][@"order"];
+            if (0 == [dict[@"status"] floatValue]) {
+                
+                //            NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                
+                //            [self.dataArray removeAllObjects];
+                
+                for (NSDictionary *orderDic in dataArray) {
+                    OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                    [orderModel setValuesForKeysWithDictionary:orderDic];
+                    NSArray *arr = orderDic[@"store"];
+                    for (NSDictionary *storedic in arr) {
+                        StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                        [storemodel setValuesForKeysWithDictionary:storedic];
+                        [orderModel.storeInfoArray addObject:storemodel];
+                    }
+                    [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                    [self.dataArray addObject:orderModel];
                 }
-                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
-                [self.dataArray addObject:orderModel];
+                
+                if (0 == dataArray.count) {
+                    --_page;// 如果当前请求数据为空将页数重置为前一页
+                }
+                
+                // 刷新UI
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                    [self.tableView footerEndRefreshing];
+                });
+                
+            } else {
+                NSLog(@"msg = %@",dict[@"msg"]);
             }
             
-            if (0 == dataArray.count) {
-                --_page;// 如果当前请求数据为空将页数重置为前一页
-            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
-            // 刷新UI
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-                [self.tableView footerEndRefreshing];
-            });
-            
-        } else {
-            NSLog(@"msg = %@",dict[@"msg"]);
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
+        }];
+    } else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        //定位不能用
+        NSLog(@"定位功能不可用");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        [self.tableView footerEndRefreshing];
+    }
+    
+    
 }
 
 
@@ -205,10 +232,10 @@
     
     _dayCount = 1;// 默认显示今天的单子
     _page = 0;
-    [self requestData];
     
     [self createView];
     
+    [self requestData];
 }
 
 

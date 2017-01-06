@@ -36,7 +36,11 @@
     _isWork = [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] boolValue];
     if (_isWork) {// 如果为1 在线
         [_workBtn setBackgroundImage:[UIImage imageNamed:@"work"] forState:UIControlStateNormal];
-        _courierAddress.text = [[[TcCourierInfoManager shareInstance] getCourierAddress] isEqualToString:@" "] ? @"上班中，正在定位" : [[TcCourierInfoManager shareInstance] getCourierAddress];
+        if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)) {//定位功能可用
+            _courierAddress.text = [[[TcCourierInfoManager shareInstance] getCourierAddress] isEqualToString:@" "] ? @"上班中，正在定位" : [[TcCourierInfoManager shareInstance] getCourierAddress];
+        } else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {//定位不能用
+            _courierAddress.text = @"定位失败，请先开启定位功能";
+        }
         
     } else {
         [_workBtn setBackgroundImage:[UIImage imageNamed:@"workout"] forState:UIControlStateNormal];
@@ -107,17 +111,6 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     [self createView];
-    
-    // 测试按钮
-//    UIButton *testBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-//    testBtn.frame = CGRectMake(100, 100, 100, 40);
-//    [testBtn setTitle:@"test" forState:UIControlStateNormal];
-//    [testBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:testBtn];
-//    
-//    [[TcCourierInfoManager shareInstance] saveTcCourierOnlineStatus:@"1"];
-    
-    
 
 }
 
@@ -125,6 +118,7 @@
 #pragma mark- Appdelegate代理方法
 
 - (void)setAddress:(NSString *)address {
+    
     if (self.isWork == YES) {
         self.courierAddress.text = address;
     }
@@ -132,7 +126,7 @@
 }
 
 
-#pragma mark- 代理方法
+#pragma mark- 手势代理方法
 
 /**
  右滑返回手势代理方法
@@ -148,6 +142,10 @@
 
 #pragma mark- 按钮方法
 
+
+/**
+ 上下班方法
+ */
 - (void)work {
     
     _isWork = !_isWork;
@@ -195,33 +193,7 @@
     [self.navigationController pushViewController:orderVC animated:YES];
     orderVC.orderNumber = @"147859731967";
     
-//    NSString *foodId = @"22053";
-//    NSString *foodStr = [NSString stringWithFormat:@"%d_%@",2,@"169"];
-////    NSDictionary *d1 = [NSDictionary dictionaryWithObjectsAndKeys:foodStr,foodId, nil];
-//    NSString *storeId = @"404";
-//    
-////    NSDictionary *d2 = [NSDictionary dictionaryWithObjectsAndKeys:d1,storeId, nil];
-//    NSDictionary *d2 = @{storeId:@{foodId:foodStr}};
-//    
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:d2 options:NSJSONWritingPrettyPrinted error:nil];
-//    
-//    NSString *foodJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];//
-//    
-//    NSString *pstr = [NSString stringWithFormat:@"address=%@&api=%@&bonus_id=%@&food=%@&is_cart=%@&is_run=%@&is_select=%@&remark=%@&server_time=%@",@"27658", @"addcart", @"", [foodJson stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"", @"", @"", @"", @""];
-//    NSDictionary *dicc = @{@"address":@"27658", @"api":@"addcart", @"bonus_id":@"", @"food":[foodJson stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"is_cart":@"", @"is_run":@"", @"is_select":@"", @"remark":@"", @"server_time":@""};
-//    NSDictionary *pdic = @{@"data":dicc, @"sign":[[MyMD5 md5:pstr] uppercaseString]};
-//    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-//    session.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-//    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"responseObject = %@",responseObject);
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"msg = %@",dict[@"msg"]);
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"error is %@",error);
-//    }];
+
     
     
 }

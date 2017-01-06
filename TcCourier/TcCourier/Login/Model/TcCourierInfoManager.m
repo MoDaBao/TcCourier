@@ -177,6 +177,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+// latitude
 - (void)saveLatitude:(NSString *)latitude {
     [[NSUserDefaults standardUserDefaults] setObject:latitude forKey:@"latitude"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -189,6 +190,7 @@
     return latitude;
 }
 
+// longitude
 - (void)saveLongitude:(NSString *)longitude {
     [[NSUserDefaults standardUserDefaults] setObject:longitude forKey:@"longitude"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -201,6 +203,7 @@
     return longitude;
 }
 
+// courierAddress
 - (void)saveCourierAddress:(NSString *)courierAddress {
     [[NSUserDefaults standardUserDefaults] setObject:courierAddress forKey:@"courierAddress"];
     [[NSUserDefaults standardUserDefaults] synchronize];

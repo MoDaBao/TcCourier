@@ -56,14 +56,11 @@
     // init Push
     // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
     // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
-    [JPUSHService setupWithOption:launchOptions appKey:appKey
-                          channel:channel
-                 apsForProduction:isProduction
-            advertisingIdentifier:nil];
+    [JPUSHService setupWithOption:launchOptions appKey:appKey channel:channel apsForProduction:isProduction advertisingIdentifier:nil];
     
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];// 收到自定义消息时调用networkDidReceiveMessage:方法ßßß
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];// 收到自定义消息时调用networkDidReceiveMessage:方法
     [defaultCenter addObserver:self selector:@selector(networkDidLoginSuccess:) name:kJPFNetworkDidLoginNotification object:nil];// 登录成功时调用networkDidLoginSuccess: 方法
     
     [self.window makeKeyAndVisible];
@@ -142,8 +139,13 @@
     //定位结果
     //    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
     
+    // 保存定位得到的经纬度
     [[TcCourierInfoManager shareInstance] saveLatitude:[NSString stringWithFormat:@"%f",location.coordinate.latitude]];
     [[TcCourierInfoManager shareInstance] saveLongitude:[NSString stringWithFormat:@"%f",location.coordinate.longitude]];
+    
+//    // 保存测试使用的温岭的经纬度
+//    [[TcCourierInfoManager shareInstance] saveLatitude:@"28.389418"];
+//    [[TcCourierInfoManager shareInstance] saveLongitude:@"121.363678"];
     
     if (!_timer) {
         _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendCourierAddress) userInfo:nil repeats:YES];
@@ -191,32 +193,44 @@
  上传跑腿当前位置
  */
 - (void)sendCourierAddress {
-    
-    if (![[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "]) {
-        NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&lati=%@&longt=%@&pid=%@",@"pdacoordinates", @"pda", [[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-        NSDictionary *dic = @{@"api":@"pdacoordinates", @"core":@"pda", @"lati":[[TcCourierInfoManager shareInstance] getLatitude], @"longt":[[TcCourierInfoManager shareInstance] getLongitude], @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
-        NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    // 当用户登录并且为在线状态的时候上传当前登录跑腿的位置
+    if (![[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "] && [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] isEqualToString:@"1"]) {
         
-        AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-        session.requestSerializer = [AFHTTPRequestSerializer serializer];
-        session.responseSerializer = [AFHTTPResponseSerializer serializer];
-        [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-        [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            if (0 == [dict[@"status"] floatValue]) {
-                NSLog(@"上传位置成功");
-            } else {
-                NSLog(@"上传位置失败");
+        if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)) {
+            //定位功能可用
+            if (![[[TcCourierInfoManager shareInstance] getLatitude] isEqualToString:@" "] && ![[[TcCourierInfoManager shareInstance] getLongitude] isEqualToString:@" "]) {
+                NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&lati=%@&longt=%@&pid=%@",@"pdacoordinates", @"pda", [[TcCourierInfoManager shareInstance] getLatitude], [[TcCourierInfoManager shareInstance] getLongitude], [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+                NSDictionary *dic = @{@"api":@"pdacoordinates", @"core":@"pda", @"lati":[[TcCourierInfoManager shareInstance] getLatitude], @"longt":[[TcCourierInfoManager shareInstance] getLongitude], @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+                NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+                
+                AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+                session.requestSerializer = [AFHTTPRequestSerializer serializer];
+                session.responseSerializer = [AFHTTPResponseSerializer serializer];
+                [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+                [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                    if (0 == [dict[@"status"] floatValue]) {
+                        NSLog(@"上传位置成功");
+                    } else {
+                        NSLog(@"上传位置失败");
+                    }
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    NSLog(@"error is %@",error);
+                }];
             }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error is %@",error);
-        }];
+        } else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+//            //定位不能用
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//            [alert show];
+        }
+        
+        
     }
 
 }
 
-#pragma mark- JPUSHRegisterDelegate
+#pragma mark- 极光
 
 // iOS 10 Support
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
@@ -256,14 +270,16 @@
     NSDictionary * userInfo = [notification userInfo];
     NSDictionary *content = [userInfo valueForKey:@"content"];
     _jPushOrderNumber = content[@"order_number"];
-    UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有新订单，前去抢单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
-    [alertV show];
-    
+    if (1 == [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] floatValue] && ![[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "]) {// 当前为登录+在线状态
+        UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有新订单，前去抢单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
+        [alertV show];
+    }
 }
+
 // 极光登录成功时
 - (void)networkDidLoginSuccess:(NSNotification *)notification {
     NSString *alias = [NSString stringWithFormat:@"tcjpda%@",[[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    [JPUSHService setAlias:alias callbackSelector:nil object:nil];
+    [JPUSHService setAlias:alias callbackSelector:nil object:nil];// 注册别名
 }
 
 

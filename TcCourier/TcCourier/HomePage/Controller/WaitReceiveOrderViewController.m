@@ -38,101 +38,131 @@
 - (void)requestData {
     
     if (1 == [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] floatValue]) {
-        NSString *str = [NSString stringWithFormat:@"ad=%@&api=%@&core=%@",[[TcCourierInfoManager shareInstance] getAddressID], @"pdawaitingorder", @"pda"];
-        NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda", @"ad":[[TcCourierInfoManager shareInstance] getAddressID]};
-        NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
-        
-        
-        AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-        session.requestSerializer = [AFHTTPRequestSerializer serializer];
-        session.responseSerializer = [AFHTTPResponseSerializer serializer];
-        [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-        [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            if (0 == [dict[@"status"] floatValue]) {
-                
-                [self.dataArray removeAllObjects];
-                
-                NSDictionary *dataDic = dict[@"data"];
-                for (NSDictionary *orderDic in dataDic[@"order"]) {
-                    OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
-                    [orderModel setValuesForKeysWithDictionary:orderDic];
-                    NSArray *arr = orderDic[@"store"];
-                    for (NSDictionary *storedic in arr) {
-                        StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
-                        [storemodel setValuesForKeysWithDictionary:storedic];
-                        [orderModel.storeInfoArray addObject:storemodel];
+        if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)) {
+            //定位功能可用
+//            NSLog(@"定位功能可用");
+            NSString *str = [NSString stringWithFormat:@"ad=%@&api=%@&core=%@",[[TcCourierInfoManager shareInstance] getAddressID], @"pdawaitingorder", @"pda"];
+            NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda", @"ad":[[TcCourierInfoManager shareInstance] getAddressID]};
+            NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+            AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+            session.requestSerializer = [AFHTTPRequestSerializer serializer];
+            session.responseSerializer = [AFHTTPResponseSerializer serializer];
+            [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+            [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                if (0 == [dict[@"status"] floatValue]) {
+                    
+                    [self.dataArray removeAllObjects];
+                    
+                    NSDictionary *dataDic = dict[@"data"];
+                    for (NSDictionary *orderDic in dataDic[@"order"]) {
+                        OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                        [orderModel setValuesForKeysWithDictionary:orderDic];
+                        NSArray *arr = orderDic[@"store"];
+                        for (NSDictionary *storedic in arr) {
+                            StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                            [storemodel setValuesForKeysWithDictionary:storedic];
+                            [orderModel.storeInfoArray addObject:storemodel];
+                        }
+                        [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                        [self.dataArray addObject:orderModel];
                     }
-                    [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
-                    [self.dataArray addObject:orderModel];
+                    
+                    // 刷新UI
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                        [self.tableView headerEndRefreshing];
+                        if (_hourGlass) {
+                            [_hourGlass removeFromSuperview];
+                            _hourGlass = nil;
+                        }
+                    });
+                } else {
+                    NSLog(@"msg = %@",dict[@"msg"]);
                 }
-                
-                // 刷新UI
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                    [self.tableView headerEndRefreshing];
-                    if (_hourGlass) {
-                        [_hourGlass removeFromSuperview];
-                        _hourGlass = nil;
-                    }
-                });
-            } else {
-                NSLog(@"msg = %@",dict[@"msg"]);
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error is %@",error);
-        }];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"error is %@",error);
+            }];
+            
+        } else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+            //定位不能用
+            NSLog(@"定位功能不可用");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            [self.tableView headerEndRefreshing];
+        }
+        
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先切换至上班状态" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
+        [self.tableView headerEndRefreshing];
     }
     
     
 }
 
 - (void)requestJpushData {
-    NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_no=%@&pid=%@",@"pdaorderinfo", @"pda", _orderNumber, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
-    NSDictionary *dic = @{@"api":@"pdaorderinfo", @"core":@"pda", @"order_no":_orderNumber, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
-    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
     
-    
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    session.requestSerializer = [AFHTTPRequestSerializer serializer];
-    session.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
-    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        //        NSLog(@"dict = %@",dict);
-        //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        if (0 == [dict[@"status"] floatValue]) {
-            [self.dataArray removeAllObjects];
-            NSDictionary *dataDic = dict[@"data"];
-            for (NSDictionary *orderDic in dataDic[@"order"]) {
-                OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
-                [orderModel setValuesForKeysWithDictionary:orderDic];
-                NSArray *arr = orderDic[@"store"];
-                for (NSDictionary *storedic in arr) {
-                    StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
-                    [storemodel setValuesForKeysWithDictionary:storedic];
-                    [orderModel.storeInfoArray addObject:storemodel];
+    if (1 == [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] floatValue]) {
+        if ([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized)) {
+            //定位功能可用
+            NSString *str = [NSString stringWithFormat:@"api=%@&core=%@&order_no=%@&pid=%@",@"pdaorderinfo", @"pda", _orderNumber, [[TcCourierInfoManager shareInstance] getTcCourierUserId]];
+            NSDictionary *dic = @{@"api":@"pdaorderinfo", @"core":@"pda", @"order_no":_orderNumber, @"pid":[[TcCourierInfoManager shareInstance] getTcCourierUserId]};
+            NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+            
+            
+            AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+            session.requestSerializer = [AFHTTPRequestSerializer serializer];
+            session.responseSerializer = [AFHTTPResponseSerializer serializer];
+            [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+            [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                //        NSLog(@"dict = %@",dict);
+                //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                if (0 == [dict[@"status"] floatValue]) {
+                    [self.dataArray removeAllObjects];
+                    NSDictionary *dataDic = dict[@"data"];
+                    for (NSDictionary *orderDic in dataDic[@"order"]) {
+                        OrderInfoModel *orderModel = [[OrderInfoModel alloc] init];
+                        [orderModel setValuesForKeysWithDictionary:orderDic];
+                        NSArray *arr = orderDic[@"store"];
+                        for (NSDictionary *storedic in arr) {
+                            StoreInfoModel *storemodel = [[StoreInfoModel alloc] init];
+                            [storemodel setValuesForKeysWithDictionary:storedic];
+                            [orderModel.storeInfoArray addObject:storemodel];
+                        }
+                        [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
+                        [self.dataArray addObject:orderModel];
+                    }
+                    
+                    // 回到主线程刷新UI
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
+                    
+                    
                 }
-                [orderModel.addressInfo setValuesForKeysWithDictionary:orderDic[@"address"]];
-                [self.dataArray addObject:orderModel];
-            }
-            
-            // 回到主线程刷新UI
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-            
-            
+                //        NSLog(@"2333");
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"error is %@",error);
+            }];
+        } else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+            //定位不能用
+            NSLog(@"定位功能不可用");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            [self.tableView headerEndRefreshing];
         }
-        //        NSLog(@"2333");
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error is %@",error);
-    }];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先切换至上班状态" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        [self.tableView headerEndRefreshing];
+    }
+    
+    
 }
 
 

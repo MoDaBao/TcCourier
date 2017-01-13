@@ -12,6 +12,7 @@
 #import "PersonCenterViewController.h"
 #import "MainTabBarController.h"
 #import "WaitReceiveOrderViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()<JPUSHRegisterDelegate, UIAlertViewDelegate>
 
@@ -273,6 +274,35 @@
     if (1 == [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] floatValue] && ![[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "]) {// 当前为登录+在线状态
         UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有新订单，前去抢单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
         [alertV show];
+        
+        // 加上声音和震动提示 如果在后台要有推送
+        
+        //系统声音
+        AudioServicesPlaySystemSound(1007);
+        //震动
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        
+        
+        //测试推送
+        UILocalNotification *localnotification;
+        if (!localnotification)
+        {
+            localnotification = [[UILocalNotification alloc]init];
+        } 
+        
+        localnotification.repeatInterval = 0;
+        /**
+         *  设置推送的相关属性
+         */
+        localnotification.alertBody = @"您当前有可接订单";//通知具体内容
+        localnotification.soundName = UILocalNotificationDefaultSoundName;//通知时的音效
+        NSDictionary *dit_noti = [NSDictionary dictionaryWithObject:@"affair.schedule" forKey:@"id"];
+        localnotification.userInfo = dit_noti;
+        
+        /**
+         *  调度本地通知,通知会在特定时间发出
+         */
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localnotification];
     }
 }
 

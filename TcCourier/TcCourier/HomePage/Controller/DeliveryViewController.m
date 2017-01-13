@@ -69,13 +69,16 @@
                         [self.dataArray addObject:orderModel];
                     }
                     //            NSLog(@"dataArray = %@",self.dataArray);
-                    
+                    DeliveryViewController *deliverVC = self;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
                         [self.tableView headerEndRefreshing];
                         if (_hourGlass) {
                             [_hourGlass removeFromSuperview];
                             _hourGlass = nil;
+                            if ([deliverVC.delegate respondsToSelector:@selector(setBtnEnabled:)]) {
+                                [deliverVC.delegate setBtnEnabled:YES];
+                            }
                         }
                     });
                     
@@ -252,6 +255,9 @@
         make.width.equalTo(@200);
     }];
 }
+
+
+#pragma mark- didReceiveMemoryWaring
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -16,11 +16,12 @@
 #define kDeliveryBtnBGRed [UIColor colorWithRed:0.93 green:0.33 blue:0.31 alpha:1.00]
 #define kDeliveryBtnBGGray [UIColor colorWithRed:0.38 green:0.38 blue:0.39 alpha:1.00]
 
-@interface ShopButtonView ()
+@interface ShopButtonView ()<DeliveryViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *storeInfoArray;
 @property (nonatomic, strong) StoreInfoModel *store;
 @property (nonatomic, copy) NSString *orderNumber;
+@property (nonatomic, strong) UIButton *deliveryBtn;
 
 @end
 
@@ -106,24 +107,24 @@
         height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:remarkL.text font:remarkL.font];
         
         // 配送按钮
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        _deliveryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self addSubview:_deliveryBtn];
+        [_deliveryBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
             make.top.equalTo(remarkL.mas_bottom).offset(margin);
             make.height.equalTo(@35);
             make.width.equalTo(@150);
         }];
-        btn.layer.cornerRadius = margin;
-        [btn setTitle:storeInfoModel.orderStatus forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = kFont14;
-        [btn addTarget:self action:@selector(statusBtn:) forControlEvents:UIControlEventTouchUpInside];
-        btn.tag = btntag++;// 设置tag值
+        _deliveryBtn.layer.cornerRadius = margin;
+        [_deliveryBtn setTitle:storeInfoModel.orderStatus forState:UIControlStateNormal];
+        [_deliveryBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _deliveryBtn.titleLabel.font = kFont14;
+        [_deliveryBtn addTarget:self action:@selector(statusBtn:) forControlEvents:UIControlEventTouchUpInside];
+        _deliveryBtn.tag = btntag++;// 设置tag值
         // 设置按钮背景色
-        [self setBtnBGColorWithSotreInfoModel:storeInfoModel btn:btn];
+        [self setBtnBGColorWithSotreInfoModel:storeInfoModel btn:_deliveryBtn];
         // 设置按钮标题
-        [self setBtnTitleWithStoreInfoModel:storeInfoModel btn:btn];
+        [self setBtnTitleWithStoreInfoModel:storeInfoModel btn:_deliveryBtn];
         
         height += margin + 35;
         
@@ -136,7 +137,7 @@
             [line mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.and.right.equalTo(self);
                 make.height.equalTo(@(sortaPixel));
-                make.top.equalTo(btn.mas_bottom).offset(5);
+                make.top.equalTo(_deliveryBtn.mas_bottom).offset(5);
             }];
             temp = line;
         }
@@ -149,7 +150,7 @@
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.top.equalTo(icon);
             make.right.equalTo(jiantou);
-            make.bottom.equalTo(btn.mas_top);
+            make.bottom.equalTo(_deliveryBtn.mas_top);
         }];
         [button addTarget:self action:@selector(addressBtn:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = buttontag++;
@@ -214,6 +215,12 @@
 
 // 配送按钮方法
 - (void)statusBtn:(UIButton *)btn {
+    if (_deliveryBtn.isEnabled) {
+        DeliveryViewController *deliveryVC = (DeliveryViewController *)[UIViewController getCurrentViewController];
+        deliveryVC.delegate = nil;
+        deliveryVC.delegate = self;
+    }
+    
     _store = _storeInfoArray[btn.tag - 1000];
     if ([_store.orderStatus isEqualToString:@"等待跑腿取餐"] || [_store.orderStatus isEqualToString:@"等待店铺接单"]) {// 取餐中
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确认已取餐？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -226,6 +233,7 @@
     } else {
         NSLog(@"点击了按钮");
     }
+    btn.enabled = NO;
     
 }
 
@@ -289,7 +297,6 @@
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (0 == [dict[@"status"] floatValue]) {// 确认送达成功
                 if ([self.delegate respondsToSelector:@selector(refreshDeliveryCell)]) {
@@ -306,6 +313,12 @@
     }];
 }
 
+
+#pragma mark- DeliveryViewControllerDelegate
+
+- (void)setBtnEnabled:(BOOL)isEnabled {
+    _deliveryBtn.enabled = isEnabled;
+}
 
 
 

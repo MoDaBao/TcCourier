@@ -97,14 +97,18 @@
     // 用户名
     NSString *userName = [[TcCourierInfoManager shareInstance] getTcCourierUserName];
     UIFont *usernameFont = [UIFont systemFontOfSize:20];
-    CGFloat usernameW = [UILabel getWidthWithTitle:userName
-                                              font:usernameFont];
+//    CGFloat usernameW = [UILabel getWidthWithTitle:userName font:usernameFont];
     CGFloat usernameH = [UILabel getHeightWithTitle:userName font:usernameFont];
-    _userNameL = [[UILabel alloc] initWithFrame:CGRectMake((self.view.width - usernameW) * .5, logoImageView.y + logoHeight + 5, usernameW, usernameH)];
+    _userNameL = [[UILabel alloc] initWithFrame:CGRectMake(0, logoImageView.y + logoHeight + 5, kScreenWidth, usernameH)];
+//    _userNameL = [UILabel new];
     _userNameL.text = userName;
     _userNameL.textAlignment = NSTextAlignmentCenter;
     _userNameL.font = usernameFont;
     [scrollView addSubview:_userNameL];
+//    [_userNameL mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.view);
+//        make.top.equalTo(logoImageView.mas_bottom);
+//    }];
     
     // 总好评率
     CGFloat totalRate = [[[TcCourierInfoManager shareInstance] getScore] floatValue] / 5.0;// 好评率

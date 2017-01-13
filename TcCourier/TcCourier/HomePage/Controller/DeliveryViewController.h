@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DeliveryViewControllerDelegate <NSObject>
+
+- (void)setBtnEnabled:(BOOL)isEnabled;
+
+@end
+
 @interface DeliveryViewController : UIViewController
+
+@property (nonatomic, assign) id<DeliveryViewControllerDelegate> delegate;
 
 @end

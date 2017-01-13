@@ -82,6 +82,7 @@
     TodayCountDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
         cell = [[TodayCountDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     TodayCountModel *model = self.dataArray[indexPath.row];
     [cell setDataWithModel:model title:_navititle];

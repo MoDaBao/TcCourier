@@ -2,7 +2,7 @@
 //  TodayCountDetailTableViewCell.m
 //  TcCourier
 //
-//  Created by 莫大宝 on 2016/12/22.
+//  Created by Mon 2016/12/22.
 //  Copyright © 2016年 dabao. All rights reserved.
 //
 
@@ -46,6 +46,18 @@
             make.right.equalTo(self.contentView).offset(-margin);
         }];
         _priceL.font = [UIFont systemFontOfSize:14];
+        
+        // 分割线
+        float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [self.contentView addSubview:line];//线是否加
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset(5);
+            make.right.equalTo(self.contentView).offset(-5);
+            make.bottom.equalTo(self.contentView);
+            make.height.equalTo(@(sortaPixel));
+        }];
         
     }
     return self;

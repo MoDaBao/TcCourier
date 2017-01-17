@@ -46,6 +46,7 @@
 		E727C19C1E0D007B0096D17E /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E727C19B1E0D007B0096D17E /* libresolv.tbd */; };
 		E732C8B11DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */; };
 		E740D8D81DC9DC1F00484F53 /* DeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */; };
+		E759250C1E2DF04200660136 /* notice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E759250B1E2DF04200660136 /* notice.mp3 */; };
 		E75A77A71DE2C70800E344EE /* FoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A77A61DE2C70800E344EE /* FoodModel.m */; };
 		E7729E4A1DDB069500BF5B69 /* OrderInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E491DDB069500BF5B69 /* OrderInfoModel.m */; };
 		E7729E4D1DDC040900BF5B69 /* StoreInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7729E4C1DDC040900BF5B69 /* StoreInfoModel.m */; };
@@ -183,6 +184,7 @@
 		E732C8B01DBDD9A000B18AA0 /* WaitReceiveOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitReceiveOrderViewController.m; sourceTree = "<group>"; };
 		E740D8D61DC9DC1F00484F53 /* DeliveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryViewController.h; sourceTree = "<group>"; };
 		E740D8D71DC9DC1F00484F53 /* DeliveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryViewController.m; sourceTree = "<group>"; };
+		E759250B1E2DF04200660136 /* notice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = notice.mp3; sourceTree = "<group>"; };
 		E75A77A51DE2C70800E344EE /* FoodModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodModel.h; sourceTree = "<group>"; };
 		E75A77A61DE2C70800E344EE /* FoodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodModel.m; sourceTree = "<group>"; };
 		E7729E481DDB069500BF5B69 /* OrderInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoModel.h; sourceTree = "<group>"; };
@@ -444,6 +446,14 @@
 			path = Lib;
 			sourceTree = "<group>";
 		};
+		E759250A1E2DF04200660136 /* voice */ = {
+			isa = PBXGroup;
+			children = (
+				E759250B1E2DF04200660136 /* notice.mp3 */,
+			);
+			path = voice;
+			sourceTree = "<group>";
+		};
 		E7CCD2E41DED553500B24256 /* Delivery */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +554,7 @@
 		E7E856811DAF64C40057D66F /* tool */ = {
 			isa = PBXGroup;
 			children = (
+				E759250A1E2DF04200660136 /* voice */,
 				E7ABA5801DF6678D007F0638 /* FeHourGlass.h */,
 				E7ABA5811DF6678D007F0638 /* FeHourGlass.m */,
 				E7ABA5831DF667B8007F0638 /* UIColor+flat.h */,
@@ -858,6 +869,7 @@
 				E70B06691DB0755500E4B5A6 /* 123.jpg in Resources */,
 				E7FB2BE71DB7580B0045E871 /* Assets.xcassets in Resources */,
 				E7FB7FA31DD19E640023148C /* MJRefresh.bundle in Resources */,
+				E759250C1E2DF04200660136 /* notice.mp3 in Resources */,
 				E7E856461DAF56700057D66F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

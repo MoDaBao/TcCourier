@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  TcCourier
 //
-//  Created by 莫大宝 on 16/10/13.
+//  Created by M on 16/10/13.
 //  Copyright © 2016年 dabao. All rights reserved.
 //
 
@@ -275,7 +275,7 @@
         UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有新订单，前去抢单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
         [alertV show];
         
-        // 加上声音和震动提示 如果在后台要有推送
+        /** 加上声音和震动提示 如果在后台要有推送 **/
         
         //系统声音
         AudioServicesPlaySystemSound(1007);
@@ -288,7 +288,7 @@
         if (!localnotification)
         {
             localnotification = [[UILocalNotification alloc]init];
-        } 
+        }
         
         localnotification.repeatInterval = 0;
         /**
@@ -304,6 +304,11 @@
          */
         [[UIApplication sharedApplication] presentLocalNotificationNow:localnotification];
     }
+    
+//    // 测试
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"64e6" message:@"53w5" delegate:nil cancelButtonTitle:@"test" otherButtonTitles:nil, nil];
+//    [alert show];
+    
 }
 
 // 极光登录成功时

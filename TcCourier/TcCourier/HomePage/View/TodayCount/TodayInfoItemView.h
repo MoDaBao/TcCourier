@@ -2,7 +2,7 @@
 //  TodayInfoItemVIew.h
 //  peisongduan
 //
-//  Created by 莫大宝 on 16/6/24.
+//  Created by M on 16/6/24.
 //  Copyright © 2016年 dabao. All rights reserved.
 //
 

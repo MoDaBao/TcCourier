@@ -2,7 +2,7 @@
 //  TodayCountDetailViewController.m
 //  TcCourier
 //
-//  Created by 莫大宝 on 2016/12/22.
+//  Created by M on 2016/12/22.
 //  Copyright © 2016年 dabao. All rights reserved.
 //
 
@@ -66,10 +66,14 @@
 #pragma mark- tableView代理方法
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    if (!self.dataArray.count) {
+//        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    }
     return self.dataArray.count;
 }
 

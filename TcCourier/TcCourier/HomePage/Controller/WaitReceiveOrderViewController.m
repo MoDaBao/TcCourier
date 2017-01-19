@@ -216,8 +216,12 @@
     
 }
 
+
+
+
 - (void)back {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark- tableView代理方法

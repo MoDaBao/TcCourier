@@ -10,7 +10,7 @@
 
 @interface TimeOutView ()
 
-@property (nonatomic, copy) NSString *timeOut;
+//@property (nonatomic, copy) NSString *timeOut;
 @property (nonatomic, strong) UILabel *timeOutL;
 
 @end
@@ -26,7 +26,7 @@
 */
 
 - (void)loadTimeOut:(NSString *)timeOut {
-    _timeOut = timeOut;
+//    _timeOut = timeOut;
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
@@ -38,7 +38,7 @@
         make.left.equalTo(@5);
     }];
     titleL.font = kFont14;
-    titleL.text = @"超时赔付:";
+    titleL.text = @"超时赔付";
     
     _timeOutL = [UILabel new];
     [self addSubview:_timeOutL];
@@ -47,7 +47,10 @@
         make.right.equalTo(@-5);
     }];
     _timeOutL.font = kFont14;
-    [self setAttStrWithlabel:_timeOutL title:@"剩余时间:" sum:timeOut];
+    if (timeOut) {
+        [self setAttStrWithlabel:_timeOutL title:@"剩余时间:" sum:timeOut];
+    }
+    
     
     // 分割线
     float sortaPixel = 1.0 / [UIScreen mainScreen].scale;
@@ -63,10 +66,10 @@
 //    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshTime) userInfo:nil repeats:YES];
 //    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
-// 每秒刷新时间
-- (void)refreshTime {
-    
-}
+//// 每秒刷新时间
+//- (void)refreshTime {
+//    
+//}
 
 /**
  设置价格富文本

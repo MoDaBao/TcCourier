@@ -149,7 +149,7 @@
 //    [[TcCourierInfoManager shareInstance] saveLongitude:@"121.363678"];
     
     if (!_timer) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendCourierAddress) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(sendCourierAddressAndRemindOrder) userInfo:nil repeats:YES];
         
     }
     
@@ -175,7 +175,7 @@
     
 }
 
-//高德定位SDK2.2 以上的版本直接用这个代理方法进行反地理编码
+//高德定位SDK2.2 以上的版本直接用这个代理方法进行反地理编码，不需要用search对象发起反地理编码
 //- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode {
 //
 //    [[TcCourierInfoManager shareInstance] saveLatitude:[NSString stringWithFormat:@"%f",location.coordinate.latitude]];
@@ -189,6 +189,10 @@
 
 #pragma mark- 定时器方法
 
+- (void)sendCourierAddressAndRemindOrder {
+    [self sendCourierAddress];
+    [self remindOrder];
+}
 
 /**
  上传跑腿当前位置
@@ -225,11 +229,44 @@
 //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请先开启定位功能" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
 //            [alert show];
         }
-        
-        
     }
 
 }
+
+- (void)remindOrder {
+    NSString *str = [NSString stringWithFormat:@"ad=%@&api=%@&core=%@",[[TcCourierInfoManager shareInstance] getAddressID], @"pdawaitingorder", @"pda"];
+    NSDictionary *dic = @{@"api":@"pdawaitingorder", @"core":@"pda", @"ad":[[TcCourierInfoManager shareInstance] getAddressID]};
+    NSDictionary *pdic = @{@"data":dic, @"sign":[[MyMD5 md5:str] uppercaseString]};
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    session.requestSerializer = [AFHTTPRequestSerializer serializer];
+    session.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [session.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html",@"text/plain",@"text/javascript",@"application/json",@"text/json",nil]];
+    [session POST:REQUEST_URL parameters:pdic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //        NSString *jsonStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (0 == [dict[@"status"] floatValue]) {
+            NSDictionary *orderDic = dict[@"data"][@"order"];
+            if (orderDic.count) {// 有未接单的单子
+                
+                UIViewController *vc = [UIViewController getCurrentViewController];
+                if (![vc isKindOfClass:[WaitReceiveOrderViewController class]]) {// 如果当前为待接单页面不需要弹窗提醒
+                    UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有可接订单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
+                    alertV.tag = 6789;
+                    [alertV show];
+                    
+                    [self pushNotificationWithMessage:@"当前有可接订单，前去抢单"];
+                }
+                
+            }
+            
+        } else {
+            NSLog(@"msg = %@",dict[@"msg"]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error is %@",error);
+    }];
+}
+
 
 #pragma mark- 极光
 
@@ -270,40 +307,22 @@
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
     NSDictionary *content = [userInfo valueForKey:@"content"];
-    _jPushOrderNumber = content[@"order_number"];
-    if (1 == [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] floatValue] && ![[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "]) {// 当前为登录+在线状态
-        UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有新订单，前去抢单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
-        [alertV show];
-        
-        /** 加上声音和震动提示 如果在后台要有推送 **/
-        
-        //系统声音
-        AudioServicesPlaySystemSound(1007);
-        //震动
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        
-        
-        //测试推送
-        UILocalNotification *localnotification;
-        if (!localnotification)
-        {
-            localnotification = [[UILocalNotification alloc]init];
+    if ([content respondsToSelector:@selector(objectForKey:)]) {
+        _jPushOrderNumber = content[@"order_number"];
+        if (1 == [[[TcCourierInfoManager shareInstance] getTcCourierOnlineStatus] floatValue] && ![[[TcCourierInfoManager shareInstance] getTcCourierUserId] isEqualToString:@" "]) {// 当前为登录+在线状态
+            UIAlertView *alertV = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"当前有新订单，前去抢单" delegate:self cancelButtonTitle:@"前去抢单" otherButtonTitles:nil, nil];
+            alertV.tag = 7890;
+            [alertV show];
+            
+            [self pushNotificationWithMessage:@"当前有新订单，前去抢单"];
+            
         }
-        
-        localnotification.repeatInterval = 0;
-        /**
-         *  设置推送的相关属性
-         */
-        localnotification.alertBody = @"您当前有可接订单";//通知具体内容
-        localnotification.soundName = UILocalNotificationDefaultSoundName;//通知时的音效
-        NSDictionary *dit_noti = [NSDictionary dictionaryWithObject:@"affair.schedule" forKey:@"id"];
-        localnotification.userInfo = dit_noti;
-        
-        /**
-         *  调度本地通知,通知会在特定时间发出
-         */
-        [[UIApplication sharedApplication] presentLocalNotificationNow:localnotification];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"极光发送了一条测试消息，请忽略" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
     }
+    
+    
     
 //    // 测试
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"64e6" message:@"53w5" delegate:nil cancelButtonTitle:@"test" otherButtonTitles:nil, nil];
@@ -321,11 +340,55 @@
 #pragma mark- AlertView代理方法
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    WaitReceiveOrderViewController *waitVC = [[WaitReceiveOrderViewController alloc] init];
-    waitVC.isJpush = YES;
-    waitVC.orderNumber = _jPushOrderNumber;
-    UIViewController *vc = [UIViewController getCurrentViewController];
-    [vc.navigationController pushViewController:waitVC animated:YES];
+    if (alertView.tag == 7890) {
+        if (_jPushOrderNumber) {
+            WaitReceiveOrderViewController *waitVC = [[WaitReceiveOrderViewController alloc] init];
+            waitVC.isJpush = YES;
+            waitVC.orderNumber = _jPushOrderNumber;
+            UIViewController *vc = [UIViewController getCurrentViewController];
+            [vc.navigationController pushViewController:waitVC animated:YES];
+        }
+    } else if (alertView.tag == 6789) {
+        WaitReceiveOrderViewController *waitVC = [[WaitReceiveOrderViewController alloc] init];
+        waitVC.isJpush = NO;
+        UIViewController *vc = [UIViewController getCurrentViewController];
+        [vc.navigationController pushViewController:waitVC animated:YES];
+    }
+    
+    
+}
+
+
+#pragma mark- 发送本地通知并有震动和声音
+
+- (void)pushNotificationWithMessage:(NSString *)message {
+    /** 加上声音和震动提示 如果在后台要有推送 **/
+    
+    // 系统声音
+    AudioServicesPlaySystemSound(1007);
+    // 震动
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
+    
+    // 测试推送
+    UILocalNotification *localnotification;
+    if (!localnotification) {
+        localnotification = [[UILocalNotification alloc]init];
+    }
+    
+    localnotification.repeatInterval = 0;
+    /**
+     *  设置推送的相关属性
+     */
+    localnotification.alertBody = message;//通知具体内容
+    localnotification.soundName = UILocalNotificationDefaultSoundName;//通知时的音效
+    NSDictionary *dit_noti = [NSDictionary dictionaryWithObject:@"affair.schedule" forKey:@"id"];
+    localnotification.userInfo = dit_noti;
+    
+    /**
+     *  调度本地通知,通知会在特定时间发出
+     */
+    [[UIApplication sharedApplication] presentLocalNotificationNow:localnotification];
 }
 
 @end

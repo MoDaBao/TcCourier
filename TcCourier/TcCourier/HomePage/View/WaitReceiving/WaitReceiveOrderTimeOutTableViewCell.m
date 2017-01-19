@@ -151,7 +151,7 @@
             make.height.equalTo(@40);// 临时高度
         }];
         
-        // 拒绝订单
+        // 接受订单
         UIButton *acceptBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.contentV addSubview:acceptBtn];
         [acceptBtn mas_makeConstraints:^(MASConstraintMaker *make) {

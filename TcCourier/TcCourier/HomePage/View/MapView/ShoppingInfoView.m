@@ -130,11 +130,11 @@
         addressL.text = address;
         [addressL mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(addressTitle);
-            make.width.equalTo(@150);
+            make.width.equalTo(@(kScreenWidth - 160));
             make.left.equalTo(addressTitle.mas_right);
         }];
         
-        _selfheight += margin + [UILabel getHeightByWidth:150 title:addressL.text font:addressL.font] + margin;
+        _selfheight += margin + [UILabel getHeightByWidth:kScreenWidth - 160 title:addressL.text font:addressL.font] + margin;
         
         
 //        [self mas_updateConstraints:^(MASConstraintMaker *make) {

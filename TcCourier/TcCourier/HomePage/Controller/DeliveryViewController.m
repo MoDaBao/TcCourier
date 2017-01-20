@@ -167,7 +167,8 @@
     CGFloat height = 0;
     for (StoreInfoModel *storeInfoModel in orderInfoModel.storeInfoArray) {
         height += margin + 15;// icon
-        height += margin + [UILabel getHeightByWidth:kScreenWidth - 38 title:[NSString stringWithFormat:@"地址:%@",storeInfoModel.address] font:[UIFont systemFontOfSize:12]];// 地址
+//        height += margin + [UILabel getHeightByWidth:kScreenWidth - 38 title:[NSString stringWithFormat:@"地址:%@",storeInfoModel.address] font:[UIFont systemFontOfSize:12]];// 地址
+        height += margin + [UILabel getHeightWithTitle:@"地址" font:[UIFont systemFontOfSize:12]];
         height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:[NSString stringWithFormat:@"备注:%@",storeInfoModel.remark] font:kFont14];// 备注
         height += margin + 35;// 配送按钮
         height += margin + 1;

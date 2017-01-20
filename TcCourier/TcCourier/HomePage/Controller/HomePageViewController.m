@@ -75,12 +75,12 @@
     // logo
     CGFloat logoWidth = 60 * kScaleForWidth;
     CGFloat logoHeight = logoWidth / 101 * 139;
-    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenWidth - logoWidth) * 0.5, self.workBtn.y + self.workBtn.height + 50, logoWidth, logoHeight)];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenWidth - logoWidth) * 0.5, self.workBtn.y + self.workBtn.height + 50 * kScaleForHeight, logoWidth, logoHeight)];
     logoImageView.image = [UIImage imageNamed:@"chicken-home"];
     [self.view addSubview:logoImageView];
     
     
-    self.homePageView = [[HomePageView alloc] initWithFrame:CGRectMake(0, logoImageView.y + logoHeight + 50, kScreenWidth, 190)];
+    self.homePageView = [[HomePageView alloc] initWithFrame:CGRectMake(0, logoImageView.y + logoHeight + 50 * kScaleForHeight, kScreenWidth, 190)];
     self.homePageView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.homePageView];
     

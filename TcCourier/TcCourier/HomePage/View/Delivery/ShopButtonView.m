@@ -56,7 +56,7 @@
             make.width.and.height.equalTo(@15);
         }];
         icon.image = [UIImage imageNamed:@"dianpuxinxi"];
-        height += 15 + margin;
+        height += 15 + margin;// icon这一行的高度+icon上方的间隔
         
         // 店铺名称
         UILabel *shopNameL = [UILabel new];
@@ -79,7 +79,7 @@
         }];
         addressL.font = [UIFont systemFontOfSize:12];
         addressL.text = [NSString stringWithFormat:@"地址:%@",storeInfoModel.address];
-        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:addressL.text font:addressL.font];
+        height += margin + [UILabel getHeightWithTitle:@"地址" font:addressL.font];// 地址上方的间隔+地址的高度
         
         UIImageView *jiantou = [UIImageView new];
         [self addSubview:jiantou];
@@ -104,7 +104,7 @@
         remarkL.font = kFont14;
         remarkL.numberOfLines = 0;
         remarkL.text = [NSString stringWithFormat:@"备注:%@",storeInfoModel.remark];
-        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:remarkL.text font:remarkL.font];
+        height += margin + [UILabel getHeightByWidth:kScreenWidth - 30 title:remarkL.text font:remarkL.font];// 备注上方的间隔+备注的高度
         
         // 配送按钮
         _deliveryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -126,7 +126,7 @@
         // 设置按钮标题
         [self setBtnTitleWithStoreInfoModel:storeInfoModel btn:_deliveryBtn];
         
-        height += margin + 35;
+        height += margin + 35 + margin;// 按钮的高度+按钮上方间隔+按钮下方的间隔
         
         if (storeInfoModel != [storeInfoArray lastObject]) {
             // 分割线
@@ -140,9 +140,8 @@
                 make.top.equalTo(_deliveryBtn.mas_bottom).offset(5);
             }];
             temp = line;
+            height += 1;//分割线的高度
         }
-        
-        height += margin + 1;
         
         // 地址跳转按钮
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -154,19 +153,18 @@
         }];
         [button addTarget:self action:@selector(addressBtn:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = buttontag++;
-        
+//        button.backgroundColor = [UIColor randomColor];
 //        shopNameL.backgroundColor = [UIColor randomColor];
 //        addressL.backgroundColor = [UIColor randomColor];
 //        remarkL.backgroundColor = [UIColor randomColor];
+//        self.backgroundColor = [UIColor randomColor];
     }
     
     height += 1;
     
-    [self mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(height));
     }];
-    
-//    self.backgroundColor = [UIColor randomColor];
     
 }
 

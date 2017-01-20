@@ -80,7 +80,7 @@
  */
 - (void)setAttStrWithlabel:(UILabel *)label title:(NSString *)title sum:(NSString *)sum {
     NSString *str = [NSString stringWithFormat:@"%@%@",title, sum];
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str]; 
     [attStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.80 green:0.15 blue:0.15 alpha:1.00] range:NSMakeRange(title.length,str.length - title.length)];
     label.attributedText = attStr;
 }

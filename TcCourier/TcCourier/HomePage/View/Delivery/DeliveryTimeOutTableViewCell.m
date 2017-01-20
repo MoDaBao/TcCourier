@@ -147,10 +147,12 @@
         [_shopBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.equalTo(self.contentV);
             make.top.equalTo(_timeOutView.mas_bottom);
-            make.height.equalTo(@40);
+//            make.height.equalTo(@40);// 高度在ShopButtonView的加载方法设置
         }];
+        _shopBtnView.delegate = [UIViewController getCurrentViewController];
+//        _shopBtnView.backgroundColor = [UIColor randomColor];
+//        _timeOutView.backgroundColor = [UIColor randomColor];
         
-//        _shopBtnView.backgroundColor = [UIColor orangeColor];
         
         
     }
